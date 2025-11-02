@@ -79,7 +79,7 @@ const ShopPage = () => {
       {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-800 transition z-50"
+        className="fixed bottom-8 right-8 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-800 hover:animate-pulse transition z-50"
         aria-label="Scroll to top">
         <ArrowUp size={24} />
       </button>
