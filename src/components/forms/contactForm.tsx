@@ -40,7 +40,6 @@ const ContactPage = () => {
     try {
 
       await emailjs.send(
-        //"service_k18htjq",
         serviceID,
         templateID,
         {
