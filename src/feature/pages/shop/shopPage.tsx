@@ -1,5 +1,5 @@
 // src/feature/pages/shop/shopPage.tsx
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowUp } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import { getProductsByCategory } from "../../data/product";
@@ -9,24 +9,39 @@ const ShopPage = () => {
   const tops = getProductsByCategory("tops");
   const bottoms = getProductsByCategory("bottoms");
 
-  const ProductCard = ({ product }: { product: any }) => (
-    <Link to={`/product/${product.id}`} className="block group">
-      <div className="cardImageBorder">
-        <div className="overflow-hidden rounded mb-4">
-          <img
-            src={`/images/pics/${product.images[0]}`}
-            alt={product.name}
-            className="imageHoverEffect"
-            loading="lazy"
-          />
+  const ProductCard = ({ product }: { product: any }) => {
+    const navigate = useNavigate();
+
+    return (
+      <Link to={`/product/${product.id}`} className="block group">
+        <div className="cardImageBorder">
+          <div className="overflow-hidden rounded mb-4">
+            <img
+              src={`/images/pics/${product.images[0]}`}
+              alt={product.name}
+              className="imageHoverEffect"
+              loading="lazy"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const img = e.currentTarget as HTMLImageElement;
+                img.classList.remove("animate-ping");
+
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                img.offsetWidth;
+                img.classList.add("animate-ping");
+
+                // Navigate after a short delay so user sees the effect
+                setTimeout(() => navigate(`/product/${product.id}`), 300);
+              }}
+            />
+          </div>
+          <p className="font-bold text-center mb-2">{product.name}</p>
+          <button className="purchaseBtn">{formatPrice(product.price)}</button>
         </div>
-        <p className="font-bold text-center mb-2">{product.name}</p>
-        <button className="w-full bg-black text-white py-2 rounded hover:bg-green-400 cursor-pointer  hover:text-black delay-75 transition">
-          {formatPrice(product.price)}
-        </button>
-      </div>
-    </Link>
-  );
+      </Link>
+    );
+  };
 
   return (
     <div className="min-h-screen flex flex-col">

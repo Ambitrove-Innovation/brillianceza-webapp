@@ -40,9 +40,7 @@ const Homepage = () => {
           />
         </div>
         <p className="font-bold text-center mb-2">{product.name}</p>
-        <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
-          {formatPrice(product.price)}
-        </button>
+        <button className="purchaseBtn">{formatPrice(product.price)}</button>
       </div>
     </Link>
   );
@@ -59,14 +57,15 @@ const Homepage = () => {
         />
         <div className="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center text-white px-4">
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold uppercase tracking-wider mb-3 hero-text">
-            Welcome To Brilliance
+            Brilliance Clothing
           </h2>
           <p className="text-base md:text-xl mb-4">
-            South African Streetwear Inspired by Hip-Hop Culture
+            <span className="text-green-500">South African Streetwear</span>{" "}
+            Inspired by Hip-Hop Culture
           </p>
           <Link
             to="/shop"
-            className="px-6 py-2 md:px-8 md:py-3 bg-white text-black font-semibold rounded hover:bg-gray-100 transition">
+            className="px-6 py-2 md:px-8 md:py-3 bg-white text-black font-semibold rounded hover:bg-gray-100 transition ">
             Shop Now
           </Link>
         </div>
@@ -164,7 +163,7 @@ const Homepage = () => {
           href="https://www.tiktok.com/@brilliance_za"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mx-4 text-black hover:text-gray-600 transition"
+          className="inline-block mx-4 text-black hover:text-blue-500 transition"
           aria-label="TikTok">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -3,7 +3,7 @@
 
 @layer components {
   .footer {
-    @apply bg-black text-white py-8 mt-12;
+    @apply bg-black text-white py-8 mt-12 w-full;
   }
 
   .gradient-overlay {
@@ -20,6 +20,10 @@
 
   .imageHoverEffect {
     @apply w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300;
+  }
+
+  .purchaseBtn {
+    @apply w-full bg-black text-white py-2 rounded hover:bg-green-400 cursor-pointer hover:text-black delay-75 transition;
   }
 
   .product-card {
@@ -111,6 +115,6 @@
 @layer base {
   body {
     font-family: "Inter", sans-serif;
-    @apply  text-gray-800;
+    @apply text-black bg-white;
   }
 }

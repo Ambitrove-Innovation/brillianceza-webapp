@@ -1,10 +1,11 @@
 import { Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full text-gray-400 border-t border-neutral-800">
+    <footer className="footer">
       {/* Outer container (full width background) */}
       <div className="w-full">
         {/* Inner content container */}
@@ -64,10 +65,12 @@ const Footer = () => {
                 Follow Us
               </h3>
               <div className="flex items-center space-x-4">
-                <a href="#" aria-label="Instagram">
+                <a
+                  href="https://www.instagram.com/brilliance_za"
+                  aria-label="Instagram">
                   <Instagram
                     size={20}
-                    className="text-white hover:text-gray-300 transition"
+                    className="text-white hover:text-pink-500 transition"
                   />
                 </a>
               </div>
@@ -77,12 +80,17 @@ const Footer = () => {
           {/* Bottom Section */}
           <div className="border-t border-neutral-800 mt-16 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
             <p>
-              © {year} <b>Brilliance Clothing</b> (Pty) Ltd. All rights
-              reserved.
+              © {year} <b>Brilliance Clothing</b>All rights reserved.
             </p>
             <p className="mt-3 md:mt-0">
               Designed & Developed by{" "}
-              <span className="text-white font-medium">Ambitrove Team</span>
+              <Link
+                to="https://www.ambitrove.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white font-medium">
+                Ambitrove Team
+              </Link>
             </p>
           </div>
         </div>
