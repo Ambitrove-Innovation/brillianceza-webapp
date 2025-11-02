@@ -11,17 +11,17 @@ const ShopPage = () => {
 
   const ProductCard = ({ product }: { product: any }) => (
     <Link to={`/product/${product.id}`} className="block group">
-      <div className="bg-white border rounded-lg p-4 hover:shadow-lg transition-all duration-300">
+      <div className="cardImageBorder">
         <div className="overflow-hidden rounded mb-4">
           <img
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
-            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="imageHoverEffect"
             loading="lazy"
           />
         </div>
         <p className="font-bold text-center mb-2">{product.name}</p>
-        <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
+        <button className="w-full bg-black text-white py-2 rounded hover:bg-green-400 cursor-pointer  hover:text-black delay-75 transition">
           {formatPrice(product.price)}
         </button>
       </div>

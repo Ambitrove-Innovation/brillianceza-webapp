@@ -30,12 +30,12 @@ const Homepage = () => {
 
   const ProductCard = ({ product }: { product: any }) => (
     <Link to={`/product/${product.id}`} className="block group">
-      <div className="">
+      <div className="cardImageBorder">
         <div className="overflow-hidden rounded mb-4">
           <img
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
-            className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="imageHoverEffect"
             loading="lazy"
           />
         </div>
