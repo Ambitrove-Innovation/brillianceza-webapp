@@ -9,10 +9,8 @@ const Footer = () => {
       <div className="w-full">
         {/* Inner content container */}
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
-          
           {/* Top Section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
-            
             {/* About */}
             <div className="flex flex-col items-center md:items-start">
               <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
@@ -79,7 +77,8 @@ const Footer = () => {
           {/* Bottom Section */}
           <div className="border-t border-neutral-800 mt-16 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
             <p>
-              © {year} <b>Brilliance Clothing</b> (Pty) Ltd. All rights reserved.
+              © {year} <b>Brilliance Clothing</b> (Pty) Ltd. All rights
+              reserved.
             </p>
             <p className="mt-3 md:mt-0">
               Designed & Developed by{" "}
