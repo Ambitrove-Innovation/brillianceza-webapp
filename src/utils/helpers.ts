@@ -1,7 +1,5 @@
 // src/utils/helpers.js - Utility helper functions
 
-/// src/utils/helpers.ts - Utility helper functions
-
 // ===== FORMAT CURRENCY =====
 export function formatPrice(price: number): string {
   return `R${price.toFixed(2)}`;
@@ -29,7 +27,10 @@ export function setUrlParameter(name: string, value: string): void {
 }
 
 // ===== DEBOUNCE FUNCTION =====
-export function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
+export function debounce<T extends (...args: any[]) => void>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout> | undefined;
   return function executedFunction(...args: Parameters<T>): void {
     const later = () => {
@@ -57,7 +58,10 @@ export function isValidPhone(phone: string): boolean {
 }
 
 // ===== SHOW NOTIFICATION =====
-export function showNotification(message: string, type: "success" | "error" | "info" | "warning" = "info"): void {
+export function showNotification(
+  message: string,
+  type: "success" | "error" | "info" | "warning" = "info"
+): void {
   const notification = document.createElement("div");
   const bgColor =
     {
@@ -161,7 +165,9 @@ function validateForm(formId: string): boolean {
   const form = document.getElementById(formId) as HTMLFormElement | null;
   if (!form) return false;
 
-  const inputs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input[required], textarea[required]");
+  const inputs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+    "input[required], textarea[required]"
+  );
   let isValid = true;
 
   inputs.forEach((input) => {
@@ -214,12 +220,22 @@ function copyToClipboard(text: string): void {
 // ===== SHARE TO SOCIAL MEDIA =====
 type SocialPlatform = "facebook" | "twitter" | "whatsapp" | "telegram";
 
-function shareToSocial(platform: SocialPlatform, url: string, text: string): void {
+function shareToSocial(
+  platform: SocialPlatform,
+  url: string,
+  text: string
+): void {
   const shareUrls: Record<SocialPlatform, string> = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      url
+    )}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(text)}`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`,
-    telegram: `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(text)}`,
   };
 
   if (shareUrls[platform]) {
@@ -237,7 +253,10 @@ declare global {
     debounce: typeof debounce;
     isValidEmail: (email: string) => boolean;
     isValidPhone: (phone: string) => boolean;
-    showNotification: (message: string, type?: "success" | "error" | "info" | "warning") => void;
+    showNotification: (
+      message: string,
+      type?: "success" | "error" | "info" | "warning"
+    ) => void;
     showLoading: typeof showLoading;
     lazyLoadImages: typeof lazyLoadImages;
     storage: typeof storage;
