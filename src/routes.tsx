@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homepage from "./feature/pages/home/homePage";
 import AboutPage from "./feature/pages/about/aboutPage";
 import ShopPage from "./feature/pages/shop/shopPage";
+import ProductsPage from "./feature/pages/products/productsPage";
 import PageErrorRedirect from "./feature/pages/pageNotFound/PageErrorRedirect";
 
 const Routespath = () => {
@@ -12,6 +13,7 @@ const Routespath = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/products" element={<ProductsPage />} />
         <Route path="*" element={<PageErrorRedirect />} />
       </Routes>
     </Router>
