@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, LoaderCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 interface FormData {
@@ -77,7 +76,28 @@ const ContactPage = () => {
   };
 
   return (
-    <></>
+    <>
+      {loading ?? (
+        <>
+
+        <input 
+          type='text'
+          onChange={(e) => handleChange(e)
+          }
+        />
+        <button onClick={() => handleSubmit}>
+          {submitted ? (
+            <>Message has been sent</>
+          )
+          :
+          (
+            <>Send message</>
+          )}
+        </button>
+      
+        </>
+      )}
+    </>
   );
 };
 
