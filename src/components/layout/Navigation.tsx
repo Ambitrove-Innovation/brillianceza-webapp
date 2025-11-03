@@ -100,7 +100,7 @@ const Navigation = () => {
                 onClick={closeMenu}
                 className={`block px-6 py-3  text-sm uppercase tracking-wide font-medium transition ${
                   isActive(link.path)
-                    ? "bg-gray-100 text-black"
+                    ? "bg-black text-white"
                     : "hover:bg-gray-50 text-gray-700"
                 }`}>
                 {link.label}

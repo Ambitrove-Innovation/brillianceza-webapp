@@ -164,7 +164,7 @@ const ProductDetailPage = () => {
             <button
               onClick={handleBuyNowClick}
               className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 rounded-lg transition cursor-pointer">
-              Buy Now via WhatsApp
+              Buy Now
             </button>
 
             {/* Product Details */}
