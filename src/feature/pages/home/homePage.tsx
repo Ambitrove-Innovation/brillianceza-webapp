@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
+import HeroSection from "./components/HeroSection";
 import { getFeaturedProducts } from "../../data/product";
 import { formatPrice } from "../../../utils/helpers";
 
@@ -28,7 +29,7 @@ const Homepage = () => {
     "blue-strip-short",
   ]);
 
-  const ProductCard = ({ product }: { product: any }) => (
+  const ProductCard = ({ product }: { product: Product }) => (
     <Link to={`/product/${product.id}`} className="block group">
       <div className="cardImageBorder">
         <div className="overflow-hidden rounded mb-4">
@@ -48,28 +49,13 @@ const Homepage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="relative">
-        <img
-          src="/images/pics/l2.png"
-          alt="Brilliance Clothing Brand Banner"
-          loading="lazy"
-          className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
-        />
-        <div className="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center text-white px-4">
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-extrabold uppercase tracking-wider mb-3 hero-text">
-            Brilliance Clothing
-          </h2>
-          <p className="text-base md:text-xl mb-4">
-            <span className="text-green-500">South African Streetwear</span>{" "}
-            Inspired by Hip-Hop Culture
-          </p>
-          <Link
-            to="/shop"
-            className="px-6 py-2 md:px-8 md:py-3 bg-white text-black font-semibold rounded hover:bg-gray-100 transition ">
-            Shop Now
-          </Link>
-        </div>
-      </section>
+      <HeroSection
+        imageSrc="/images/pics/l2.png"
+        title="Brilliance Clothing"
+        subtitle="South African Streetwear Inspired by Hip-Hop Culture"
+        buttonText="Shop Now"
+        buttonLink="/shop"
+      />
 
       {/* Welcome Message */}
       <div className="bg-black text-white text-center py-6">
@@ -115,17 +101,17 @@ const Homepage = () => {
       </section>
 
       {/* Image Gallery Section */}
-      <section className="container mx-auto px-4 py-8">
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
+      <section className="container mx-auto px-6 py-16">
+        <div className="flex-col sm:flex-row justify-center grid grid-cols-1 md:grid-cols-2 gap-6">
           <img
             src="/images/pics/s4.png"
             alt="Streetwear Style 1"
-            className="w-full sm:w-80 rounded-lg shadow-md"
+            className="rounded-xl object-cover shadow-lg"
           />
           <img
             src="/images/pics/s3.png"
             alt="Streetwear Style 2"
-            className="w-full sm:w-80 rounded-lg shadow-md"
+            className="rounded-xl object-cover shadow-lg"
           />
         </div>
       </section>
