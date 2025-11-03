@@ -1,6 +1,6 @@
 // src/utils/whatsappService.ts
 
-const WHATSAPP_NUMBER = "27686311388";
+const WHATSAPP_NUMBER = "+27686311388";
 
 interface BuyNowParams {
   product: Product;

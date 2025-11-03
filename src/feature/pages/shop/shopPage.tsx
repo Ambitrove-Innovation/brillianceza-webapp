@@ -10,38 +10,43 @@ const ShopPage = () => {
   const bottoms = getProductsByCategory("bottoms");
 
   const ProductCard = ({ product }: { product: any }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-      <Link to={`/product/${product.id}`} className="block group">
-        <div className="cardImageBorder">
-          <div className="overflow-hidden rounded mb-4">
-            <img
-              src={`/images/pics/${product.images[0]}`}
-              alt={product.name}
-              className="imageHoverEffect"
-              loading="lazy"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const img = e.currentTarget as HTMLImageElement;
-                img.classList.remove("animate-ping");
+  return (
+    <Link to={`/product/${product.id}`} className="block group">
+      <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        {/* Image */}
+        <div className="w-full aspect-square overflow-hidden">
+          <img
+            src={`/images/pics/${product.images[0]}`}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105  transition-transform duration-300"
+            loading="lazy"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const img = e.currentTarget as HTMLImageElement;
+              img.classList.remove("animate-ping");
+              img.offsetWidth; // trigger reflow
+              img.classList.add("animate-ping");
 
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                img.offsetWidth;
-                img.classList.add("animate-ping");
-
-                // Navigate after a short delay so user sees the effect
-                setTimeout(() => navigate(`/product/${product.id}`), 300);
-              }}
-            />
-          </div>
-          <p className="font-bold text-center mb-2">{product.name}</p>
-          <button className="purchaseBtn">{formatPrice(product.price)}</button>
+              setTimeout(() => navigate(`/product/${product.id}`), 300);
+            }}
+          />
         </div>
-      </Link>
-    );
-  };
+
+        {/* Product Info */}
+        <div className="p-4 text-center">
+          <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
+          <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+            {formatPrice(product.price)}
+          </button>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -50,14 +55,16 @@ const ShopPage = () => {
         <img
           src="/images/pics/B12.1.png"
           alt="Shop Brilliance Collection"
-          className="w-full max-w-6xl mx-auto rounded-lg shadow-lg hover:scale-[1.02] transition-transform duration-300"
+          className="w-full max-w-6xl mx-auto rounded-xl shadow-lg hover:scale-[1.02] transition-transform duration-300 object-cover"
         />
       </section>
 
       {/* Tops Section */}
       <section className="container mx-auto px-4 py-12">
-        <h2 className="text-4xl font-bold mb-8 text-center">Brilliance Tops</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center uppercase tracking-tight">
+          Brilliance Tops
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
           {tops.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -66,10 +73,10 @@ const ShopPage = () => {
 
       {/* Bottoms Section */}
       <section className="container mx-auto px-4 py-12">
-        <h2 className="text-4xl font-bold mb-8 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center uppercase tracking-tight">
           Brilliance Bottoms
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
           {bottoms.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
