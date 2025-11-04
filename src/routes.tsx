@@ -9,6 +9,7 @@ import GalleryPage from "./feature/pages/gallery/galleryPage";
 import ContactPage from "./feature/pages/contact/contactPage";
 import DeliveryPage from "./feature/pages/delivery/deliveryPage";
 import PageErrorRedirect from "./feature/pages/pageNotFound/PageErrorRedirect";
+import SecurePaymentPage from "./feature/pages/payment/securePaymentPage";
 
 const Routespath = () => {
   return (
@@ -22,6 +23,7 @@ const Routespath = () => {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/delivery" element={<DeliveryPage />} />
+        <Route path="/secure-payment" element={<SecurePaymentPage />} />
         <Route path="*" element={<PageErrorRedirect />} />
       </Routes>
     </Router>
