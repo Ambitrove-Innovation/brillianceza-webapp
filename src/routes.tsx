@@ -1,19 +1,27 @@
 // src/routes.tsx
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navigation from "./components/layout/Navigation";
 import Homepage from "./feature/pages/home/homePage";
 import AboutPage from "./feature/pages/about/aboutPage";
 import ShopPage from "./feature/pages/shop/shopPage";
-import ProductsPage from "./feature/pages/products/productsPage";
+import ProductDetailPage from "./feature/pages/products/productsPage";
+import GalleryPage from "./feature/pages/gallery/galleryPage";
+import ContactPage from "./feature/pages/contact/contactPage";
+import DeliveryPage from "./feature/pages/delivery/deliveryPage";
 import PageErrorRedirect from "./feature/pages/pageNotFound/PageErrorRedirect";
 
 const Routespath = () => {
   return (
     <Router>
+      <Navigation />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/shop" element={<ShopPage />} />
-        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/delivery" element={<DeliveryPage />} />
         <Route path="*" element={<PageErrorRedirect />} />
       </Routes>
     </Router>

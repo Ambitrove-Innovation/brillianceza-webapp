@@ -10,8 +10,8 @@ import {
   Instagram,
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import Footer from "../../components/layout/Footer";
-import { sendContactMessage } from "../../utils/whatsappService";
+import Footer from "../../../components/layout/Footer";
+import { sendContactMessage } from "../../../utils/whatsappService";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState<ContactFormData>({

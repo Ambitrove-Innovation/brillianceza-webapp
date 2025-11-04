@@ -71,7 +71,7 @@ export function showNotification(
       warning: "bg-yellow-500",
     }[type] || "bg-blue-500";
 
-  notification.className = `fixed top-24 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in`;
+  notification.className = `fixed top-24 right-4 ${bgColor}  border-black border-2 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in`;
   notification.textContent = message;
 
   document.body.appendChild(notification);
