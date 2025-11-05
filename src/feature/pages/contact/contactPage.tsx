@@ -12,6 +12,7 @@ import {
 import emailjs from "@emailjs/browser";
 import Footer from "../../../components/layout/Footer";
 import { sendContactMessage } from "../../../utils/whatsappService";
+import { showNotification } from "../../../utils/helpers";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -23,6 +24,7 @@ const ContactPage = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -33,6 +35,10 @@ const ContactPage = () => {
     });
   };
 
+  function isValidEmail(email: string): boolean {
+    return emailRegex.test(email);
+  }
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -41,7 +47,26 @@ const ContactPage = () => {
     const templateID = import.meta.env.VITE_TEMPLATE_ID!;
     const publicKey = import.meta.env.VITE_PUBLIC_KEY!;
 
+    console.log(serviceID);
+    console.log(templateID);
+    console.log(publicKey);
+    
+
     try {
+
+      if (!isValidEmail(formData.email)) { 
+
+        showNotification(
+          "Please enter a valid email",
+          "error"
+        );
+        setLoading(false);
+        return
+
+      }
+
+
+
       await emailjs.send(
         serviceID,
         templateID,
@@ -67,11 +92,15 @@ const ContactPage = () => {
           message: "",
         });
       }, 3000);
+
+
     } catch (err) {
-      alert("Error: " + JSON.stringify(err));
+      console.log("Error: " + JSON.stringify(err));
       setLoading(false);
     }
   };
+
+  
 
   const handleWhatsAppSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -203,7 +232,9 @@ const ContactPage = () => {
                 <button
                   type="submit"
                   disabled={loading || submitted}
-                  className="flex-1 bg-black hover:bg-gray-900 text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2 transition">
+                  className={`flex-1 text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2 transition 
+                    ${loading ? "bg-yellow-400" : submitted ? "bg-green-600" : "bg-black hover:bg-gray-900"}`}
+                    >
                   {loading ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" /> Sending...

@@ -110,18 +110,18 @@ Netlify or Vercel recommended.
 Ensure your publish directory is set to dist.
 
 🧱 Features
-_Fully responsive design
+Fully responsive design
 Modular and maintainable component structure
 Smooth page transitions with React Router
 Optimized for SEO and performance
 Dynamic product gallery and category filters
 Reusable Tailwind components
-Email contact integration (optional with EmailJS or backend API)_
+Email contact integration (Email.JS)
 
 🧑‍💻 Contributors
 Kamogelo Mogasoa - Developer
-_Dean Meyer - Developer
-Brilliance ZA Team — Brand & Content_
+Dean Meyer - Developer
+Brilliance ZA Team — Brand & Content
 
 📄 License
 
