@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Mail,
   Phone,
@@ -24,10 +24,6 @@ const ContactPage = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState({
-    type: "Send Email",
-    class: "flex-1 bg-black hover:bg-gray-900 text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2 transition",
-  });
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleChange = (
@@ -85,11 +81,6 @@ const ContactPage = () => {
       );
 
       setSubmitted(true);
-      setStatusMessage((prev) => ({
-        ...prev,
-        status: "Sent!",
-        class: "flex-1 bg-green hover:bg-gray-900 text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2 transition",
-      }));
       setLoading(false);
       setTimeout(() => {
         setSubmitted(false);
@@ -102,14 +93,9 @@ const ContactPage = () => {
         });
       }, 3000);
 
-      setStatusMessage((prev) => ({
-        ...prev,
-        status: "Send Email",
-        class: "flex-1 bg-black hover:bg-gray-900 text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2 transition",
-      }));
 
     } catch (err) {
-      alert("Error: " + JSON.stringify(err));
+      console.log("Error: " + JSON.stringify(err));
       setLoading(false);
     }
   };
@@ -120,11 +106,6 @@ const ContactPage = () => {
     e.preventDefault();
     sendContactMessage(formData);
   };
-
-  useEffect(() => {
-
-    //switch (formData.email)
-  }, [statusMessage, loading]);
 
   return (
     <div className="min-h-screen flex flex-col">
