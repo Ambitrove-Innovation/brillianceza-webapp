@@ -1,5 +1,6 @@
 import { Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -19,9 +20,11 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="/" className="hover:text-white transition">
-                    Our Story
-                  </a>
+                  <HashLink smooth to="/about#our_story" className="hover:text-white transition">
+                    <a href="/about/#our_story" className="hover:text-white transition">
+                      Our Story
+                    </a>
+                  </HashLink>
                 </li>
               </ul>
             </div>
@@ -33,14 +36,18 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#contact" className="hover:text-white transition">
-                    Contact Us
-                  </a>
+                  <HashLink smooth to="/contact" className="hover:text-white transition">
+                    <a className="hover:text-white transition">
+                      Contact Us
+                    </a>
+                  </HashLink>
                 </li>
                 <li>
-                  <a href="#delivery" className="hover:text-white transition">
-                    Delivery Info
-                  </a>
+                  <HashLink smooth to="/delivery" className="hover:text-white transition"> 
+                    <a className="hover:text-white transition">
+                      Delivery Info
+                    </a>
+                  </HashLink>
                 </li>
               </ul>
             </div>
@@ -52,9 +59,11 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#payment" className="hover:text-white transition">
-                    Secured Payment
-                  </a>
+                  <HashLink smooth to="/secure-payment" className="hover:text-white transition"> 
+                    <a className="hover:text-white transition">
+                      Secured Payment
+                    </a>
+                  </HashLink>
                 </li>
               </ul>
             </div>

@@ -23,7 +23,7 @@ const AboutPage = () => {
       </section>
 
       {/* Brand Story */}
-      <section className="container mx-auto px-4 py-12 max-w-5xl">
+      <section id="our_story" className="container mx-auto px-4 py-12 max-w-5xl">
         <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
             Our Story

@@ -10,11 +10,15 @@ import ContactPage from "./feature/pages/contact/contactPage";
 import DeliveryPage from "./feature/pages/delivery/deliveryPage";
 import PageErrorRedirect from "./feature/pages/pageNotFound/PageErrorRedirect";
 import SecurePaymentPage from "./feature/pages/payment/securePaymentPage";
+import ScrollToTop from "./components/layout/ScrollToTop";
+import ScrollToHashElement from "./components/layout/ScrollToHashElement";
 
 const Routespath = () => {
   return (
     <Router>
       <Navigation />
+      <ScrollToTop />
+      <ScrollToHashElement />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<AboutPage />} />
