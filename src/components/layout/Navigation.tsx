@@ -29,8 +29,10 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" onClick={closeMenu}>
             <img
-              src="/images/pics/Brilliancelogo.png"
+              src="/images/pics/Brilliancelogo.webp"
               alt="Brilliance Logo"
+              srcSet="/images/pics/Brilliancelogo.webp 400w, /images/pics/Brilliancelogo@2x.webp 800w"
+              sizes="(max-width: 600px) 80vw, (max-width: 1200px) 40vw, 20vw"
               className="h-12 md:h-14 w-auto"
             />
           </Link>

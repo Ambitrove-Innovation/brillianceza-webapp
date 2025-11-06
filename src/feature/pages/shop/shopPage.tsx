@@ -9,51 +9,50 @@ const ShopPage = () => {
   const tops = getProductsByCategory("tops");
   const bottoms = getProductsByCategory("bottoms");
 
-  const ProductCard = ({ product }: { product: any }) => {
-  const navigate = useNavigate();
+  const ProductCard = ({ product }: { product: Product }) => {
+    const navigate = useNavigate();
 
-  return (
-    <Link to={`/product/${product.id}`} className="block group">
-      <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-        {/* Image */}
-        <div className="w-full aspect-square overflow-hidden">
-          <img
-            src={`/images/pics/${product.images[0]}`}
-            alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105  transition-transform duration-300"
-            loading="lazy"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              const img = e.currentTarget as HTMLImageElement;
-              img.classList.remove("animate-ping");
-              img.offsetWidth; // trigger reflow
-              img.classList.add("animate-ping");
+    return (
+      <Link to={`/product/${product.id}`} className="block group">
+        <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+          {/* Image */}
+          <div className="w-full aspect-square overflow-hidden">
+            <img
+              src={`/images/pics/${product.images[0]}`}
+              alt={product.name}
+              className="w-full h-full object-cover group-hover:scale-105  transition-transform duration-300"
+              loading="lazy"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const img = e.currentTarget as HTMLImageElement;
+                img.classList.remove("animate-ping");
+                void img.offsetWidth; // trigger reflow
+                img.classList.add("animate-ping");
 
-              setTimeout(() => navigate(`/product/${product.id}`), 300);
-            }}
-          />
+                setTimeout(() => navigate(`/product/${product.id}`), 300);
+              }}
+            />
+          </div>
+
+          {/* Product Info */}
+          <div className="p-4 text-center">
+            <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
+            <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+              {formatPrice(product.price)}
+            </button>
+          </div>
         </div>
-
-        {/* Product Info */}
-        <div className="p-4 text-center">
-          <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
-          <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-            {formatPrice(product.price)}
-          </button>
-        </div>
-      </div>
-    </Link>
-  );
-};
-
+      </Link>
+    );
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Banner */}
       <section className="container mx-auto px-4 py-8">
         <img
-          src="/images/pics/B12.1.png"
+          src="/images/pics/B12.1.webp"
           alt="Shop Brilliance Collection"
           className="w-full max-w-6xl mx-auto rounded-xl shadow-lg hover:scale-[1.02] transition-transform duration-300 object-cover"
         />

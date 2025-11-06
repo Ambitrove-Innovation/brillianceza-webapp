@@ -82,8 +82,6 @@ const ProductDetailPage = () => {
                 <img
                   key={index}
                   src={`/images/pics/${img}`}
-                  loading="lazy"
-                  decoding=""
                   alt={`${currentProduct.name} - Image ${index + 2}`}
                   className="thumbnail cursor-pointer w-20 h-20 object-cover rounded hover:opacity-75 transition"
                   onClick={() => changeMainImage(index + 1)}

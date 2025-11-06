@@ -30,7 +30,7 @@ const SecurePaymentPage = () => {
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-12">
             <div className="flex items-center justify-center mb-8">
               <img
-                src="/images/pics/payshap.jpg"
+                src="/images/pics/payshap.webp"
                 alt="PayShap"
                 className="h-24 w-auto"
               />
@@ -127,7 +127,7 @@ const SecurePaymentPage = () => {
               </h3>
               <div className="flex justify-center items-center gap-6 flex-wrap">
                 <img
-                  src="/images/pics/Payshap banks.png"
+                  src="/images/pics/Payshap banks.webp"
                   alt="Supported Banks"
                   className="h-16 w-auto"
                 />

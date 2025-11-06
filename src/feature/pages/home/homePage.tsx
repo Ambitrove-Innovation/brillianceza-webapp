@@ -38,6 +38,7 @@ const Homepage = () => {
             alt={product.name}
             className="imageHoverEffect"
             loading="lazy"
+            
           />
         </div>
         <p className="font-bold text-center mb-2">{product.name}</p>
@@ -50,7 +51,7 @@ const Homepage = () => {
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
       <HeroSection
-        imageSrc="/images/pics/l2.png"
+        imageSrc="/images/pics/l2.webp"
         title="Brilliance"
         subtitle="South African Streetwear Inspired by Hip-Hop Culture"
         buttonText="Shop Now"
@@ -82,7 +83,7 @@ const Homepage = () => {
       {/* Welcome Banner */}
       <section className="container mx-auto px-4 py-8">
         <img
-          src="/images/pics/hello.png"
+          src="/images/pics/hello.webp"
           alt="Welcome to Euphoria Collection"
           className="w-full max-w-5xl mx-auto rounded-lg shadow-lg"
         />
@@ -128,14 +129,14 @@ const Homepage = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
           <div className="w-full aspect-square overflow-hidden rounded-xl shadow-lg">
             <img
-              src="/images/pics/s4.png"
+              src="/images/pics/s4.webp"
               alt="Streetwear Style 1"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
           </div>
           <div className="w-full aspect-square overflow-hidden rounded-xl shadow-lg">
             <img
-              src="/images/pics/s3.png"
+              src="/images/pics/s3.webp"
               alt="Streetwear Style 2"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />

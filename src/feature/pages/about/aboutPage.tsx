@@ -16,7 +16,7 @@ const AboutPage = () => {
       {/* Hero Image */}
       <section className="container mx-auto px-4 py-8">
         <img
-          src="/images/pics/B90.png"
+          src="/images/pics/B90.webp"
           alt="Brilliance Brand Story"
           className="w-full max-w-6xl mx-auto rounded-lg shadow-lg"
         />

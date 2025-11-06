@@ -27,7 +27,7 @@ export function setUrlParameter(name: string, value: string): void {
 }
 
 // ===== DEBOUNCE FUNCTION =====
-export function debounce<T extends (...args: any[]) => void>(
+export function debounce<T extends (...args: unknown[]) => void>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -51,7 +51,7 @@ export function isValidEmail(email: string): boolean {
 // ===== VALIDATE PHONE NUMBER (South African) =====
 export function isValidPhone(phone: string): boolean {
   // Remove spaces and special characters
-  const cleanPhone = phone.replace(/[\s\-\(\)]/g, "");
+  const cleanPhone = phone.replace(/[\s() -]/g, "");
   // Check if it matches South African format
   const phoneRegex = /^(\+27|0)[0-9]{9}$/;
   return phoneRegex.test(cleanPhone);
@@ -116,6 +116,31 @@ export function lazyLoadImages(): void {
   });
 
   images.forEach((img) => imageObserver.observe(img));
+}
+
+// ===== RESPONSIVE SRCSET BUILDER =====
+export function buildResponsiveSrcSet(
+  filename: string,
+  folder = "/images/pics",
+  widths: number[] = [480, 800, 1200, 1800]
+): {
+  webpSrcSet: string;
+  fallbackSrcSet: string;
+  sizes: string;
+  fallback: string;
+} {
+  const parts = filename.split(".");
+  const ext = parts.pop() || "jpg";
+  const base = parts.join(".");
+  const webpSrcSet = widths
+    .map((w) => `${folder}/${base}-${w}.webp ${w}w`)
+    .join(", ");
+  const fallbackSrcSet = widths
+    .map((w) => `${folder}/${base}-${w}.${ext} ${w}w`)
+    .join(", ");
+  const sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
+  const fallback = `${folder}/${filename}`;
+  return { webpSrcSet, fallbackSrcSet, sizes, fallback };
 }
 
 // ===== LOCAL STORAGE HELPERS =====
@@ -263,6 +288,7 @@ declare global {
     validateForm: typeof validateForm;
     copyToClipboard: typeof copyToClipboard;
     shareToSocial: typeof shareToSocial;
+    buildResponsiveSrcSet: typeof buildResponsiveSrcSet;
   }
 }
 
@@ -280,3 +306,4 @@ window.storage = storage;
 window.validateForm = validateForm;
 window.copyToClipboard = copyToClipboard;
 window.shareToSocial = shareToSocial;
+window.buildResponsiveSrcSet = buildResponsiveSrcSet;
