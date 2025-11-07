@@ -1,13 +1,27 @@
 // src/feature/pages/home/homePage.tsx
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
+import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { getFeaturedProducts } from "../../data/product";
 import { formatPrice } from "../../../utils/helpers";
 
 const Homepage = () => {
-  // Featured collections
+  // Preload critical hero image
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = "/images/pics/l2.webp";
+    document.head.appendChild(link);
+
+    return () => {
+      if (link.parentNode) link.parentNode.removeChild(link);
+    };
+  }, []);
+
   const brillianceCollection = getFeaturedProducts([
     "reflector-tshirt",
     "7-ways-brilliance",
@@ -33,12 +47,12 @@ const Homepage = () => {
     <Link to={`/product/${product.id}`} className="block group">
       <div className="cardImageBorder">
         <div className="overflow-hidden rounded mb-4">
-          <img
+          <OptimizedImage
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
             className="imageHoverEffect"
-            loading="lazy"
-            
+            width={400}
+            height={400}
           />
         </div>
         <p className="font-bold text-center mb-2">{product.name}</p>
@@ -49,7 +63,6 @@ const Homepage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Hero Section */}
       <HeroSection
         imageSrc="/images/pics/l2.webp"
         title="Brilliance"
@@ -58,7 +71,6 @@ const Homepage = () => {
         buttonLink="/shop"
       />
 
-      {/* Welcome Message */}
       <div className="bg-black text-white text-center py-6">
         <p className="text-2xl md:text-3xl font-bold">Welcome To Euphoria</p>
       </div>
@@ -68,7 +80,6 @@ const Homepage = () => {
         </p>
       </div>
 
-      {/* Brilliance Collection */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-8">
           Brilliance Collection
@@ -80,16 +91,16 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Welcome Banner */}
       <section className="container mx-auto px-4 py-8">
-        <img
+        <OptimizedImage
           src="/images/pics/hello.webp"
           alt="Welcome to Euphoria Collection"
           className="w-full max-w-5xl mx-auto rounded-lg shadow-lg"
+          width={1200}
+          height={600}
         />
       </section>
 
-      {/* Euphoria Collection */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-2xl md:text-4xl font-bold text-center mb-12 uppercase tracking-wide">
           Explore Our Welcome To Euphoria Collection
@@ -100,17 +111,16 @@ const Homepage = () => {
             <div
               key={product.id}
               className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-              {/* Image */}
               <div className="w-full aspect-square overflow-hidden">
-                <img
+                <OptimizedImage
                   src={`/images/pics/${product.images[0]}`}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
+                  width={400}
+                  height={400}
                 />
               </div>
 
-              {/* Product Info */}
               <div className="p-4 text-center">
                 <p className="font-semibold text-gray-800 mb-2">
                   {product.name}
@@ -124,27 +134,29 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Image Gallery Section */}
       <section className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
           <div className="w-full aspect-square overflow-hidden rounded-xl shadow-lg">
-            <img
+            <OptimizedImage
               src="/images/pics/s4.webp"
               alt="Streetwear Style 1"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              width={400}
+              height={400}
             />
           </div>
           <div className="w-full aspect-square overflow-hidden rounded-xl shadow-lg">
-            <img
+            <OptimizedImage
               src="/images/pics/s3.webp"
               alt="Streetwear Style 2"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              width={400}
+              height={400}
             />
           </div>
         </div>
       </section>
 
-      {/* Bottoms Collection */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center uppercase tracking-tight">
           Brilliance Bottoms
@@ -154,17 +166,16 @@ const Homepage = () => {
             <div
               key={product.id}
               className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-              {/* Image */}
               <div className="w-full aspect-square overflow-hidden">
-                <img
+                <OptimizedImage
                   src={`/images/pics/${product.images[0]}`}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
+                  width={400}
+                  height={400}
                 />
               </div>
 
-              {/* Product Info */}
               <div className="p-4 text-center">
                 <p className="font-semibold text-gray-800 mb-2">
                   {product.name}
@@ -178,13 +189,11 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Brand Message */}
       <div className="bg-black text-white text-center py-8 my-12">
         <p className="text-2xl md:text-3xl font-bold px-4">
           Inspired By Hip-Hop And Streetwear Fashion
         </p>
 
-        {/* Social Media Bar */}
         <div className="text-center my-8">
           <a
             href="https://www.instagram.com/brilliance_za"
