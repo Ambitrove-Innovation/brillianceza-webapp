@@ -122,7 +122,7 @@ export const IMAGE_QUALITY = {
 /**
  * Generate image path with CDN or optimization service
  * In production, you'd route through image CDN like Cloudinary, Imgix, etc.
- */
+ 
 export const getOptimizedImageUrl = (
   path: string,
   options: {
@@ -136,7 +136,7 @@ export const getOptimizedImageUrl = (
   // return `https://your-cdn.com/image/${path}?w=${options.width}&q=${options.quality}&f=${options.format}`;
   return path;
 };
-
+*/
 /**
  * Responsive image component generator
  */
