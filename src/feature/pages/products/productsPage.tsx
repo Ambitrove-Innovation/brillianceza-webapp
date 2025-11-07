@@ -1,7 +1,8 @@
-// src/feature/pages/product/ProductDetailPage.tsx
+// src/feature/pages/products/productsPage.tsx
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../../../components/layout/Footer";
+import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { getProductById, getRandomProducts } from "../../data/product";
 import { formatPrice } from "../../../utils/helpers";
 import { handleBuyNow } from "../../../utils/whatsappService";
@@ -33,11 +34,9 @@ const ProductDetailPage = () => {
     setSelectedColor(product.colors[0] || "");
     setCurrentImageIndex(0);
 
-    // Load recommendations
     const recommended = getRandomProducts(3, id);
     setRecommendations(recommended);
 
-    // Scroll to top when product changes
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id, navigate]);
 
@@ -65,41 +64,44 @@ const ProductDetailPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Product Details Section */}
       <section className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Images */}
           <div>
             <div className="mb-4">
-              <img
+              <OptimizedImage
                 src={`/images/pics/${currentProduct.images[currentImageIndex]}`}
                 alt={currentProduct.name}
                 className="w-full rounded-lg shadow-lg"
+                width={800}
+                height={800}
+                priority
               />
             </div>
             <div className="flex gap-2 overflow-x-auto">
               {currentProduct.images.slice(1).map((img, index) => (
-                <img
+                <div
                   key={index}
-                  src={`/images/pics/${img}`}
-                  alt={`${currentProduct.name} - Image ${index + 2}`}
-                  className="thumbnail cursor-pointer w-20 h-20 object-cover rounded hover:opacity-75 transition"
-                  onClick={() => changeMainImage(index + 1)}
-                />
+                  className="thumbnail cursor-pointer w-20 h-20 rounded hover:opacity-75 transition overflow-hidden"
+                  onClick={() => changeMainImage(index + 1)}>
+                  <OptimizedImage
+                    src={`/images/pics/${img}`}
+                    alt={`${currentProduct.name} - Image ${index + 2}`}
+                    className="w-full h-full object-cover"
+                    width={80}
+                    height={80}
+                  />
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Product Info */}
           <div>
             <h1 className="text-4xl font-bold mb-4">{currentProduct.name}</h1>
             <p className="text-3xl font-bold text-gray-800 mb-6">
               {formatPrice(currentProduct.price)}
             </p>
 
-            {/* Product Options */}
             <div className="space-y-4 mb-6">
-              {/* Size Selection */}
               <div>
                 <label
                   htmlFor="size-select"
@@ -119,7 +121,6 @@ const ProductDetailPage = () => {
                 </select>
               </div>
 
-              {/* Color Selection */}
               <div>
                 <label
                   htmlFor="color-select"
@@ -139,7 +140,6 @@ const ProductDetailPage = () => {
                 </select>
               </div>
 
-              {/* Quantity Selection */}
               <div>
                 <label
                   htmlFor="quantity-select"
@@ -160,14 +160,12 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
-            {/* Buy Button */}
             <button
               onClick={handleBuyNowClick}
               className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 rounded-lg transition cursor-pointer">
               Buy Now
             </button>
 
-            {/* Product Details */}
             <div className="mt-8 p-6 bg-black text-white rounded-lg">
               {currentProduct.fit && (
                 <p className="text-xl font-bold mb-2">
@@ -180,10 +178,8 @@ const ProductDetailPage = () => {
         </div>
       </section>
 
-      {/* Divider */}
       <hr className="container mx-auto border-t-4 border-gray-800 my-12" />
 
-      {/* Recommendations Section */}
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold text-center mb-8">
           You May Also Like
@@ -196,11 +192,12 @@ const ProductDetailPage = () => {
               className="block group">
               <div className="cardImageBorder">
                 <div className="overflow-hidden rounded mb-4">
-                  <img
+                  <OptimizedImage
                     src={`/images/pics/${product.images[0]}`}
                     alt={product.name}
                     className="imageHoverEffect"
-                    loading="lazy"
+                    width={400}
+                    height={400}
                   />
                 </div>
                 <p className="font-bold text-center mb-2">{product.name}</p>
