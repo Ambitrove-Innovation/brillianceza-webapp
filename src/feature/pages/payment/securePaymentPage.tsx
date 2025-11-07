@@ -7,6 +7,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
+import OptimizedImage from "../../../components/ui/OptimizedImage";
 
 const SecurePaymentPage = () => {
   return (
@@ -24,15 +25,17 @@ const SecurePaymentPage = () => {
         </div>
       </section>
 
-      {/* PayShap Section */}
       <section className="container mx-auto px-6 py-16">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-12">
             <div className="flex items-center justify-center mb-8">
-              <img
+              <OptimizedImage
                 src="/images/pics/payshap.webp"
                 alt="PayShap"
                 className="h-24 w-auto"
+                width={300}
+                height={96}
+                priority
               />
             </div>
 
@@ -55,7 +58,6 @@ const SecurePaymentPage = () => {
               </p>
             </div>
 
-            {/* PayShap Benefits */}
             <div className="grid md:grid-cols-3 gap-6 mt-10">
               <div className="bg-green-50 rounded-lg p-6 text-center">
                 <Smartphone className="w-12 h-12 mx-auto mb-4 text-green-600" />
@@ -83,7 +85,6 @@ const SecurePaymentPage = () => {
               </div>
             </div>
 
-            {/* How to Use */}
             <div className="mt-12">
               <h3 className="text-2xl font-bold mb-6 text-center">
                 How to Send or Receive a PayShap Request
@@ -120,27 +121,26 @@ const SecurePaymentPage = () => {
               </ol>
             </div>
 
-            {/* Supported Banks */}
             <div className="mt-12 text-center">
               <h3 className="text-xl font-bold mb-4">
                 Supported by Major Banks
               </h3>
               <div className="flex justify-center items-center gap-6 flex-wrap">
-                <img
+                <OptimizedImage
                   src="/images/pics/Payshap banks.webp"
                   alt="Supported Banks"
                   className="h-16 w-auto"
+                  width={400}
+                  height={64}
                 />
               </div>
             </div>
           </div>
 
-          {/* Divider */}
           <div className="text-center my-12">
             <p className="text-4xl font-black text-gray-400">OR</p>
           </div>
 
-          {/* EFT Section */}
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
             <div className="flex items-center justify-center mb-8">
               <Building2 className="w-16 h-16 text-blue-600" />
@@ -191,7 +191,6 @@ const SecurePaymentPage = () => {
         </div>
       </section>
 
-      {/* Security Notice */}
       <section className="bg-gray-50 py-12">
         <div className="container mx-auto px-6 max-w-3xl">
           <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-green-600">
