@@ -21,7 +21,11 @@ const HeroSection = ({
       <img
         src={imageSrc}
         alt={title}
-        loading="lazy"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+        width={1920}
+        height={600}
         className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
       />
       <div className="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center text-white px-4">
