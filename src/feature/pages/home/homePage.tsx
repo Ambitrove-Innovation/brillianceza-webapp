@@ -45,18 +45,27 @@ const Homepage = () => {
 
   const ProductCard = ({ product }: { product: Product }) => (
     <Link to={`/product/${product.id}`} className="block group">
-      <div className="cardImageBorder">
-        <div className="overflow-hidden rounded mb-4">
+      <div
+        key={product.id}
+        className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        <div className="w-full aspect-square overflow-hidden">
           <OptimizedImage
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
-            className="imageHoverEffect"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             width={400}
             height={400}
           />
         </div>
-        <p className="font-bold text-center mb-2">{product.name}</p>
-        <button className="purchaseBtn">{formatPrice(product.price)}</button>
+
+        <div className="p-4 text-center">
+          <p className="font-semibold text-gray-800 mb-2">
+            {product.name}
+          </p>
+          <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+            {formatPrice(product.price)}
+          </button>
+        </div>
       </div>
     </Link>
   );
@@ -108,28 +117,9 @@ const Homepage = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {euphoriaCollection.map((product) => (
-            <div
-              key={product.id}
-              className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-              <div className="w-full aspect-square overflow-hidden">
-                <OptimizedImage
-                  src={`/images/pics/${product.images[0]}`}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  width={400}
-                  height={400}
-                />
-              </div>
+            
+            <ProductCard key={product.id} product={product} />
 
-              <div className="p-4 text-center">
-                <p className="font-semibold text-gray-800 mb-2">
-                  {product.name}
-                </p>
-                <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-                  {formatPrice(product.price)}
-                </button>
-              </div>
-            </div>
           ))}
         </div>
       </section>
@@ -163,28 +153,9 @@ const Homepage = () => {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {bottomsCollection.map((product) => (
-            <div
-              key={product.id}
-              className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-              <div className="w-full aspect-square overflow-hidden">
-                <OptimizedImage
-                  src={`/images/pics/${product.images[0]}`}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  width={400}
-                  height={400}
-                />
-              </div>
 
-              <div className="p-4 text-center">
-                <p className="font-semibold text-gray-800 mb-2">
-                  {product.name}
-                </p>
-                <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-                  {formatPrice(product.price)}
-                </button>
-              </div>
-            </div>
+            <ProductCard key={product.id} product={product} />
+            
           ))}
         </div>
       </section>
