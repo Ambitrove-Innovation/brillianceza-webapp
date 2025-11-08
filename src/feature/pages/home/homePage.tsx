@@ -59,9 +59,7 @@ const Homepage = () => {
         </div>
 
         <div className="p-4 text-center">
-          <p className="font-semibold text-gray-800 mb-2">
-            {product.name}
-          </p>
+          <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
           <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
             {formatPrice(product.price)}
           </button>
@@ -117,15 +115,13 @@ const Homepage = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {euphoriaCollection.map((product) => (
-            
             <ProductCard key={product.id} product={product} />
-
           ))}
         </div>
       </section>
 
       <section className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
           <div className="w-full aspect-square overflow-hidden rounded-xl shadow-lg">
             <OptimizedImage
               src="/images/pics/s4.webp"
@@ -153,9 +149,7 @@ const Homepage = () => {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {bottomsCollection.map((product) => (
-
             <ProductCard key={product.id} product={product} />
-            
           ))}
         </div>
       </section>
