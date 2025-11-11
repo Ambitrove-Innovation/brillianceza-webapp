@@ -9,7 +9,6 @@ import { getFeaturedProducts } from "../../data/product";
 import { formatPrice } from "../../../utils/helpers";
 
 const Homepage = () => {
-  // Preload critical hero image
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
