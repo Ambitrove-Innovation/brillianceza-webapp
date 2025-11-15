@@ -1,7 +1,152 @@
-// src/feature/pages/gallery/GalleryPage.tsx
-import Footer from "../../../components/layout/Footer";
-import SocialBar from "../../../components/layout/SocialBar";
+// src/feature/pages/gallery/galleryPage.tsx
 import { useEffect, useRef, useState } from "react";
+import OptimizedImage from "../../../components/ui/OptimizedImage";
+
+const SocialBar = () => (
+  <div className="text-center my-8">
+    <a
+      href="https://www.instagram.com/brilliance_za"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-block mx-4 text-black hover:text-pink-500 transition"
+      aria-label="Instagram">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+    </a>
+    <a
+      href="https://www.tiktok.com/@brilliance_za"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-block mx-4 text-black hover:text-gray-600 transition"
+      aria-label="TikTok">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round">
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+      </svg>
+    </a>
+  </div>
+);
+
+const Footer = () => {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="bg-black text-white py-8 w-full">
+      <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
+              About
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="/about#our_story"
+                  className="hover:text-white transition">
+                  Our Story
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
+              Support
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="/contact" className="hover:text-white transition">
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="/delivery" className="hover:text-white transition">
+                  Delivery Info
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
+              Shop
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="/secure-payment"
+                  className="hover:text-white transition">
+                  Secured Payment
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
+              Follow Us
+            </h3>
+            <div className="flex items-center space-x-4">
+              <a
+                href="https://www.instagram.com/brilliance_za"
+                aria-label="Instagram">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="text-white hover:text-pink-500 transition">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-neutral-800 mt-16 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+          <p>
+            © {year} <b>Brilliance Clothing</b> All rights reserved.
+          </p>
+          <p className="mt-3 md:mt-0">
+            Designed & Developed by{" "}
+            <a
+              href="https://www.ambitrove.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white font-medium">
+              Ambitrove Team
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
 const GalleryPage = () => {
   const galleryImages = [
@@ -33,13 +178,10 @@ const GalleryPage = () => {
 
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [modalShown, setModalShown] = useState(false);
-  const galleryRefs = useRef<Record<number, HTMLImageElement | null>>({});
+  const galleryRefs = useRef<Record<number, HTMLDivElement | null>>({});
   const modalImgRef = useRef<HTMLImageElement | null>(null);
 
   const openViewer = (index: number) => {
-    // If View Transition API is available, use it to animate between the
-    // thumbnail and the modal image. We set the view-transition-name on
-    // both elements using refs so the UA can match them.
     const startVT = (
       document as unknown as {
         startViewTransition?: (cb: () => void) => Promise<unknown>;
@@ -52,7 +194,6 @@ const GalleryPage = () => {
           setCurrentIndex(index);
         });
       } catch {
-        // Fallback if startViewTransition throws for any reason
         setCurrentIndex(index);
       }
     } else {
@@ -61,12 +202,10 @@ const GalleryPage = () => {
   };
 
   const closeViewer = () => {
-    // trigger CSS hide animation, then unmount after duration
     setModalShown(false);
     setTimeout(() => setCurrentIndex(null), 300);
   };
 
-  // Keyboard handler: Esc to close, arrows to navigate
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (currentIndex === null) return;
@@ -88,48 +227,16 @@ const GalleryPage = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [currentIndex, galleryImages.length]);
 
-  // When modal is open, set view-transition-name on the modal image to match
-  // the thumbnail's name (if available). Also ensure body scrolling is disabled.
   useEffect(() => {
     if (currentIndex === null) {
-      // start hiding animation
       setModalShown(false);
-      // restore scrolling after animation
       const t = setTimeout(() => {
         document.body.style.overflow = "";
-        if (modalImgRef.current) {
-          try {
-            modalImgRef.current.style.removeProperty("view-transition-name");
-          } catch {
-            /* ignore */
-          }
-        }
       }, 300);
       return () => clearTimeout(t);
     }
 
-    // when opening, immediately disable body scroll and show modal after mount
     document.body.style.overflow = "hidden";
-    const name = `gallery-${currentIndex}`;
-    if (modalImgRef.current) {
-      try {
-        modalImgRef.current.style.setProperty("view-transition-name", name);
-      } catch {
-        /* ignore */
-      }
-    }
-    // Also set the thumbnail's view-transition-name (it should already be set
-    // on render, but ensure it's present)
-    const thumb = galleryRefs.current[currentIndex];
-    if (thumb) {
-      try {
-        thumb.style.setProperty("view-transition-name", name);
-      } catch {
-        /* ignore */
-      }
-    }
-    // small delay to allow the modal DOM to mount before triggering the CSS
-    // entrance animation
     const raf = requestAnimationFrame(() => setModalShown(true));
     return () => cancelAnimationFrame(raf);
   }, [currentIndex]);
@@ -154,26 +261,29 @@ const GalleryPage = () => {
             currentIndex !== null ? "filter blur-sm" : ""
           }`}>
           {galleryImages.map((image, index) => (
-            <div key={index} className="masonry-item">
-              <img
-                ref={(el) => {
-                  galleryRefs.current[index] = el;
-                  if (el) {
-                    try {
-                      el.style.setProperty(
-                        "view-transition-name",
-                        `gallery-${index}`
-                      );
-                    } catch {
-                      /* ignore if unsupported */
-                    }
-                  }
+            <div
+              key={index}
+              className="masonry-item relative"
+              ref={(el) => {
+                galleryRefs.current[index] = el;
+              }}>
+              <div
+                style={{
+                  viewTransitionName: `gallery-${index}`,
                 }}
-                src={`/images/gallery/${image}`}
-                loading="lazy"
-                decoding="async"
-                alt={`Gallery image ${index + 1}`}
-                className="w-full rounded-lg shadow-md hover:scale-105 transition-transform cursor-pointer"
+                className="w-full">
+                <OptimizedImage
+                  src={`/images/gallery/${image}`}
+                  alt={`Gallery image ${index + 1}`}
+                  className="w-full rounded-lg shadow-md hover:scale-105 transition-transform cursor-pointer"
+                  width={400}
+                  height={600}
+                  objectFit="cover"
+                  onLoad={() => {}}
+                />
+              </div>
+              <div
+                className="absolute inset-0 cursor-pointer"
                 onClick={() => openViewer(index)}
               />
             </div>
@@ -196,17 +306,21 @@ const GalleryPage = () => {
           role="dialog"
           aria-modal="true">
           <div className="max-w-4xl w-full px-4">
-            <img
-              ref={(el) => {
-                modalImgRef.current = el;
-              }}
-              src={`/images/gallery/${galleryImages[currentIndex]}`}
-              alt={`Viewing ${currentIndex + 1}`}
-              className={`w-full h-auto rounded-lg shadow-2xl mx-auto transition-transform duration-300 ${
-                modalShown ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
-              onClick={(e) => e.stopPropagation()}
-            />
+            <div
+              style={{
+                viewTransitionName:
+                  currentIndex !== null ? `gallery-${currentIndex}` : undefined,
+              }}>
+              <img
+                ref={modalImgRef}
+                src={`/images/gallery/${galleryImages[currentIndex]}`}
+                alt={`Viewing ${currentIndex + 1}`}
+                className={`w-full h-auto rounded-lg shadow-2xl mx-auto transition-transform duration-300 ${
+                  modalShown ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
 
             {/* Controls */}
             <button

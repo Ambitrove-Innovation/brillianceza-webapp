@@ -71,21 +71,25 @@ const ProductDetailPage = () => {
               <OptimizedImage
                 src={`/images/pics/${currentProduct.images[currentImageIndex]}`}
                 alt={currentProduct.name}
-                className="w-full rounded-lg shadow-lg"
+                className="w-full rounded-lg shadow-lg cursor-pointer"
                 width={800}
                 height={800}
                 priority
               />
             </div>
             <div className="flex gap-2 overflow-x-auto">
-              {currentProduct.images.slice(1).map((img, index) => (
+              {currentProduct.images.map((img, index) => (
                 <div
                   key={index}
-                  className="thumbnail cursor-pointer w-20 h-20 rounded hover:opacity-75 transition overflow-hidden"
-                  onClick={() => changeMainImage(index + 1)}>
+                  className={`thumbnail cursor-pointer w-20 h-20 rounded transition overflow-hidden ${
+                    currentImageIndex === index
+                      ? "ring-2 ring-black opacity-100"
+                      : "hover:opacity-75 opacity-60"
+                  }`}
+                  onClick={() => changeMainImage(index)}>
                   <OptimizedImage
                     src={`/images/pics/${img}`}
-                    alt={`${currentProduct.name} - Image ${index + 2}`}
+                    alt={`${currentProduct.name} - Image ${index + 1}`}
                     className="w-full h-full object-cover"
                     width={80}
                     height={80}
