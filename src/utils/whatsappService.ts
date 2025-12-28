@@ -1,4 +1,9 @@
 // src/utils/whatsappService.ts
+import {
+  isSelectionOnPromo,
+  calculatePromoPrice,
+  getPromoWhatsAppMessage,
+} from "./promoService";
 
 const WHATSAPP_NUMBER = "+27686311388";
 
@@ -12,6 +17,7 @@ interface BuyNowParams {
 
 /**
  * Handles the "Buy Now" action by redirecting to WhatsApp with order details
+ * Now includes promotional pricing if applicable
  */
 export const handleBuyNow = ({
   product,
@@ -20,15 +26,42 @@ export const handleBuyNow = ({
   quantity,
   mainImageSrc,
 }: BuyNowParams): void => {
-  const message =
+  // Check if this selection qualifies for promo
+  const isOnPromo = isSelectionOnPromo(product, color);
+  const price = isOnPromo ? calculatePromoPrice(product.price) : product.price;
+  const totalPrice = price * quantity;
+
+  // Base message
+  let message =
     "*New Order Request*\n\n" +
     `*Product:* ${product.name} 👕\n` +
-    `*Price:* R${product.price.toFixed(2)}\n` +
     `*Size:* ${size}\n` +
     `*Color:* ${color}\n` +
-    `*Quantity:* ${quantity}\n\n` +
-    `🖼️ *Product Image:* ${window.location.origin}${mainImageSrc}\n\n` +
+    `*Quantity:* ${quantity}\n`;
+
+  // Add pricing based on promo status
+  if (isOnPromo) {
+    const originalTotal = product.price * quantity;
+    message +=
+      `\n*Original Price:* ~R${product.price.toFixed(2)}~ ❌\n` +
+      `*Special Price:* R${price.toFixed(2)} ✨\n` +
+      `*Total:* R${totalPrice.toFixed(2)} (Save R${(
+        originalTotal - totalPrice
+      ).toFixed(2)}!) 💰\n`;
+  } else {
+    message +=
+      `*Price:* R${price.toFixed(2)}\n` +
+      `*Total:* R${totalPrice.toFixed(2)}\n`;
+  }
+
+  message +=
+    `\n🖼️ *Product Image:* ${window.location.origin}${mainImageSrc}\n\n` +
     "Please confirm availability. ✅";
+
+  // Add promo message if applicable
+  if (isOnPromo) {
+    message += getPromoWhatsAppMessage(product, color, quantity);
+  }
 
   const encodedMessage = encodeURIComponent(message);
   const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
