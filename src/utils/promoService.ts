@@ -4,8 +4,6 @@
 export const PROMO_CONFIG = {
   // Toggle promotion on/off
   isActive: true,
-
-  // Discount percentage
   discountPercent: 30,
 
   // Target criteria
@@ -20,10 +18,6 @@ export const PROMO_CONFIG = {
   promoLabel: "SALE",
 } as const;
 
-/**
- * Check if a product qualifies for the promotion
- * Product must be a top AND have white color option
- */
 export const isProductOnPromo = (product: Product): boolean => {
   if (!PROMO_CONFIG.isActive) return false;
 

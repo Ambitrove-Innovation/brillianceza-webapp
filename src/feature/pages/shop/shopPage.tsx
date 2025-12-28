@@ -1,4 +1,3 @@
-// src/feature/pages/shop/shopPage.tsx
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowUp } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
