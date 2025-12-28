@@ -1,4 +1,3 @@
-// src/feature/pages/gallery/galleryPage.tsx
 import { useEffect, useRef, useState } from "react";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 

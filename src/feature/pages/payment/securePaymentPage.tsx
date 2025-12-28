@@ -1,4 +1,3 @@
-// src/feature/pages/payment/securePaymentPage.tsx
 import {
   Shield,
   CreditCard,

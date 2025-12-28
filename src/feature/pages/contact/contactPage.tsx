@@ -50,22 +50,13 @@ const ContactPage = () => {
     console.log(serviceID);
     console.log(templateID);
     console.log(publicKey);
-    
 
     try {
-
-      if (!isValidEmail(formData.email)) { 
-
-        showNotification(
-          "Please enter a valid email",
-          "error"
-        );
+      if (!isValidEmail(formData.email)) {
+        showNotification("Please enter a valid email", "error");
         setLoading(false);
-        return
-
+        return;
       }
-
-
 
       await emailjs.send(
         serviceID,
@@ -92,15 +83,11 @@ const ContactPage = () => {
           message: "",
         });
       }, 3000);
-
-
     } catch (err) {
       console.log("Error: " + JSON.stringify(err));
       setLoading(false);
     }
   };
-
-  
 
   const handleWhatsAppSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -233,8 +220,13 @@ const ContactPage = () => {
                   type="submit"
                   disabled={loading || submitted}
                   className={`flex-1 text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2 transition 
-                    ${loading ? "bg-yellow-400" : submitted ? "bg-green-600" : "bg-black hover:bg-gray-900"}`}
-                    >
+                    ${
+                      loading
+                        ? "bg-yellow-400"
+                        : submitted
+                        ? "bg-green-600"
+                        : "bg-black hover:bg-gray-900"
+                    }`}>
                   {loading ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" /> Sending...

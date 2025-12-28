@@ -1,4 +1,3 @@
-// src/feature/pages/delivery/DeliveryPage.tsx
 import { Truck, Package, Clock, MapPin, CheckCircle } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 
