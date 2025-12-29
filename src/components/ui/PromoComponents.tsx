@@ -3,17 +3,11 @@
 import { getPromoDetails, getPromoBadgeProps } from "../../utils/promoService";
 import { formatPrice } from "../../utils/helpers";
 
-/**
- * Promo Badge - Shows "30% OFF" badge
- */
 export const PromoBadge = () => {
   const badgeProps = getPromoBadgeProps();
   return <span className={badgeProps.className}>{badgeProps.text}</span>;
 };
 
-/**
- * Promo Price Display - Shows original + discounted price
- */
 interface PromoPriceProps {
   product: Product;
   className?: string;

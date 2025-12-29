@@ -50,8 +50,8 @@ const Homepage = () => {
         <div className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
           <div className="w-full aspect-square overflow-hidden relative">
             {promo.isOnPromo && (
-              <div className="absolute top-2 left-2 z-10 animate-pulse">
-                <span className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-lg">
+              <div className="absolute top-2 left-2 z-10 ">
+                <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-lg border border-black">
                   30% OFF
                 </span>
               </div>
@@ -72,7 +72,7 @@ const Homepage = () => {
                 <div className="text-gray-500 line-through text-sm">
                   {formatPrice(promo.originalPrice)}
                 </div>
-                <button className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition font-bold">
+                <button className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition font-bold">
                   {formatPrice(promo.discountedPrice)}
                 </button>
                 <div className="text-green-600 text-xs font-semibold">
@@ -93,7 +93,7 @@ const Homepage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Promo Banner */}
-      <div className="bg-linear-to-r from-red-600 to-red-500 text-white text-center py-6 shadow-lg">
+      <div className="bg-linear-to-r from-green-600 to-green-500 text-white text-center py-6 shadow-lg">
         <p className="text-2xl md:text-3xl font-bold animate-pulse">
           🎉 SPECIAL OFFER: 30% OFF All White Shirts! 🎉
         </p>
