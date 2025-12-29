@@ -15,10 +15,6 @@ interface BuyNowParams {
   mainImageSrc: string;
 }
 
-/**
- * Handles the "Buy Now" action by redirecting to WhatsApp with order details
- * Now includes promotional pricing if applicable
- */
 export const handleBuyNow = ({
   product,
   size,
