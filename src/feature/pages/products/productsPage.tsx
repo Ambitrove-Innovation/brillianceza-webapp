@@ -80,9 +80,9 @@ const ProductDetailPage = () => {
     <div className="min-h-screen flex flex-col">
       {/* Promo Banner if product is on promo */}
       {getPromoDetails(currentProduct).isOnPromo && (
-        <section className="bg-linear-to-r from-red-600 to-red-500 text-white py-4 shadow-lg">
+        <section className="bg-linear-to-r from-green-600 to-green-500 text-white py-4 shadow-lg">
           <div className="container mx-auto px-4 text-center">
-            <p className="text-lg font-bold animate-pulse">
+            <p className="text-lg font-bold">
               🎉 30% OFF on White variants! Limited Time Offer! 🎉
             </p>
           </div>
@@ -96,7 +96,7 @@ const ProductDetailPage = () => {
             <div className="mb-4 relative">
               {isCurrentSelectionOnPromo && (
                 <div className="absolute top-4 left-4 z-10 animate-pulse">
-                  <span className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide shadow-lg">
+                  <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide shadow-lg border border-black">
                     30% OFF
                   </span>
                 </div>
@@ -142,7 +142,7 @@ const ProductDetailPage = () => {
                   <span className="text-gray-500 line-through text-2xl">
                     {formatPrice(currentProduct.price)}
                   </span>
-                  <span className="bg-red-600 text-white px-2 py-1 rounded text-sm font-bold">
+                  <span className="bg-red-600 text-white px-2 py-1 rounded text-sm font-bold border border-black">
                     30% OFF
                   </span>
                 </div>
@@ -233,7 +233,7 @@ const ProductDetailPage = () => {
                 </span>
               </div>
               {isCurrentSelectionOnPromo && (
-                <p className="text-green-600 text-sm mt-2">
+                <p className="text-red-600 text-sm mt-2">
                   💰 Total savings:{" "}
                   {formatPrice(
                     (currentProduct.price - currentPrice) * quantity
@@ -246,8 +246,8 @@ const ProductDetailPage = () => {
               onClick={handleBuyNowClick}
               className={`w-full ${
                 isCurrentSelectionOnPromo
-                  ? "bg-red-600 hover:bg-red-700"
-                  : "bg-green-600 hover:bg-green-700"
+                  ? "bg-green-600 hover:bg-green-700"
+                  : "bg-yellow-600 hover:bg-yellow-700"
               } text-white font-bold text-lg py-4 rounded-lg transition cursor-pointer`}>
               {isCurrentSelectionOnPromo ? "🎉 Buy Now - 30% OFF!" : "Buy Now"}
             </button>
