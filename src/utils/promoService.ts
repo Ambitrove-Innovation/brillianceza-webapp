@@ -3,7 +3,7 @@
 //* Easily enable/disable and modify promo settings
 export const PROMO_CONFIG = {
   // Toggle promotion on/off
-  isActive: true,
+  isActive: false,
   discountPercent: 30,
 
   // Target criteria
