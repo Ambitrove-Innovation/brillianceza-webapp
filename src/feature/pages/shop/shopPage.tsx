@@ -72,7 +72,7 @@ const ShopPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Promo Banner */}
-      <section className="bg-linear-to-r from-green-600 to-green-500 text-white py-6 shadow-lg">
+      {/* <section className="bg-linear-to-r from-green-600 to-green-500 text-white py-6 shadow-lg">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-2 animate-pulse">
             🎉 LIMITED TIME OFFER! 🎉
@@ -82,7 +82,7 @@ const ShopPage = () => {
             White Shirts!
           </p>
         </div>
-      </section>
+      </section> */}
 
       {/* Hero Banner */}
       <section className="container mx-auto px-4 py-8">

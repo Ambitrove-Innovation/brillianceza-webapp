@@ -93,12 +93,12 @@ const Homepage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Promo Banner */}
-      <div className="bg-linear-to-r from-green-600 to-green-500 text-white text-center py-6 shadow-lg">
+      {/* <div className="bg-linear-to-r from-green-600 to-green-500 text-white text-center py-6 shadow-lg">
         <p className="text-2xl md:text-3xl font-bold animate-pulse">
           🎉 SPECIAL OFFER: 30% OFF All White Shirts! 🎉
         </p>
         <p className="text-lg mt-2">Limited Time Only - Shop Now!</p>
-      </div>
+      </div> */}
 
       <HeroSection
         imageSrc="/images/pics/l2.webp"
