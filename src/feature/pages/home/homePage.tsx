@@ -6,7 +6,6 @@ import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { getFeaturedProducts } from "../../data/product";
 import { formatPrice } from "../../../utils/helpers";
-import { getPromoDetails } from "../../../utils/promoService";
 
 const Homepage = () => {
   useEffect(() => {
@@ -42,64 +41,33 @@ const Homepage = () => {
     "blue-strip-short",
   ]);
 
-  const ProductCard = ({ product }: { product: Product }) => {
-    const promo = getPromoDetails(product);
-
-    return (
-      <Link to={`/product/${product.id}`} className="block group">
-        <div className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-          <div className="w-full aspect-square overflow-hidden relative">
-            {promo.isOnPromo && (
-              <div className="absolute top-2 left-2 z-10 ">
-                <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-lg border border-black">
-                  30% OFF
-                </span>
-              </div>
-            )}
-            <OptimizedImage
-              src={`/images/pics/${product.images[0]}`}
-              alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              width={400}
-              height={400}
-            />
-          </div>
-
-          <div className="p-4 text-center">
-            <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
-            {promo.isOnPromo ? (
-              <div className="space-y-1">
-                <div className="text-gray-500 line-through text-sm">
-                  {formatPrice(promo.originalPrice)}
-                </div>
-                <button className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition font-bold">
-                  {formatPrice(promo.discountedPrice)}
-                </button>
-                <div className="text-green-600 text-xs font-semibold">
-                  Save {formatPrice(promo.savings)}!
-                </div>
-              </div>
-            ) : (
-              <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-                {formatPrice(product.price)}
-              </button>
-            )}
-          </div>
+  const ProductCard = ({ product }: { product: Product }) => (
+    <Link to={`/product/${product.id}`} className="block group">
+      <div
+        key={product.id}
+        className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        <div className="w-full aspect-square overflow-hidden">
+          <OptimizedImage
+            src={`/images/pics/${product.images[0]}`}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            width={400}
+            height={400}
+          />
         </div>
-      </Link>
-    );
-  };
+
+        <div className="p-4 text-center">
+          <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
+          <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+            {formatPrice(product.price)}
+          </button>
+        </div>
+      </div>
+    </Link>
+  );
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Promo Banner */}
-      {/* <div className="bg-linear-to-r from-green-600 to-green-500 text-white text-center py-6 shadow-lg">
-        <p className="text-2xl md:text-3xl font-bold animate-pulse">
-          🎉 SPECIAL OFFER: 30% OFF All White Shirts! 🎉
-        </p>
-        <p className="text-lg mt-2">Limited Time Only - Shop Now!</p>
-      </div> */}
-
       <HeroSection
         imageSrc="/images/pics/l2.webp"
         title="Brilliance"

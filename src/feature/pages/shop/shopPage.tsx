@@ -3,7 +3,6 @@ import { ArrowUp } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import { getProductsByCategory } from "../../data/product";
 import { formatPrice, scrollToTop } from "../../../utils/helpers";
-import { getPromoDetails } from "../../../utils/promoService";
 
 const ShopPage = () => {
   const tops = getProductsByCategory("tops");
@@ -11,32 +10,25 @@ const ShopPage = () => {
 
   const ProductCard = ({ product }: { product: Product }) => {
     const navigate = useNavigate();
-    const promo = getPromoDetails(product);
 
     return (
       <Link to={`/product/${product.id}`} className="block group">
         <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-          {/* Image with promo badge */}
-          <div className="w-full aspect-square overflow-hidden relative">
-            {promo.isOnPromo && (
-              <div className="absolute top-2 left-2 z-10 ">
-                <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-lg border border-black">
-                  30% OFF
-                </span>
-              </div>
-            )}
+          {/* Image */}
+          <div className="w-full aspect-square overflow-hidden">
             <img
               src={`/images/pics/${product.images[0]}`}
               alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover group-hover:scale-105  transition-transform duration-300"
               loading="lazy"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 const img = e.currentTarget as HTMLImageElement;
-                img.classList.remove("animate-pulse");
-                void img.offsetWidth;
-                img.classList.add("animate-pulse");
+                img.classList.remove("animate-ping");
+                void img.offsetWidth; // trigger reflow
+                img.classList.add("animate-ping");
+
                 setTimeout(() => navigate(`/product/${product.id}`), 300);
               }}
             />
@@ -45,24 +37,9 @@ const ShopPage = () => {
           {/* Product Info */}
           <div className="p-4 text-center">
             <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
-
-            {promo.isOnPromo ? (
-              <div className="space-y-1">
-                <div className="text-gray-500 line-through text-sm">
-                  {formatPrice(promo.originalPrice)}
-                </div>
-                <button className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition font-bold">
-                  {formatPrice(promo.discountedPrice)}
-                </button>
-                <div className="text-green-600 text-xs font-semibold">
-                  Save {formatPrice(promo.savings)}!
-                </div>
-              </div>
-            ) : (
-              <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-                {formatPrice(product.price)}
-              </button>
-            )}
+            <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+              {formatPrice(product.price)}
+            </button>
           </div>
         </div>
       </Link>
@@ -71,19 +48,6 @@ const ShopPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Promo Banner */}
-      {/* <section className="bg-linear-to-r from-green-600 to-green-500 text-white py-6 shadow-lg">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 animate-pulse">
-            🎉 LIMITED TIME OFFER! 🎉
-          </h2>
-          <p className="text-lg md:text-xl">
-            Get <span className="font-black text-yellow-300">30% OFF</span> All
-            White Shirts!
-          </p>
-        </div>
-      </section> */}
-
       {/* Hero Banner */}
       <section className="container mx-auto px-4 py-8">
         <img

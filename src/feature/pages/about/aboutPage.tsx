@@ -3,7 +3,6 @@ import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { getFeaturedProducts } from "../../data/product";
 import { formatPrice } from "../../../utils/helpers";
-import { getPromoDetails } from "../../../utils/promoService";
 
 const AboutPage = () => {
   const newCollection = getFeaturedProducts([
@@ -76,50 +75,26 @@ const AboutPage = () => {
       <section className="container mx-auto px-4 py-12">
         <h2 className="text-4xl font-bold text-center mb-8">New Collection</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {newCollection.map((product) => {
-            const promo = getPromoDetails(product);
-            return (
-              <Link
-                key={product.id}
-                to={`/product/${product.id}`}
-                className="block">
-                <div className="bg-white border rounded-lg p-4 hover:shadow-lg transition relative">
-                  {promo.isOnPromo && (
-                    <div className="absolute top-6 left-6 z-10 animate-pulse">
-                      <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
-                        30% OFF
-                      </span>
-                    </div>
-                  )}
-                  <OptimizedImage
-                    src={`/images/pics/${product.images[0]}`}
-                    alt={product.name}
-                    className="w-full h-64 object-cover mb-4 rounded"
-                    width={400}
-                    height={400}
-                  />
-                  <p className="font-bold text-center mb-2">{product.name}</p>
-                  {promo.isOnPromo ? (
-                    <div className="space-y-1">
-                      <div className="text-center text-gray-500 line-through text-sm">
-                        {formatPrice(promo.originalPrice)}
-                      </div>
-                      <button className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition font-bold">
-                        {formatPrice(promo.discountedPrice)}
-                      </button>
-                      <div className="text-center text-green-600 text-xs font-semibold">
-                        Save {formatPrice(promo.savings)}!
-                      </div>
-                    </div>
-                  ) : (
-                    <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
-                      {formatPrice(product.price)}
-                    </button>
-                  )}
-                </div>
-              </Link>
-            );
-          })}
+          {newCollection.map((product) => (
+            <Link
+              key={product.id}
+              to={`/product/${product.id}`}
+              className="block">
+              <div className="bg-white border rounded-lg p-4 hover:shadow-lg transition">
+                <OptimizedImage
+                  src={`/images/pics/${product.images[0]}`}
+                  alt={product.name}
+                  className="w-full h-64 object-cover mb-4 rounded"
+                  width={400}
+                  height={400}
+                />
+                <p className="font-bold text-center mb-2">{product.name}</p>
+                <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
+                  {formatPrice(product.price)}
+                </button>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
