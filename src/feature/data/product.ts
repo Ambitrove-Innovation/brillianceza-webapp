@@ -4,7 +4,7 @@ export const products: Product[] = [
     name: "Gum Elastic W.T.E. T-SHIRT",
     price: 349.0,
     category: "tops",
-    images: ["B91.webp", "B92.webp", "93.webp"],
+    images: ["B91.webp", "B92.webp", "B93.webp"],
     sizes: ["Small", "Medium", "Large", "X-Large", "2X-Large"],
     colors: ["White", "Black", "Light gray"],
     fit: "OVERSIZE",
