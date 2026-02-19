@@ -1,5 +1,6 @@
 export const products: Product[] = [
   {
+<<<<<<< HEAD
     id: "gum-elastic-wte",
     name: "Gum Elastic W.T.E. T-SHIRT",
     price: 349.0,
@@ -12,6 +13,8 @@ export const products: Product[] = [
       "Customers love its oversize fit, giving Streetwear style all the way.",
   },
   {
+=======
+>>>>>>> 4420d74ebc785c8601c338f09c8ab5bd495a93ce
     id: "3bs-tshirt",
     name: "3 B'S T-SHIRT",
     price: 279.0,
