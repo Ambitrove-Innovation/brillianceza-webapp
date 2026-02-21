@@ -1,5 +1,3 @@
-// src/components/common/OptimizedImage.tsx
-
 import React, { useState, useEffect, useRef } from "react";
 
 interface OptimizedImageProps {
@@ -54,7 +52,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {
         rootMargin: "100px", // Start loading 100px before visible
         threshold: 0.01,
-      }
+      },
     );
 
     observer.observe(imgRef.current);

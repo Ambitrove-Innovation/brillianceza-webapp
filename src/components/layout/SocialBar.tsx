@@ -1,4 +1,3 @@
-// src/components/layout/SocialBar.tsx
 import { Instagram } from "lucide-react";
 
 const SocialBar = () => {
@@ -34,5 +33,4 @@ const SocialBar = () => {
     </div>
   );
 };
-
 export default SocialBar;

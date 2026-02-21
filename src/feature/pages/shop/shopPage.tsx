@@ -14,7 +14,6 @@ const ShopPage = () => {
     return (
       <Link to={`/product/${product.id}`} className="block group">
         <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-          {/* Image */}
           <div className="w-full aspect-square overflow-hidden">
             <img
               src={`/images/pics/${product.images[0]}`}
@@ -26,7 +25,7 @@ const ShopPage = () => {
                 e.stopPropagation();
                 const img = e.currentTarget as HTMLImageElement;
                 img.classList.remove("animate-ping");
-                void img.offsetWidth; // trigger reflow
+                void img.offsetWidth;
                 img.classList.add("animate-ping");
 
                 setTimeout(() => navigate(`/product/${product.id}`), 300);
@@ -81,7 +80,6 @@ const ShopPage = () => {
         </div>
       </section>
 
-      {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
         className="fixed bottom-8 right-8 bg-black text-white p-4 rounded-full shadow-lg hover:bg-gray-800 hover:animate-pulse transition z-50"
@@ -93,5 +91,4 @@ const ShopPage = () => {
     </div>
   );
 };
-
 export default ShopPage;

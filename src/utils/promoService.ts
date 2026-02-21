@@ -10,11 +10,9 @@ export const PROMO_CONFIG = {
   targetCategory: "tops" as const,
   targetColor: "White",
 
-  // Visual settings
   badgeText: "30% OFF",
   badgeColor: "bg-red-600",
 
-  // Display messages
   promoLabel: "SALE",
 } as const;
 
@@ -24,18 +22,14 @@ export const isProductOnPromo = (product: Product): boolean => {
   return (
     product.category === PROMO_CONFIG.targetCategory &&
     product.colors.some((color) =>
-      color.toLowerCase().includes(PROMO_CONFIG.targetColor.toLowerCase())
+      color.toLowerCase().includes(PROMO_CONFIG.targetColor.toLowerCase()),
     )
   );
 };
 
-/**
- * Check if specific product + color selection qualifies
- * Used on product detail page where user selects color
- */
 export const isSelectionOnPromo = (
   product: Product,
-  selectedColor: string
+  selectedColor: string,
 ): boolean => {
   if (!PROMO_CONFIG.isActive) return false;
 
@@ -45,17 +39,11 @@ export const isSelectionOnPromo = (
   );
 };
 
-/**
- * Calculate discounted price
- */
 export const calculatePromoPrice = (originalPrice: number): number => {
   const discount = originalPrice * (PROMO_CONFIG.discountPercent / 100);
   return originalPrice - discount;
 };
 
-/**
- * Get promo details for a product
- */
 export const getPromoDetails = (product: Product) => {
   const isOnPromo = isProductOnPromo(product);
 
@@ -81,21 +69,15 @@ export const getPromoDetails = (product: Product) => {
   };
 };
 
-/**
- * Get promo badge component props
- */
 export const getPromoBadgeProps = () => ({
   text: PROMO_CONFIG.badgeText,
   className: `${PROMO_CONFIG.badgeColor} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide`,
 });
 
-/**
- * Format promo message for WhatsApp
- */
 export const getPromoWhatsAppMessage = (
   product: Product,
   selectedColor: string,
-  quantity: number
+  quantity: number,
 ): string => {
   const isOnPromo = isSelectionOnPromo(product, selectedColor);
 
@@ -109,10 +91,10 @@ export const getPromoWhatsAppMessage = (
   return (
     `\n\n🎉 *SPECIAL OFFER: ${PROMO_CONFIG.discountPercent}% OFF WHITE SHIRTS!*\n` +
     `*Original Price:* R${product.price.toFixed(
-      2
+      2,
     )} × ${quantity} = R${originalTotal.toFixed(2)}\n` +
     `*Promo Price:* R${discountedPrice.toFixed(
-      2
+      2,
     )} × ${quantity} = R${discountedTotal.toFixed(2)}\n` +
     `*You Save:* R${totalSavings.toFixed(2)} 💰`
   );

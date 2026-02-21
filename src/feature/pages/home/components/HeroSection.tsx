@@ -1,4 +1,3 @@
-// src/feature/pages/home/components/HeroSection.tsx
 import { Link } from "react-router-dom";
 
 interface HeroSectionProps {

@@ -1,5 +1,17 @@
 export const products: Product[] = [
   {
+    id: "gum-elastic-wte-tshirt",
+    name: "Gum Elastic W.T.E. T-SHIRT",
+    price: 349.0,
+    category: "tops",
+    images: ["B91.webp", "B92.webp", "B93.webp"],
+    sizes: ["Small", "Medium", "Large", "X-Large", "2X-Large"],
+    colors: ["White", "Black", "Light gray"],
+    fit: "OVERSIZE",
+    description:
+      "Customers love its oversize fit, giving Streetwear style all the way.",
+  },
+  {
     id: "3bs-tshirt",
     name: "3 B'S T-SHIRT",
     price: 279.0,
@@ -298,20 +310,19 @@ export const products: Product[] = [
   },
 ];
 
-// Helper functions
 export const getProductById = (id: string): Product | undefined => {
   return products.find((p) => p.id === id);
 };
 
 export const getProductsByCategory = (
-  category: "tops" | "bottoms" | "accessories"
+  category: "tops" | "bottoms" | "accessories",
 ): Product[] => {
   return products.filter((p) => p.category === category);
 };
 
 export const getRandomProducts = (
   count: number,
-  excludeId?: string
+  excludeId?: string,
 ): Product[] => {
   let filtered = products;
   if (excludeId) {

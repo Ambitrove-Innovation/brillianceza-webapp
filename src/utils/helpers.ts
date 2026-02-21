@@ -1,11 +1,7 @@
-// src/utils/helpers.js - Utility helper functions
-
-// ===== FORMAT CURRENCY =====
 export function formatPrice(price: number): string {
   return `R${price.toFixed(2)}`;
 }
 
-// ===== SCROLL TO TOP =====
 export function scrollToTop(): void {
   window.scrollTo({
     top: 0,
@@ -13,23 +9,20 @@ export function scrollToTop(): void {
   });
 }
 
-// ===== GET URL PARAMETERS =====
 export function getUrlParameter(name: string): string | null {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(name);
 }
 
-// ===== SET URL PARAMETER =====
 export function setUrlParameter(name: string, value: string): void {
   const url = new URL(window.location.href);
   url.searchParams.set(name, value);
   window.history.pushState({}, "", url.toString());
 }
 
-// ===== DEBOUNCE FUNCTION =====
 export function debounce<T extends (...args: unknown[]) => void>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout> | undefined;
   return function executedFunction(...args: Parameters<T>): void {
@@ -42,25 +35,20 @@ export function debounce<T extends (...args: unknown[]) => void>(
   };
 }
 
-// ===== VALIDATE EMAIL =====
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-// ===== VALIDATE PHONE NUMBER (South African) =====
 export function isValidPhone(phone: string): boolean {
-  // Remove spaces and special characters
   const cleanPhone = phone.replace(/[\s() -]/g, "");
-  // Check if it matches South African format
   const phoneRegex = /^(\+27|0)[0-9]{9}$/;
   return phoneRegex.test(cleanPhone);
 }
 
-// ===== SHOW NOTIFICATION =====
 export function showNotification(
   message: string,
-  type: "success" | "error" | "info" | "warning" = "info"
+  type: "success" | "error" | "info" | "warning" = "info",
 ): void {
   const notification = document.createElement("div");
   const bgColor =
@@ -82,7 +70,6 @@ export function showNotification(
   }, 3000);
 }
 
-// ===== LOADING SPINNER =====
 export function showLoading(container: string | HTMLElement): void {
   const spinner = `
     <div class="flex justify-center items-center py-12">
@@ -99,7 +86,6 @@ export function showLoading(container: string | HTMLElement): void {
   }
 }
 
-// ===== LAZY LOAD IMAGES =====
 export function lazyLoadImages(): void {
   const images = document.querySelectorAll<HTMLImageElement>("img[data-src]");
   const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -118,11 +104,10 @@ export function lazyLoadImages(): void {
   images.forEach((img) => imageObserver.observe(img));
 }
 
-// ===== RESPONSIVE SRCSET BUILDER =====
 export function buildResponsiveSrcSet(
   filename: string,
   folder = "/images/pics",
-  widths: number[] = [480, 800, 1200, 1800]
+  widths: number[] = [480, 800, 1200, 1800],
 ): {
   webpSrcSet: string;
   fallbackSrcSet: string;
@@ -143,7 +128,6 @@ export function buildResponsiveSrcSet(
   return { webpSrcSet, fallbackSrcSet, sizes, fallback };
 }
 
-// ===== LOCAL STORAGE HELPERS =====
 export const storage = {
   set<T>(key: string, value: T): boolean {
     try {
@@ -185,13 +169,13 @@ export const storage = {
     }
   },
 };
-// ===== FORM VALIDATION =====
+
 function validateForm(formId: string): boolean {
   const form = document.getElementById(formId) as HTMLFormElement | null;
   if (!form) return false;
 
   const inputs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
-    "input[required], textarea[required]"
+    "input[required], textarea[required]",
   );
   let isValid = true;
 
@@ -231,7 +215,6 @@ function copyToClipboard(text: string): void {
         showNotification("Failed to copy", "error");
       });
   } else {
-    // Fallback for older browsers
     const textarea = document.createElement("textarea");
     textarea.value = text;
     document.body.appendChild(textarea);
@@ -242,24 +225,23 @@ function copyToClipboard(text: string): void {
   }
 }
 
-// ===== SHARE TO SOCIAL MEDIA =====
 type SocialPlatform = "facebook" | "twitter" | "whatsapp" | "telegram";
 
 function shareToSocial(
   platform: SocialPlatform,
   url: string,
-  text: string
+  text: string,
 ): void {
   const shareUrls: Record<SocialPlatform, string> = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      url
+      url,
     )}`,
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-      url
+      url,
     )}&text=${encodeURIComponent(text)}`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`,
     telegram: `https://t.me/share/url?url=${encodeURIComponent(
-      url
+      url,
     )}&text=${encodeURIComponent(text)}`,
   };
 
@@ -268,7 +250,6 @@ function shareToSocial(
   }
 }
 
-// ===== EXPORT FUNCTIONS =====
 declare global {
   interface Window {
     formatPrice: typeof formatPrice;
@@ -280,7 +261,7 @@ declare global {
     isValidPhone: (phone: string) => boolean;
     showNotification: (
       message: string,
-      type?: "success" | "error" | "info" | "warning"
+      type?: "success" | "error" | "info" | "warning",
     ) => void;
     showLoading: typeof showLoading;
     lazyLoadImages: typeof lazyLoadImages;

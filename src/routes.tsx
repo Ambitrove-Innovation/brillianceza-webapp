@@ -1,4 +1,3 @@
-// src/routes.tsx
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navigation from "./components/layout/Navigation";
 import Homepage from "./feature/pages/home/homePage";
