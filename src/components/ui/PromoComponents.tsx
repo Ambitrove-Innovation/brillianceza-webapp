@@ -1,5 +1,3 @@
-// Reusable promo badge and price display components
-
 import { getPromoDetails, getPromoBadgeProps } from "../../utils/promoService";
 import { formatPrice } from "../../utils/helpers";
 

@@ -1,15 +1,10 @@
-// src/utils/imageOptimization.ts
+import React from "react";
 
-/**
- * Generate responsive image attributes with multiple sizes
- * Use this for product images, gallery images, etc.
- */
 export const getResponsiveImageProps = (
   imagePath: string,
   alt: string,
-  sizes?: string
+  sizes?: string,
 ) => {
-  // Extract filename and create variants
   const filename = imagePath.split("/").pop() || "";
   const basePath = imagePath.substring(0, imagePath.lastIndexOf("/"));
   const [name, ext] = filename.split(".");
@@ -20,7 +15,6 @@ export const getResponsiveImageProps = (
     .map((w) => `${basePath}/${name}-${w}w.${ext} ${w}w`)
     .join(", ");
 
-  // Default sizes based on common breakpoints
   const defaultSizes =
     sizes || "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
 
@@ -34,14 +28,10 @@ export const getResponsiveImageProps = (
   };
 };
 
-/**
- * Progressive image loader component props
- * Shows blur placeholder while loading
- */
 export const getProgressiveImageProps = (
   imagePath: string,
   alt: string,
-  placeholderDataUrl?: string
+  placeholderDataUrl?: string,
 ) => {
   const lowQualityPlaceholder =
     placeholderDataUrl ||
@@ -59,10 +49,6 @@ export const getProgressiveImageProps = (
   };
 };
 
-/**
- * Preload critical images (hero, above-the-fold)
- * Call this in useEffect for critical images
- */
 export const preloadImage = (src: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -72,9 +58,6 @@ export const preloadImage = (src: string): Promise<void> => {
   });
 };
 
-/**
- * Intersection Observer hook for lazy loading
- */
 export const useImageLazyLoad = () => {
   const imageRefs = new Map<string, HTMLImageElement>();
 
@@ -98,9 +81,9 @@ export const useImageLazyLoad = () => {
         });
       },
       {
-        rootMargin: "50px", // Start loading 50px before entering viewport
+        rootMargin: "50px",
         threshold: 0.01,
-      }
+      },
     );
 
     observer.observe(element);
@@ -109,62 +92,32 @@ export const useImageLazyLoad = () => {
   return observeImage;
 };
 
-/**
- * Image compression quality settings by use case
- */
 export const IMAGE_QUALITY = {
-  hero: 85, // High quality for hero images
-  product: 80, // Good quality for product images
-  thumbnail: 70, // Lower quality for thumbnails
-  gallery: 75, // Medium quality for gallery
+  hero: 85,
+  product: 80,
+  thumbnail: 70,
+  gallery: 75,
 } as const;
 
-/**
- * Generate image path with CDN or optimization service
- * In production, you'd route through image CDN like Cloudinary, Imgix, etc.
- 
-export const getOptimizedImageUrl = (
-  path: string,
-  options: {
-    width?: number;
-    quality?: number;
-    format?: "webp" | "avif" | "jpg";
-  } = {}
-) => {
-  // For now, return original path
-  // In production, construct CDN URL with transformations:
-  // return `https://your-cdn.com/image/${path}?w=${options.width}&q=${options.quality}&f=${options.format}`;
-  return path;
-};
-*/
-/**
- * Responsive image component generator
- */
 export const createResponsiveImage = (
   src: string,
   alt: string,
-  className?: string
+  className?: string,
 ) => ({
   src,
   alt,
   className,
   loading: "lazy" as const,
   decoding: "async" as const,
-  // Add srcset when you have image variants
-  srcSet: undefined, // `${src} 1x, ${src.replace('.webp', '@2x.webp')} 2x`,
+
+  srcSet: undefined,
 });
 
-/**
- * Batch preload multiple images
- */
 export const preloadImages = async (imageUrls: string[]): Promise<void> => {
   const preloadPromises = imageUrls.map((url) => preloadImage(url));
   await Promise.all(preloadPromises);
 };
 
-/**
- * Check if image is in viewport
- */
 export const isImageInViewport = (element: HTMLImageElement): boolean => {
   const rect = element.getBoundingClientRect();
   return (
@@ -176,21 +129,15 @@ export const isImageInViewport = (element: HTMLImageElement): boolean => {
   );
 };
 
-/**
- * Image loading states
- */
 export enum ImageLoadState {
   LOADING = "loading",
   LOADED = "loaded",
   ERROR = "error",
 }
 
-/**
- * Hook to track image loading state
- */
 export const useImageLoadState = (src: string) => {
   const [loadState, setLoadState] = React.useState<ImageLoadState>(
-    ImageLoadState.LOADING
+    ImageLoadState.LOADING,
   );
 
   React.useEffect(() => {
@@ -202,6 +149,3 @@ export const useImageLoadState = (src: string) => {
 
   return loadState;
 };
-
-// Add React import for hooks
-import React from "react";

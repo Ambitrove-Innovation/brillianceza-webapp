@@ -10,7 +10,7 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
-  },   
+  },
   {
     id: "3bs-tshirt",
     name: "3 B'S T-SHIRT",
@@ -310,20 +310,19 @@ export const products: Product[] = [
   },
 ];
 
-// Helper functions
 export const getProductById = (id: string): Product | undefined => {
   return products.find((p) => p.id === id);
 };
 
 export const getProductsByCategory = (
-  category: "tops" | "bottoms" | "accessories"
+  category: "tops" | "bottoms" | "accessories",
 ): Product[] => {
   return products.filter((p) => p.category === category);
 };
 
 export const getRandomProducts = (
   count: number,
-  excludeId?: string
+  excludeId?: string,
 ): Product[] => {
   let filtered = products;
   if (excludeId) {

@@ -1,4 +1,3 @@
-// src/utils/whatsappService.ts
 import {
   isSelectionOnPromo,
   calculatePromoPrice,
@@ -22,12 +21,10 @@ export const handleBuyNow = ({
   quantity,
   mainImageSrc,
 }: BuyNowParams): void => {
-  // Check if this selection qualifies for promo
   const isOnPromo = isSelectionOnPromo(product, color);
   const price = isOnPromo ? calculatePromoPrice(product.price) : product.price;
   const totalPrice = price * quantity;
 
-  // Base message
   let message =
     "*New Order Request*\n\n" +
     `*Product:* ${product.name} 👕\n` +
@@ -35,7 +32,6 @@ export const handleBuyNow = ({
     `*Color:* ${color}\n` +
     `*Quantity:* ${quantity}\n`;
 
-  // Add pricing based on promo status
   if (isOnPromo) {
     const originalTotal = product.price * quantity;
     message +=
@@ -54,7 +50,6 @@ export const handleBuyNow = ({
     `\n🖼️ *Product Image:* ${window.location.origin}${mainImageSrc}\n\n` +
     "Please confirm availability. ✅";
 
-  // Add promo message if applicable
   if (isOnPromo) {
     message += getPromoWhatsAppMessage(product, color, quantity);
   }
@@ -65,9 +60,6 @@ export const handleBuyNow = ({
   window.location.href = whatsappURL;
 };
 
-/**
- * Sends a contact form message via WhatsApp
- */
 export const sendContactMessage = (formData: ContactFormData): void => {
   const message =
     "*New Contact Message*\n\n" +
@@ -83,9 +75,6 @@ export const sendContactMessage = (formData: ContactFormData): void => {
   window.location.href = whatsappURL;
 };
 
-/**
- * Opens WhatsApp chat for general inquiries
- */
 export const openWhatsAppChat = (message?: string): void => {
   const defaultMessage = "Hi! I have a question about Brilliance products.";
   const encodedMessage = encodeURIComponent(message || defaultMessage);
@@ -94,9 +83,6 @@ export const openWhatsAppChat = (message?: string): void => {
   window.open(whatsappURL, "_blank");
 };
 
-/**
- * Validates if WhatsApp number is configured correctly
- */
 export const isWhatsAppConfigured = (): boolean => {
   return WHATSAPP_NUMBER.length > 0;
 };

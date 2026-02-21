@@ -26,7 +26,6 @@ const Navigation = () => {
     <>
       <nav className="fixed top-0 w-full backdrop-blur-md bg-white/80 shadow-sm z-50 border-b border-gray-100">
         <div className="container mx-auto px-6 py-3 flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" onClick={closeMenu}>
             <img
               src="/images/pics/Brilliancelogo.webp"
@@ -63,7 +62,7 @@ const Navigation = () => {
                   e.preventDefault();
                   showNotification(
                     "You are already in the Shop — go ahead and buy! 🛍️",
-                    "info"
+                    "info",
                   );
                 } else {
                   // close mobile menu if open
@@ -113,7 +112,6 @@ const Navigation = () => {
         )}
       </nav>
 
-      {/* Spacer for fixed nav */}
       <div className="h-20"></div>
 
       {/* Announcement Bar */}
@@ -123,5 +121,4 @@ const Navigation = () => {
     </>
   );
 };
-
 export default Navigation;
