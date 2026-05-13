@@ -10,7 +10,7 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
-  },
+  },   
   {
     id: "3bs-tshirt",
     name: "3 B'S T-SHIRT",

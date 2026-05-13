@@ -22,6 +22,7 @@ const Homepage = () => {
 
   const brillianceCollection = getFeaturedProducts([
     "reflector-tshirt",
+    "gum-elastic-wte-tshirt",
     "7-ways-brilliance",
     "more-fashion-sweater",
     "gum-elastic-wte-tshirt",
