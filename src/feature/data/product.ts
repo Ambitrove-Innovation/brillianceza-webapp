@@ -1,6 +1,6 @@
 export const products: Product[] = [
   {
-    id: "gum-elastic-wte",
+    id: "gum-elastic-wte-tshirt",
     name: "Gum Elastic W.T.E. T-SHIRT",
     price: 349.0,
     category: "tops",

@@ -24,7 +24,7 @@ const Homepage = () => {
     "reflector-tshirt",
     "7-ways-brilliance",
     "more-fashion-sweater",
-    "3bs-tshirt",
+    "gum-elastic-wte-tshirt",
   ]);
 
   const euphoriaCollection = getFeaturedProducts([
