@@ -13,13 +13,13 @@ const ShopPage = () => {
 
     return (
       <Link to={`/product/${product.id}`} className="block group">
-        <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 relative">
           {/* Image */}
-          <div className="w-full aspect-square overflow-hidden">
+          <div className="w-full aspect-square overflow-hidden relative">
             <img
               src={`/images/pics/${product.images[0]}`}
               alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-105  transition-transform duration-300"
+              className={`w-full h-full object-cover transition-transform duration-300 ${product.isSoldOut ? "grayscale" : "group-hover:scale-105"}`}
               loading="lazy"
               onClick={(e) => {
                 e.preventDefault();
@@ -32,14 +32,27 @@ const ShopPage = () => {
                 setTimeout(() => navigate(`/product/${product.id}`), 300);
               }}
             />
+            {product.isSoldOut && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10 pointer-events-none">
+                <span className="bg-black text-white px-6 py-2 text-xl font-bold tracking-widest uppercase rotate-[-12deg] shadow-lg border-2 border-white">
+                  Sold Out
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Product Info */}
           <div className="p-4 text-center">
             <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
-            <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-              {formatPrice(product.price)}
-            </button>
+            {product.isSoldOut ? (
+              <button className="bg-gray-400 cursor-not-allowed text-white py-2 px-4 rounded-lg transition" disabled onClick={(e) => e.preventDefault()}>
+                Sold Out
+              </button>
+            ) : (
+              <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+                {formatPrice(product.price)}
+              </button>
+            )}
           </div>
         </div>
       </Link>

@@ -22,9 +22,9 @@ const Homepage = () => {
 
   const brillianceCollection = getFeaturedProducts([
     "reflector-tshirt",
+    "gum-elastic-wte-tshirt",
     "7-ways-brilliance",
     "more-fashion-sweater",
-    "3bs-tshirt",
   ]);
 
   const euphoriaCollection = getFeaturedProducts([
@@ -45,22 +45,35 @@ const Homepage = () => {
     <Link to={`/product/${product.id}`} className="block group">
       <div
         key={product.id}
-        className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-        <div className="w-full aspect-square overflow-hidden">
+        className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 relative">
+        <div className="w-full aspect-square overflow-hidden relative">
           <OptimizedImage
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className={`w-full h-full object-cover transition-transform duration-300 ${product.isSoldOut ? "grayscale" : "group-hover:scale-105"}`}
             width={400}
             height={400}
           />
+          {product.isSoldOut && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10">
+              <span className="bg-black text-white px-6 py-2 text-xl font-bold tracking-widest uppercase rotate-[-12deg] shadow-lg border-2 border-white">
+                Sold Out
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="p-4 text-center">
           <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
-          <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-            {formatPrice(product.price)}
-          </button>
+          {product.isSoldOut ? (
+            <button className="bg-gray-400 cursor-not-allowed text-white py-2 px-4 rounded-lg transition" disabled>
+              Sold Out
+            </button>
+          ) : (
+            <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+              {formatPrice(product.price)}
+            </button>
+          )}
         </div>
       </div>
     </Link>
