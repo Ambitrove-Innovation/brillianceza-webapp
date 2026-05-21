@@ -22,6 +22,7 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
+    isSoldOut: true,
   },
   {
     id: "7-ways-brilliance",
