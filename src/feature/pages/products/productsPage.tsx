@@ -99,7 +99,14 @@ const ProductDetailPage = () => {
           </div>
 
           <div>
-            <h1 className="text-4xl font-bold mb-4">{currentProduct.name}</h1>
+            <div className="flex items-center gap-4 mb-4">
+              <h1 className="text-4xl font-bold">{currentProduct.name}</h1>
+              {currentProduct.isSoldOut && (
+                <span className="bg-red-600 text-white px-3 py-1 text-sm font-bold tracking-widest uppercase rounded">
+                  Sold Out
+                </span>
+              )}
+            </div>
             <p className="text-3xl font-bold text-gray-800 mb-6">
               {formatPrice(currentProduct.price)}
             </p>
@@ -163,11 +170,19 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
-            <button
-              onClick={handleBuyNowClick}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 rounded-lg transition cursor-pointer">
-              Buy Now
-            </button>
+            {currentProduct.isSoldOut ? (
+              <button
+                disabled
+                className="w-full bg-gray-400 cursor-not-allowed text-white font-bold text-lg py-4 rounded-lg transition">
+                Out of Stock
+              </button>
+            ) : (
+              <button
+                onClick={handleBuyNowClick}
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 rounded-lg transition cursor-pointer">
+                Buy Now
+              </button>
+            )}
 
             <div className="mt-8 p-6 bg-black text-white rounded-lg">
               {currentProduct.fit && (
@@ -193,20 +208,33 @@ const ProductDetailPage = () => {
               key={product.id}
               to={`/product/${product.id}`}
               className="block group">
-              <div className="cardImageBorder">
-                <div className="overflow-hidden rounded mb-4">
+              <div className="cardImageBorder relative">
+                <div className="overflow-hidden rounded mb-4 relative">
                   <OptimizedImage
                     src={`/images/pics/${product.images[0]}`}
                     alt={product.name}
-                    className="imageHoverEffect"
+                    className={`imageHoverEffect ${product.isSoldOut ? "grayscale" : ""}`}
                     width={400}
                     height={400}
                   />
+                  {product.isSoldOut && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10 pointer-events-none rounded">
+                      <span className="bg-black text-white px-4 py-1 text-sm font-bold tracking-widest uppercase rotate-[-12deg] shadow-lg border border-white">
+                        Sold Out
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <p className="font-bold text-center mb-2">{product.name}</p>
-                <button className="purchaseBtn">
-                  {formatPrice(product.price)}
-                </button>
+                {product.isSoldOut ? (
+                  <button className="bg-gray-400 text-white font-bold py-2 px-4 rounded w-full mx-auto block max-w-fit cursor-not-allowed" disabled onClick={(e) => e.preventDefault()}>
+                    SOLD OUT
+                  </button>
+                ) : (
+                  <button className="purchaseBtn">
+                    {formatPrice(product.price)}
+                  </button>
+                )}
               </div>
             </Link>
           ))}
