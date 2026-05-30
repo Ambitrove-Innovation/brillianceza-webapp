@@ -9,6 +9,11 @@ interface Product {
   fit: "OVERSIZE" | "RELAXED" | null;
   description: string;
   isSoldOut?: boolean;
+  markdown?: {
+    salePrice: number;
+    startDate: string;
+    endDate: string;
+  };
 }
 
 interface CartItem {

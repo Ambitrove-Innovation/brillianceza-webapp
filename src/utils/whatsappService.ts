@@ -4,6 +4,7 @@ import {
   calculatePromoPrice,
   getPromoWhatsAppMessage,
 } from "./promoService";
+import { getActiveMarkdown } from "./helpers";
 
 const WHATSAPP_NUMBER = "+27686311388";
 
@@ -24,7 +25,15 @@ export const handleBuyNow = ({
 }: BuyNowParams): void => {
   // Check if this selection qualifies for promo
   const isOnPromo = isSelectionOnPromo(product, color);
-  const price = isOnPromo ? calculatePromoPrice(product.price) : product.price;
+  const activeMarkdown = getActiveMarkdown(product.markdown);
+  
+  let price = product.price;
+  if (isOnPromo) {
+    price = calculatePromoPrice(product.price);
+  } else if (activeMarkdown) {
+    price = activeMarkdown.salePrice;
+  }
+  
   const totalPrice = price * quantity;
 
   // Base message
@@ -36,7 +45,7 @@ export const handleBuyNow = ({
     `*Quantity:* ${quantity}\n`;
 
   // Add pricing based on promo status
-  if (isOnPromo) {
+  if (isOnPromo || activeMarkdown) {
     const originalTotal = product.price * quantity;
     message +=
       `\n*Original Price:* ~R${product.price.toFixed(2)}~ ❌\n` +

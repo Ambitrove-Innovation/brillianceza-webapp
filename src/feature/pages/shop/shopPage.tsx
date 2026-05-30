@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowUp } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import { getProductsByCategory } from "../../data/product";
-import { formatPrice, scrollToTop } from "../../../utils/helpers";
+import { formatPrice, scrollToTop, getActiveMarkdown } from "../../../utils/helpers";
 
 const ShopPage = () => {
   const tops = getProductsByCategory("tops");
@@ -50,7 +50,14 @@ const ShopPage = () => {
               </button>
             ) : (
               <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-                {formatPrice(product.price)}
+                {getActiveMarkdown(product.markdown) ? (
+                  <span>
+                    <span className="line-through text-red-500 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
+                    {formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}
+                  </span>
+                ) : (
+                  formatPrice(product.price)
+                )}
               </button>
             )}
           </div>
