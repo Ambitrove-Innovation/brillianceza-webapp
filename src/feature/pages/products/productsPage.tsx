@@ -109,12 +109,12 @@ const ProductDetailPage = () => {
                 )}
               </div>
               
-              <div className="text-3xl font-bold text-gray-800 flex items-center gap-3">
+              <div className="text-3xl font-bold text-gray-800 flex flex-wrap items-center gap-x-3 gap-y-2">
                 {getActiveMarkdown(currentProduct.markdown) ? (
                   <>
                     <span className="line-through text-red-500 opacity-80">{formatPrice(currentProduct.price)}</span>
                     <span>{formatPrice(getActiveMarkdown(currentProduct.markdown)!.salePrice)}</span>
-                    <span className="bg-black text-white text-xs px-2 py-1 rounded ml-2 uppercase tracking-wide">
+                    <span className="bg-black text-white text-xs px-2 py-1 rounded uppercase tracking-wide whitespace-nowrap">
                       Valid Until {new Date(getActiveMarkdown(currentProduct.markdown)!.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
                     </span>
                   </>

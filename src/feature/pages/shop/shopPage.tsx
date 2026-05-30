@@ -42,21 +42,21 @@ const ShopPage = () => {
           </div>
 
           {/* Product Info */}
-          <div className="p-4 text-center">
-            <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
+          <div className="p-4 text-center flex flex-col items-center">
+            <p className="font-semibold text-gray-800 mb-2 w-full truncate">{product.name}</p>
             {product.isSoldOut ? (
-              <button className="bg-gray-400 cursor-not-allowed text-white py-2 px-4 rounded-lg transition" disabled onClick={(e) => e.preventDefault()}>
+              <button className="bg-gray-400 cursor-not-allowed text-white py-2 px-4 rounded-lg transition max-w-full" disabled onClick={(e) => e.preventDefault()}>
                 Sold Out
               </button>
             ) : (
-              <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+              <button className="bg-black text-white py-2 px-2 sm:px-4 rounded-lg hover:bg-gray-800 transition max-w-full w-full sm:w-auto">
                 {getActiveMarkdown(product.markdown) ? (
-                  <span>
-                    <span className="line-through text-red-500 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
-                    {formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}
+                  <span className="flex flex-wrap justify-center items-center gap-x-1 sm:gap-x-2">
+                    <span className="line-through text-red-500 opacity-80 text-xs sm:text-sm">{formatPrice(product.price)}</span>
+                    <span className="text-sm sm:text-base">{formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}</span>
                   </span>
                 ) : (
-                  formatPrice(product.price)
+                  <span>{formatPrice(product.price)}</span>
                 )}
               </button>
             )}
