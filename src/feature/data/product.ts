@@ -10,7 +10,7 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
-  },   
+  },
   {
     id: "3bs-tshirt",
     name: "3 B'S T-SHIRT",
@@ -105,6 +105,11 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
+    markdown: {
+      salePrice: 200.0,
+      startDate: "2026-05-30",
+      endDate: "2026-06-05",
+    },
   },
   {
     id: "rainbow-tshirt-white",
@@ -317,14 +322,14 @@ export const getProductById = (id: string): Product | undefined => {
 };
 
 export const getProductsByCategory = (
-  category: "tops" | "bottoms" | "accessories"
+  category: "tops" | "bottoms" | "accessories",
 ): Product[] => {
   return products.filter((p) => p.category === category);
 };
 
 export const getRandomProducts = (
   count: number,
-  excludeId?: string
+  excludeId?: string,
 ): Product[] => {
   let filtered = products;
   if (excludeId) {

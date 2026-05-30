@@ -5,7 +5,7 @@ import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { getFeaturedProducts } from "../../data/product";
-import { formatPrice } from "../../../utils/helpers";
+import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 
 const Homepage = () => {
   useEffect(() => {
@@ -71,7 +71,14 @@ const Homepage = () => {
             </button>
           ) : (
             <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-              {formatPrice(product.price)}
+              {getActiveMarkdown(product.markdown) ? (
+                <span>
+                  <span className="line-through text-red-500 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
+                  {formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}
+                </span>
+              ) : (
+                formatPrice(product.price)
+              )}
             </button>
           )}
         </div>

@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { getProductById, getRandomProducts } from "../../data/product";
-import { formatPrice } from "../../../utils/helpers";
+import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 import { handleBuyNow } from "../../../utils/whatsappService";
 
 const ProductDetailPage = () => {
@@ -99,17 +99,30 @@ const ProductDetailPage = () => {
           </div>
 
           <div>
-            <div className="flex items-center gap-4 mb-4">
-              <h1 className="text-4xl font-bold">{currentProduct.name}</h1>
-              {currentProduct.isSoldOut && (
-                <span className="bg-red-600 text-white px-3 py-1 text-sm font-bold tracking-widest uppercase rounded">
-                  Sold Out
-                </span>
-              )}
+            <div className="flex flex-col gap-2 mb-6">
+              <div className="flex items-center gap-4">
+                <h1 className="text-4xl font-bold">{currentProduct.name}</h1>
+                {currentProduct.isSoldOut && (
+                  <span className="bg-red-600 text-white px-3 py-1 text-sm font-bold tracking-widest uppercase rounded">
+                    Sold Out
+                  </span>
+                )}
+              </div>
+              
+              <div className="text-3xl font-bold text-gray-800 flex items-center gap-3">
+                {getActiveMarkdown(currentProduct.markdown) ? (
+                  <>
+                    <span className="line-through text-red-500 opacity-80">{formatPrice(currentProduct.price)}</span>
+                    <span>{formatPrice(getActiveMarkdown(currentProduct.markdown)!.salePrice)}</span>
+                    <span className="bg-black text-white text-xs px-2 py-1 rounded ml-2 uppercase tracking-wide">
+                      Valid Until {new Date(getActiveMarkdown(currentProduct.markdown)!.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
+                    </span>
+                  </>
+                ) : (
+                  <span>{formatPrice(currentProduct.price)}</span>
+                )}
+              </div>
             </div>
-            <p className="text-3xl font-bold text-gray-800 mb-6">
-              {formatPrice(currentProduct.price)}
-            </p>
 
             <div className="space-y-4 mb-6">
               <div>
@@ -232,7 +245,14 @@ const ProductDetailPage = () => {
                   </button>
                 ) : (
                   <button className="purchaseBtn">
-                    {formatPrice(product.price)}
+                    {getActiveMarkdown(product.markdown) ? (
+                      <span>
+                        <span className="line-through text-red-500 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
+                        {formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}
+                      </span>
+                    ) : (
+                      formatPrice(product.price)
+                    )}
                   </button>
                 )}
               </div>
