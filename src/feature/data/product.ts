@@ -314,6 +314,22 @@ export const products: Product[] = [
     fit: "RELAXED",
     description: "Comfortable motion pants.",
   },
+  {
+    id: "brilliance-luck-24",
+    name: "BRILLIANCE LUCK 24",
+    price: 380.0,
+    category: "tops",
+    images: [
+      "BrillianceLuck24_pic1.webp",
+      "BrillianceLuck24_pic2.webp",
+      "BrillianceLuck24_pic3.webp",
+    ],
+    sizes: ["Small", "Medium", "Large", "X-Large", "2X-Large"],
+    colors: ["Black", "White"],
+    fit: "OVERSIZE",
+    description:
+      "The Brilliance Lucky 24. Perfect for all weather conditions.",
+  },
 ];
 
 // Helper functions
