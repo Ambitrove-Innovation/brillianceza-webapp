@@ -315,8 +315,8 @@ export const products: Product[] = [
     description: "Comfortable motion pants.",
   },
   {
-    id: "brilliance-luck-24",
-    name: "BRILLIANCE LUCK 24",
+    id: "brilliance-lucky-24",
+    name: "BRILLIANCE LUCKY 24",
     price: 380.0,
     category: "tops",
     images: [
