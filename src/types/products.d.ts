@@ -8,7 +8,6 @@ interface Product {
   colors: string[];
   fit: "OVERSIZE" | "RELAXED" | null;
   description: string;
-  markdown?: object
   isSoldOut?: boolean;
   markdown?: {
     salePrice: number;
