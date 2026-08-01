@@ -8,6 +8,7 @@ interface Product {
   colors: string[];
   fit: "OVERSIZE" | "RELAXED" | null;
   description: string;
+  markdown?: object
 }
 
 interface CartItem {

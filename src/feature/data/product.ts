@@ -116,6 +116,11 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
+    markdown: {
+      salePrice: 200.0,
+      startDate: "2026-07-30",
+      endDate: "2025-08-05",
+    },
   },
   {
     id: "rainbow-tshirt-black",
