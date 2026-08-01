@@ -10,7 +10,7 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
-  },   
+  },
   {
     id: "3bs-tshirt",
     name: "3 B'S T-SHIRT",
@@ -22,6 +22,7 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
+    isSoldOut: true,
   },
   {
     id: "7-ways-brilliance",
@@ -104,6 +105,11 @@ export const products: Product[] = [
     fit: "OVERSIZE",
     description:
       "Customers love its oversize fit, giving Streetwear style all the way.",
+    markdown: {
+      salePrice: 200.0,
+      startDate: "2026-05-30",
+      endDate: "2026-06-05",
+    },
   },
   {
     id: "rainbow-tshirt-white",
@@ -313,6 +319,22 @@ export const products: Product[] = [
     fit: "RELAXED",
     description: "Comfortable motion pants.",
   },
+  {
+    id: "brilliance-lucky-24",
+    name: "BRILLIANCE LUCKY 24",
+    price: 380.0,
+    category: "tops",
+    images: [
+      "BrillianceLuck24_pic1.webp",
+      "BrillianceLuck24_pic2.webp",
+      "BrillianceLuck24_pic3.webp",
+    ],
+    sizes: ["Small", "Medium", "Large", "X-Large", "2X-Large"],
+    colors: ["Black", "White"],
+    fit: "OVERSIZE",
+    description:
+      "The Brilliance Lucky 24. Perfect for all weather conditions.",
+  },
 ];
 
 // Helper functions
@@ -321,14 +343,14 @@ export const getProductById = (id: string): Product | undefined => {
 };
 
 export const getProductsByCategory = (
-  category: "tops" | "bottoms" | "accessories"
+  category: "tops" | "bottoms" | "accessories",
 ): Product[] => {
   return products.filter((p) => p.category === category);
 };
 
 export const getRandomProducts = (
   count: number,
-  excludeId?: string
+  excludeId?: string,
 ): Product[] => {
   let filtered = products;
   if (excludeId) {

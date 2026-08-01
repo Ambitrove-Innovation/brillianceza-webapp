@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowUp } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import { getProductsByCategory } from "../../data/product";
-import { formatPrice, scrollToTop } from "../../../utils/helpers";
+import { formatPrice, scrollToTop, getActiveMarkdown } from "../../../utils/helpers";
 
 const ShopPage = () => {
   const tops = getProductsByCategory("tops");
@@ -13,13 +13,13 @@ const ShopPage = () => {
 
     return (
       <Link to={`/product/${product.id}`} className="block group">
-        <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 relative">
           {/* Image */}
-          <div className="w-full aspect-square overflow-hidden">
+          <div className="w-full aspect-square overflow-hidden relative">
             <img
               src={`/images/pics/${product.images[0]}`}
               alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-105  transition-transform duration-300"
+              className={`w-full h-full object-cover transition-transform duration-300 ${product.isSoldOut ? "grayscale" : "group-hover:scale-105"}`}
               loading="lazy"
               onClick={(e) => {
                 e.preventDefault();
@@ -32,14 +32,34 @@ const ShopPage = () => {
                 setTimeout(() => navigate(`/product/${product.id}`), 300);
               }}
             />
+            {product.isSoldOut && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10 pointer-events-none">
+                <span className="bg-black text-white px-6 py-2 text-xl font-bold tracking-widest uppercase rotate-[-12deg] shadow-lg border-2 border-white">
+                  Sold Out
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Product Info */}
-          <div className="p-4 text-center">
-            <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
-            <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-              {formatPrice(product.price)}
-            </button>
+          <div className="p-4 text-center flex flex-col items-center">
+            <p className="font-semibold text-gray-800 mb-2 w-full truncate">{product.name}</p>
+            {product.isSoldOut ? (
+              <button className="bg-gray-400 cursor-not-allowed text-white py-2 px-4 rounded-lg transition max-w-full" disabled onClick={(e) => e.preventDefault()}>
+                Sold Out
+              </button>
+            ) : (
+              <button className="bg-black text-white py-2 px-2 sm:px-4 rounded-lg hover:bg-gray-800 transition max-w-full w-full sm:w-auto">
+                {getActiveMarkdown(product.markdown) ? (
+                  <span className="flex flex-wrap justify-center items-center gap-x-1 sm:gap-x-2">
+                    <span className="line-through text-red-500 opacity-80 text-xs sm:text-sm">{formatPrice(product.price)}</span>
+                    <span className="text-sm sm:text-base">{formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}</span>
+                  </span>
+                ) : (
+                  <span>{formatPrice(product.price)}</span>
+                )}
+              </button>
+            )}
           </div>
         </div>
       </Link>

@@ -5,7 +5,7 @@ import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { getFeaturedProducts } from "../../data/product";
-import { formatPrice } from "../../../utils/helpers";
+import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 
 const Homepage = () => {
   useEffect(() => {
@@ -46,22 +46,42 @@ const Homepage = () => {
     <Link to={`/product/${product.id}`} className="block group">
       <div
         key={product.id}
-        className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-        <div className="w-full aspect-square overflow-hidden">
+        className="group border-2 border-black bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 relative">
+        <div className="w-full aspect-square overflow-hidden relative">
           <OptimizedImage
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className={`w-full h-full object-cover transition-transform duration-300 ${product.isSoldOut ? "grayscale" : "group-hover:scale-105"}`}
             width={400}
             height={400}
           />
+          {product.isSoldOut && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10">
+              <span className="bg-black text-white px-6 py-2 text-xl font-bold tracking-widest uppercase rotate-[-12deg] shadow-lg border-2 border-white">
+                Sold Out
+              </span>
+            </div>
+          )}
         </div>
 
-        <div className="p-4 text-center">
-          <p className="font-semibold text-gray-800 mb-2">{product.name}</p>
-          <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
-            {formatPrice(product.price)}
-          </button>
+        <div className="p-4 text-center flex flex-col items-center">
+          <p className="font-semibold text-gray-800 mb-2 w-full truncate">{product.name}</p>
+          {product.isSoldOut ? (
+            <button className="bg-gray-400 cursor-not-allowed text-white py-2 px-4 rounded-lg transition max-w-full" disabled>
+              Sold Out
+            </button>
+          ) : (
+            <button className="bg-black text-white py-2 px-2 sm:px-4 rounded-lg hover:bg-gray-800 transition max-w-full w-full sm:w-auto">
+              {getActiveMarkdown(product.markdown) ? (
+                <span className="flex flex-wrap justify-center items-center gap-x-1 sm:gap-x-2">
+                  <span className="line-through text-red-500 opacity-80 text-xs sm:text-sm">{formatPrice(product.price)}</span>
+                  <span className="text-sm sm:text-base">{formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}</span>
+                </span>
+              ) : (
+                <span>{formatPrice(product.price)}</span>
+              )}
+            </button>
+          )}
         </div>
       </div>
     </Link>

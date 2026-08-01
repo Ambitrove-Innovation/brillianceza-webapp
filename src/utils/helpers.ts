@@ -5,6 +5,24 @@ export function formatPrice(price: number): string {
   return `R${price.toFixed(2)}`;
 }
 
+// ===== CHECK ACTIVE MARKDOWN =====
+export function getActiveMarkdown(markdown?: { salePrice: number; startDate: string; endDate: string }): { salePrice: number; endDate: string } | null {
+  if (!markdown) return null;
+  
+  const today = new Date();
+  const start = new Date(markdown.startDate);
+  const end = new Date(markdown.endDate);
+  
+  // Set end date to end of day to be inclusive
+  end.setHours(23, 59, 59, 999);
+  
+  if (today >= start && today <= end) {
+    return { salePrice: markdown.salePrice, endDate: markdown.endDate };
+  }
+  
+  return null;
+}
+
 // ===== SCROLL TO TOP =====
 export function scrollToTop(): void {
   window.scrollTo({
@@ -289,6 +307,7 @@ declare global {
     copyToClipboard: typeof copyToClipboard;
     shareToSocial: typeof shareToSocial;
     buildResponsiveSrcSet: typeof buildResponsiveSrcSet;
+    getActiveMarkdown: typeof getActiveMarkdown;
   }
 }
 
@@ -307,3 +326,4 @@ window.validateForm = validateForm;
 window.copyToClipboard = copyToClipboard;
 window.shareToSocial = shareToSocial;
 window.buildResponsiveSrcSet = buildResponsiveSrcSet;
+window.getActiveMarkdown = getActiveMarkdown;
