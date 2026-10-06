@@ -70,7 +70,7 @@ const ProductDetailPage = () => {
               <OptimizedImage
                 src={`/images/pics/${currentProduct.images[currentImageIndex]}`}
                 alt={currentProduct.name}
-                className="w-full rounded-lg shadow-lg cursor-pointer"
+                className="w-full rounded-sm shadow-md cursor-pointer"
                 width={800}
                 height={800}
                 priority
@@ -101,7 +101,7 @@ const ProductDetailPage = () => {
           <div>
             <div className="flex flex-col gap-2 mb-6">
               <div className="flex items-center gap-4">
-                <h1 className="text-4xl font-bold">{currentProduct.name}</h1>
+                <h1 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight leading-none">{currentProduct.name}</h1>
                 {currentProduct.isSoldOut && (
                   <span className="bg-red-600 text-white px-3 py-1 text-sm font-bold tracking-widest uppercase rounded">
                     Sold Out
@@ -109,10 +109,10 @@ const ProductDetailPage = () => {
                 )}
               </div>
               
-              <div className="text-3xl font-bold text-gray-800 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <div className="text-2xl font-medium text-ink flex flex-wrap items-center gap-x-3 gap-y-2">
                 {getActiveMarkdown(currentProduct.markdown) ? (
                   <>
-                    <span className="line-through text-red-500 opacity-80">{formatPrice(currentProduct.price)}</span>
+                    <span className="line-through text-neutral-400 opacity-80">{formatPrice(currentProduct.price)}</span>
                     <span>{formatPrice(getActiveMarkdown(currentProduct.markdown)!.salePrice)}</span>
                     <span className="bg-black text-white text-xs px-2 py-1 rounded uppercase tracking-wide whitespace-nowrap">
                       Valid Until {new Date(getActiveMarkdown(currentProduct.markdown)!.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
@@ -135,7 +135,7 @@ const ProductDetailPage = () => {
                   id="size-select"
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black">
+                  className="w-full border border-gray-300 rounded-sm p-3 focus:outline-none focus:ring-2 focus:ring-brand">
                   {currentProduct.sizes.map((size) => (
                     <option key={size} value={size}>
                       {size}
@@ -154,7 +154,7 @@ const ProductDetailPage = () => {
                   id="color-select"
                   value={selectedColor}
                   onChange={(e) => setSelectedColor(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black">
+                  className="w-full border border-gray-300 rounded-sm p-3 focus:outline-none focus:ring-2 focus:ring-brand">
                   {currentProduct.colors.map((color) => (
                     <option key={color} value={color}>
                       {color}
@@ -173,7 +173,7 @@ const ProductDetailPage = () => {
                   id="quantity-select"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black">
+                  className="w-full border border-gray-300 rounded-sm p-3 focus:outline-none focus:ring-2 focus:ring-brand">
                   {[1, 2, 3, 4, 5].map((num) => (
                     <option key={num} value={num}>
                       {num}
@@ -186,18 +186,18 @@ const ProductDetailPage = () => {
             {currentProduct.isSoldOut ? (
               <button
                 disabled
-                className="w-full bg-gray-400 cursor-not-allowed text-white font-bold text-lg py-4 rounded-lg transition">
+                className="w-full bg-gray-300 cursor-not-allowed text-white font-semibold text-sm uppercase tracking-[0.2em] py-5 rounded-none transition">
                 Out of Stock
               </button>
             ) : (
               <button
                 onClick={handleBuyNowClick}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-lg py-4 rounded-lg transition cursor-pointer">
+                className="w-full bg-ink hover:bg-brand text-white font-semibold text-sm uppercase tracking-[0.2em] py-5 rounded-none transition cursor-pointer">
                 Buy Now
               </button>
             )}
 
-            <div className="mt-8 p-6 bg-black text-white rounded-lg">
+            <div className="mt-8 p-6 bg-stone text-ink">
               {currentProduct.fit && (
                 <p className="text-xl font-bold mb-2">
                   FIT | {currentProduct.fit}
@@ -209,10 +209,10 @@ const ProductDetailPage = () => {
         </div>
       </section>
 
-      <hr className="container mx-auto border-t-4 border-gray-800 my-12" />
+      <hr className="container mx-auto border-t border-ink/15 my-12" />
 
       <section className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-2xl md:text-4xl font-extrabold uppercase tracking-tight mb-8">
           You May Also Like
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -247,7 +247,7 @@ const ProductDetailPage = () => {
                   <button className="purchaseBtn">
                     {getActiveMarkdown(product.markdown) ? (
                       <span>
-                        <span className="line-through text-red-500 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
+                        <span className="line-through text-neutral-400 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
                         {formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}
                       </span>
                     ) : (

@@ -24,7 +24,7 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-full backdrop-blur-md bg-white/80 shadow-sm z-50 border-b border-gray-100">
+      <nav className="fixed top-0 w-full backdrop-blur-md bg-cream/85 z-50 border-b border-black/5">
         <div className="container mx-auto px-6 py-3 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" onClick={closeMenu}>
@@ -38,14 +38,14 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-10 font-semibold uppercase tracking-wide text-gray-800 text-sm">
+          <div className="hidden md:flex items-center space-x-10 font-medium uppercase tracking-[0.18em] text-gray-800 text-xs">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative pb-1 hover:scale-110 transition-transform duration-300 ${
+                className={`relative pb-1 transition-colors duration-300 ${
                   isActive(link.path)
-                    ? "text-black after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-black"
+                    ? "text-black after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-ink"
                     : "hover:text-black text-gray-600"
                 }`}>
                 {link.label}
@@ -73,8 +73,8 @@ const Navigation = () => {
               <ShoppingBag
                 className={`w-5 h-5 ${
                   isActive("/shop")
-                    ? "text-green-600 hover:animate-pulse hover:scale-125 transition-transform duration-300"
-                    : "text-red-600  hover:animate-pulse"
+                    ? "text-brand"
+                    : "text-ink hover:text-brand transition-colors"
                 }`}
               />
             </Link>
@@ -103,7 +103,7 @@ const Navigation = () => {
                 onClick={closeMenu}
                 className={`block px-6 py-3  text-sm uppercase tracking-wide font-medium transition ${
                   isActive(link.path)
-                    ? "bg-black text-white"
+                    ? "bg-ink text-white"
                     : "hover:bg-gray-50 text-gray-700"
                 }`}>
                 {link.label}
@@ -117,7 +117,7 @@ const Navigation = () => {
       <div className="h-20"></div>
 
       {/* Announcement Bar */}
-      <div className="bg-black text-white text-center py-3 uppercase tracking-wider text-sm font-medium">
+      <div className="bg-ink text-white/90 text-center py-2 uppercase tracking-[0.2em] text-xs font-medium">
         Free Delivery On Orders Over R500
       </div>
     </>

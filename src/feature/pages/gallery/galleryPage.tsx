@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
+import Footer from "../../../components/layout/Footer";
 
 const SocialBar = () => (
   <div className="text-center my-8">
@@ -7,7 +8,7 @@ const SocialBar = () => (
       href="https://www.instagram.com/brilliance_za"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-block mx-4 text-black hover:text-pink-500 transition"
+      className="inline-block mx-4 text-black hover:text-brand transition"
       aria-label="Instagram">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -45,107 +46,6 @@ const SocialBar = () => (
     </a>
   </div>
 );
-
-const Footer = () => {
-  const year = new Date().getFullYear();
-
-  return (
-    <footer className="bg-black text-white py-8 w-full">
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
-              About
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="/about#our_story"
-                  className="hover:text-white transition">
-                  Our Story
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
-              Support
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/contact" className="hover:text-white transition">
-                  Contact Us
-                </a>
-              </li>
-              <li>
-                <a href="/delivery" className="hover:text-white transition">
-                  Delivery Info
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
-              Shop
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="/secure-payment"
-                  className="hover:text-white transition">
-                  Secured Payment
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
-              Follow Us
-            </h3>
-            <div className="flex items-center space-x-4">
-              <a
-                href="https://www.instagram.com/brilliance_za"
-                aria-label="Instagram">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="text-white hover:text-pink-500 transition">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-neutral-800 mt-16 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-          <p>
-            © {year} <b>Brilliance Clothing</b> All rights reserved.
-          </p>
-          <p className="mt-3 md:mt-0">
-            Designed & Developed by{" "}
-            <a
-              href="https://www.ambitrove.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white font-medium">
-              Ambitrove Team
-            </a>
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-};
 
 const GalleryPage = () => {
   const galleryImages = [
@@ -274,7 +174,7 @@ const GalleryPage = () => {
                 <OptimizedImage
                   src={`/images/gallery/${image}`}
                   alt={`Gallery image ${index + 1}`}
-                  className="w-full rounded-lg shadow-md hover:scale-105 transition-transform cursor-pointer"
+                  className="w-full rounded-sm shadow-md hover:scale-105 transition-transform cursor-pointer"
                   width={400}
                   height={600}
                   objectFit="cover"
@@ -314,7 +214,7 @@ const GalleryPage = () => {
                 ref={modalImgRef}
                 src={`/images/gallery/${galleryImages[currentIndex]}`}
                 alt={`Viewing ${currentIndex + 1}`}
-                className={`w-full h-auto rounded-lg shadow-2xl mx-auto transition-transform duration-300 ${
+                className={`w-full h-auto rounded-sm shadow-2xl mx-auto transition-transform duration-300 ${
                   modalShown ? "opacity-100 scale-100" : "opacity-0 scale-95"
                 }`}
                 onClick={(e) => e.stopPropagation()}
