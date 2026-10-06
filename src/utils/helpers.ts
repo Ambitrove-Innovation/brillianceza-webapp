@@ -204,7 +204,7 @@ export const storage = {
   },
 };
 // ===== FORM VALIDATION =====
-function validateForm(formId: string): boolean {
+export function validateForm(formId: string): boolean {
   const form = document.getElementById(formId) as HTMLFormElement | null;
   if (!form) return false;
 
@@ -238,32 +238,21 @@ function validateForm(formId: string): boolean {
 }
 
 // ===== COPY TO CLIPBOARD =====
-function copyToClipboard(text: string): void {
-  if (navigator.clipboard) {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        showNotification("Copied to clipboard!", "success");
-      })
-      .catch(() => {
-        showNotification("Failed to copy", "error");
-      });
-  } else {
-    // Fallback for older browsers
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-    showNotification("Copied to clipboard!", "success");
-  }
+export function copyToClipboard(text: string): void {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      showNotification("Copied to clipboard!", "success");
+    })
+    .catch(() => {
+      showNotification("Failed to copy", "error");
+    });
 }
 
 // ===== SHARE TO SOCIAL MEDIA =====
-type SocialPlatform = "facebook" | "twitter" | "whatsapp" | "telegram";
+export type SocialPlatform = "facebook" | "twitter" | "whatsapp" | "telegram";
 
-function shareToSocial(
+export function shareToSocial(
   platform: SocialPlatform,
   url: string,
   text: string
@@ -286,44 +275,4 @@ function shareToSocial(
   }
 }
 
-// ===== EXPORT FUNCTIONS =====
-declare global {
-  interface Window {
-    formatPrice: typeof formatPrice;
-    scrollToTop: typeof scrollToTop;
-    getUrlParameter: typeof getUrlParameter;
-    setUrlParameter: typeof setUrlParameter;
-    debounce: typeof debounce;
-    isValidEmail: (email: string) => boolean;
-    isValidPhone: (phone: string) => boolean;
-    showNotification: (
-      message: string,
-      type?: "success" | "error" | "info" | "warning"
-    ) => void;
-    showLoading: typeof showLoading;
-    lazyLoadImages: typeof lazyLoadImages;
-    storage: typeof storage;
-    validateForm: typeof validateForm;
-    copyToClipboard: typeof copyToClipboard;
-    shareToSocial: typeof shareToSocial;
-    buildResponsiveSrcSet: typeof buildResponsiveSrcSet;
-    getActiveMarkdown: typeof getActiveMarkdown;
-  }
-}
 
-window.formatPrice = formatPrice;
-window.scrollToTop = scrollToTop;
-window.getUrlParameter = getUrlParameter;
-window.setUrlParameter = setUrlParameter;
-window.debounce = debounce;
-window.isValidEmail = isValidEmail;
-window.isValidPhone = isValidPhone;
-window.showNotification = showNotification;
-window.showLoading = showLoading;
-window.lazyLoadImages = lazyLoadImages;
-window.storage = storage;
-window.validateForm = validateForm;
-window.copyToClipboard = copyToClipboard;
-window.shareToSocial = shareToSocial;
-window.buildResponsiveSrcSet = buildResponsiveSrcSet;
-window.getActiveMarkdown = getActiveMarkdown;
