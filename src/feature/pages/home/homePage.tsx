@@ -4,10 +4,12 @@ import { Instagram } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
-import { getFeaturedProducts } from "../../data/product";
+import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 
 const Homepage = () => {
+  const { getFeatured } = useProducts();
+
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
@@ -20,7 +22,7 @@ const Homepage = () => {
     };
   }, []);
 
-  const brillianceCollection = getFeaturedProducts([
+  const brillianceCollection = getFeatured([
     "reflector-tshirt",
     "gum-elastic-wte-tshirt",
     "7-ways-brilliance",
@@ -28,14 +30,14 @@ const Homepage = () => {
     "gum-elastic-wte-tshirt",
   ]);
 
-  const euphoriaCollection = getFeaturedProducts([
+  const euphoriaCollection = getFeatured([
     "og-wte-tshirt-pink",
     "wte-5p",
     "wte-hoodie",
     "uk-motion-wear-navy",
   ]);
 
-  const bottomsCollection = getFeaturedProducts([
+  const bottomsCollection = getFeatured([
     "reflector-cargo-pants",
     "purple-strip-short",
     "white-cargo-pants",

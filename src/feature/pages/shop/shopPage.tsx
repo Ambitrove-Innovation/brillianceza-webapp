@@ -1,12 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowUp } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
-import { getProductsByCategory } from "../../data/product";
+import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, scrollToTop, getActiveMarkdown } from "../../../utils/helpers";
 
 const ShopPage = () => {
-  const tops = getProductsByCategory("tops");
-  const bottoms = getProductsByCategory("bottoms");
+  const { tops, bottoms } = useProducts();
 
   const ProductCard = ({ product }: { product: Product }) => {
     const navigate = useNavigate();

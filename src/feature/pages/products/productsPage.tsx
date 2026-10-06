@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
-import { getProductById, getRandomProducts } from "../../data/product";
+import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 import { handleBuyNow } from "../../../utils/whatsappService";
 
 const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { getById, getRecommendations } = useProducts();
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
@@ -22,7 +23,7 @@ const ProductDetailPage = () => {
       return;
     }
 
-    const product = getProductById(id);
+    const product = getById(id);
     if (!product) {
       navigate("/");
       return;
@@ -33,11 +34,12 @@ const ProductDetailPage = () => {
     setSelectedColor(product.colors[0] || "");
     setCurrentImageIndex(0);
 
-    const recommended = getRandomProducts(3, id);
+    const recommended = getRecommendations(3, id);
     setRecommendations(recommended);
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [id, navigate]);
+  }, [id, navigate, getById, getRecommendations]);
+
 
   if (!currentProduct) {
     return (
