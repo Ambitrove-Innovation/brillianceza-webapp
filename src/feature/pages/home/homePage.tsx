@@ -49,7 +49,7 @@ const Homepage = () => {
       <div
         key={product.id}
         className="group transition-colors duration-300 relative">
-        <div className="w-full aspect-[4/5] overflow-hidden relative bg-stone">
+        <div className="w-full aspect-4/5 overflow-hidden relative bg-stone">
           <OptimizedImage
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
@@ -158,7 +158,7 @@ const Homepage = () => {
 
       <section className="container mx-auto px-4 md:px-6 py-16">
         <div className="grid grid-cols-12 gap-4 md:gap-8 items-start max-w-6xl mx-auto">
-          <div className="col-span-7 aspect-[4/5] overflow-hidden bg-stone">
+          <div className="col-span-7 aspect-4/5 overflow-hidden bg-stone">
             <OptimizedImage
               src="/images/pics/s4.webp"
               alt="Streetwear Style 1"
@@ -167,7 +167,7 @@ const Homepage = () => {
               height={500}
             />
           </div>
-          <div className="col-span-5 aspect-[4/5] overflow-hidden bg-stone mt-10 md:mt-24">
+          <div className="col-span-5 aspect-4/5 overflow-hidden bg-stone mt-10 md:mt-24">
             <OptimizedImage
               src="/images/pics/s3.webp"
               alt="Streetwear Style 2"

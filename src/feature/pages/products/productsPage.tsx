@@ -234,7 +234,7 @@ const ProductDetailPage = () => {
                   />
                   {product.isSoldOut && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10 pointer-events-none rounded">
-                      <span className="bg-black text-white px-4 py-1 text-sm font-bold tracking-widest uppercase rotate-[-12deg] shadow-lg border border-white">
+                      <span className="bg-black text-white px-4 py-1 text-sm font-bold tracking-widest uppercase -rotate-12 shadow-lg border border-white">
                         Sold Out
                       </span>
                     </div>

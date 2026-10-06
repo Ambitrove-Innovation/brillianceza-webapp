@@ -14,7 +14,7 @@ const ShopPage = () => {
       <Link to={`/product/${product.id}`} className="block group">
         <div className="transition-colors duration-300 relative">
           {/* Image */}
-          <div className="w-full aspect-[4/5] overflow-hidden relative bg-stone">
+          <div className="w-full aspect-4/5 overflow-hidden relative bg-stone">
             <img
               src={`/images/pics/${product.images[0]}`}
               alt={product.name}
