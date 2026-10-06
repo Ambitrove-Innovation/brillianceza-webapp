@@ -17,7 +17,7 @@ const AboutPage = () => {
         <OptimizedImage
           src="/images/pics/B90.webp"
           alt="Brilliance Brand Story"
-          className="w-full max-w-6xl mx-auto rounded-lg shadow-lg"
+          className="w-full max-w-6xl mx-auto rounded-sm shadow-lg"
           width={1200}
           height={800}
           priority
@@ -27,7 +27,7 @@ const AboutPage = () => {
       <section
         id="our_story"
         className="container mx-auto px-4 py-12 max-w-5xl">
-        <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
+        <div className="bg-white rounded-sm shadow-lg p-8 md:p-12">
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
             Our Story
           </h1>
@@ -58,7 +58,7 @@ const AboutPage = () => {
           href="https://www.instagram.com/brilliance_za"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mx-4 text-5xl text-black hover:text-pink-500 transition">
+          className="inline-block mx-4 text-5xl text-black hover:text-brand transition">
           <i className="fab fa-instagram"></i>
         </a>
         <a
@@ -80,7 +80,7 @@ const AboutPage = () => {
               key={product.id}
               to={`/product/${product.id}`}
               className="block">
-              <div className="bg-white border rounded-lg p-4 hover:shadow-lg transition">
+              <div className="bg-white border rounded-sm p-4 hover:shadow-lg transition">
                 <OptimizedImage
                   src={`/images/pics/${product.images[0]}`}
                   alt={product.name}
@@ -89,7 +89,7 @@ const AboutPage = () => {
                   height={400}
                 />
                 <p className="font-bold text-center mb-2">{product.name}</p>
-                <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
+                <button className="w-full bg-ink text-white py-2 rounded-full hover:bg-brand transition">
                   {formatPrice(product.price)}
                 </button>
               </div>

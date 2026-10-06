@@ -8,7 +8,7 @@ const SocialBar = () => {
         href="https://www.instagram.com/brilliance_za"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block mx-4 text-black hover:text-pink-500 transition"
+        className="inline-block mx-4 text-black hover:text-brand transition"
         aria-label="Instagram">
         <Instagram size={48} strokeWidth={1.5} />
       </a>

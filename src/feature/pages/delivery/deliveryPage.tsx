@@ -22,9 +22,9 @@ const DeliveryPage = () => {
       <section className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Free Delivery */}
-          <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
-            <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6 mx-auto">
-              <CheckCircle className="w-8 h-8 text-green-600" />
+          <div className="bg-white rounded-sm shadow-sm border border-black/5 p-8 hover:shadow-xl transition">
+            <div className="flex items-center justify-center w-16 h-16 bg-brand/10 rounded-full mb-6 mx-auto">
+              <CheckCircle className="w-8 h-8 text-brand" />
             </div>
             <h3 className="text-2xl font-bold text-center mb-4">
               Free Delivery
@@ -36,9 +36,9 @@ const DeliveryPage = () => {
           </div>
 
           {/* Delivery Time */}
-          <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
-            <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6 mx-auto">
-              <Clock className="w-8 h-8 text-blue-600" />
+          <div className="bg-white rounded-sm shadow-sm border border-black/5 p-8 hover:shadow-xl transition">
+            <div className="flex items-center justify-center w-16 h-16 bg-brand/10 rounded-full mb-6 mx-auto">
+              <Clock className="w-8 h-8 text-brand" />
             </div>
             <h3 className="text-2xl font-bold text-center mb-4">
               Processing Time
@@ -50,9 +50,9 @@ const DeliveryPage = () => {
           </div>
 
           {/* Delivery Coverage */}
-          <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
-            <div className="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-6 mx-auto">
-              <MapPin className="w-8 h-8 text-purple-600" />
+          <div className="bg-white rounded-sm shadow-sm border border-black/5 p-8 hover:shadow-xl transition">
+            <div className="flex items-center justify-center w-16 h-16 bg-brand/10 rounded-full mb-6 mx-auto">
+              <MapPin className="w-8 h-8 text-brand" />
             </div>
             <h3 className="text-2xl font-bold text-center mb-4">
               Nationwide Coverage
@@ -64,9 +64,9 @@ const DeliveryPage = () => {
           </div>
 
           {/* Secure Packaging */}
-          <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
-            <div className="flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-6 mx-auto">
-              <Package className="w-8 h-8 text-yellow-600" />
+          <div className="bg-white rounded-sm shadow-sm border border-black/5 p-8 hover:shadow-xl transition">
+            <div className="flex items-center justify-center w-16 h-16 bg-brand/10 rounded-full mb-6 mx-auto">
+              <Package className="w-8 h-8 text-brand" />
             </div>
             <h3 className="text-2xl font-bold text-center mb-4">
               Secure Packaging
@@ -78,9 +78,9 @@ const DeliveryPage = () => {
           </div>
 
           {/* Tracking */}
-          <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
-            <div className="flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-6 mx-auto">
-              <Truck className="w-8 h-8 text-red-600" />
+          <div className="bg-white rounded-sm shadow-sm border border-black/5 p-8 hover:shadow-xl transition">
+            <div className="flex items-center justify-center w-16 h-16 bg-brand/10 rounded-full mb-6 mx-auto">
+              <Truck className="w-8 h-8 text-brand" />
             </div>
             <h3 className="text-2xl font-bold text-center mb-4">
               Track Your Order
@@ -92,9 +92,9 @@ const DeliveryPage = () => {
           </div>
 
           {/* Customer Support */}
-          <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
-            <div className="flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-6 mx-auto">
-              <CheckCircle className="w-8 h-8 text-indigo-600" />
+          <div className="bg-white rounded-sm shadow-sm border border-black/5 p-8 hover:shadow-xl transition">
+            <div className="flex items-center justify-center w-16 h-16 bg-brand/10 rounded-full mb-6 mx-auto">
+              <CheckCircle className="w-8 h-8 text-brand" />
             </div>
             <h3 className="text-2xl font-bold text-center mb-4">
               24/7 Support
@@ -114,7 +114,7 @@ const DeliveryPage = () => {
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-sm shadow p-6">
               <h3 className="text-xl font-bold mb-2">
                 How long does delivery take?
               </h3>
@@ -123,7 +123,7 @@ const DeliveryPage = () => {
                 Major cities may receive orders faster.
               </p>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-sm shadow p-6">
               <h3 className="text-xl font-bold mb-2">
                 Do you deliver to my area?
               </h3>
@@ -132,7 +132,7 @@ const DeliveryPage = () => {
                 contact us via WhatsApp with your area code.
               </p>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-sm shadow p-6">
               <h3 className="text-xl font-bold mb-2">
                 What if my order is delayed?
               </h3>
@@ -142,7 +142,7 @@ const DeliveryPage = () => {
                 tracking number.
               </p>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-sm shadow p-6">
               <h3 className="text-xl font-bold mb-2">
                 Can I change my delivery address?
               </h3>

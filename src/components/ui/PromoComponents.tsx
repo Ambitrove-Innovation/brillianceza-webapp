@@ -56,9 +56,9 @@ export const PromoProductCard = ({
   const promo = getPromoDetails(product);
 
   return (
-    <div className="bg-white rounded-xl border-2 border-black overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+    <div className="transition-colors duration-300">
       {/* Image with badge */}
-      <div className="w-full aspect-square overflow-hidden relative">
+      <div className="w-full aspect-[4/5] overflow-hidden relative bg-stone">
         {promo.isOnPromo && (
           <div className="absolute top-2 left-2 z-10">
             <PromoBadge />
@@ -82,12 +82,12 @@ export const PromoProductCard = ({
             <div className="text-gray-500 line-through text-sm">
               {formatPrice(promo.originalPrice)}
             </div>
-            <button className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition font-bold">
+            <button className="bg-brand text-white py-2 px-4 rounded-full hover:bg-brand-dark transition font-bold">
               {formatPrice(promo.discountedPrice)}
             </button>
           </div>
         ) : (
-          <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+          <button className="bg-ink text-white py-2 px-4 rounded-full hover:bg-brand transition">
             {formatPrice(product.price)}
           </button>
         )}

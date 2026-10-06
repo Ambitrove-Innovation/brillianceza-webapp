@@ -83,7 +83,7 @@ const ContactPage = () => {
       {/* Split Section (Black & White) */}
       <section className="flex flex-col md:flex-row min-h-screen">
         {/* Left: Info / Black Side */}
-        <div className="md:w-1/2 bg-black text-white flex flex-col justify-center px-8 py-20 md:py-32 relative overflow-hidden">
+        <div className="md:w-1/2 bg-ink text-white flex flex-col justify-center px-8 py-20 md:py-32 relative overflow-hidden">
           <div className="absolute inset-0 bg-linear-to-br from-black via-neutral-900 to-gray-800 opacity-90"></div>
           <div className="relative z-10 max-w-lg mx-auto text-center md:text-left">
             <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
@@ -118,7 +118,7 @@ const ContactPage = () => {
                 href="https://www.instagram.com/brilliance_za"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-pink-500 transition">
+                className="text-gray-400 hover:text-brand transition">
                 <Instagram size={28} />
               </a>
               <a
@@ -158,7 +158,7 @@ const ContactPage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-black focus:outline-none"
+                className="w-full border border-gray-300 rounded-sm p-3 focus:ring-2 focus:ring-brand focus:outline-none"
               />
 
               <input
@@ -168,7 +168,7 @@ const ContactPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-black focus:outline-none"
+                className="w-full border border-gray-300 rounded-sm p-3 focus:ring-2 focus:ring-brand focus:outline-none"
               />
 
               <input
@@ -177,7 +177,7 @@ const ContactPage = () => {
                 placeholder="Your Phone (optional)"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-black focus:outline-none"
+                className="w-full border border-gray-300 rounded-sm p-3 focus:ring-2 focus:ring-brand focus:outline-none"
               />
 
               <input
@@ -186,7 +186,7 @@ const ContactPage = () => {
                 placeholder="Subject"
                 value={formData.subject}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-black focus:outline-none"
+                className="w-full border border-gray-300 rounded-sm p-3 focus:ring-2 focus:ring-brand focus:outline-none"
               />
 
               <textarea
@@ -196,14 +196,14 @@ const ContactPage = () => {
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-black focus:outline-none resize-none"
+                className="w-full border border-gray-300 rounded-sm p-3 focus:ring-2 focus:ring-brand focus:outline-none resize-none"
               />
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <button
                   type="submit"
                   disabled={loading || submitted}
-                  className="flex-1 bg-black hover:bg-gray-900 text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2 transition">
+                  className="flex-1 bg-ink hover:bg-brand text-white font-semibold py-3 rounded-sm flex items-center justify-center gap-2 transition">
                   {loading ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" /> Sending...
@@ -222,7 +222,7 @@ const ContactPage = () => {
                 <button
                   type="button"
                   onClick={handleWhatsAppSubmit}
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2 transition">
+                  className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-sm flex items-center justify-center gap-2 transition">
                   <Phone className="w-5 h-5" /> WhatsApp
                 </button>
               </div>
