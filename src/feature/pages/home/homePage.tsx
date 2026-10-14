@@ -28,7 +28,6 @@ const Homepage = () => {
     "gum-elastic-wte-tshirt",
     "7-ways-brilliance",
     "more-fashion-sweater",
-    "gum-elastic-wte-tshirt",
   ]);
 
   const euphoriaCollection = getFeatured([

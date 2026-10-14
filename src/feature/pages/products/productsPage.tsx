@@ -14,6 +14,7 @@ const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { getById, getRecommendations } = useProducts();
+  const { addToCart } = useCart();
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
@@ -57,8 +58,6 @@ const ProductDetailPage = () => {
   const changeMainImage = (index: number) => {
     setCurrentImageIndex(index);
   };
-
-  const { addToCart } = useCart();
 
   const handleAddToCartClick = () => {
     if (!currentProduct || currentProduct.isSoldOut) return;
