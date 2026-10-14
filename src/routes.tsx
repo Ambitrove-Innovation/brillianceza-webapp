@@ -1,6 +1,7 @@
 // src/routes.tsx
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navigation from "./components/layout/Navigation";
+import CartDrawer from "./components/cart/CartDrawer";
 import Homepage from "./feature/pages/home/homePage";
 import AboutPage from "./feature/pages/about/aboutPage";
 import ShopPage from "./feature/pages/shop/shopPage";
@@ -17,6 +18,7 @@ const Routespath = () => {
   return (
     <Router>
       <Navigation />
+      <CartDrawer />
       <ScrollToTop />
       <ScrollToHashElement />
       <Routes>

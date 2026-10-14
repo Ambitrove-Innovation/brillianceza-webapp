@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { ShoppingBag } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { useProducts } from "../../../hooks/useProducts";
-import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
+import { useCart } from "../../../context/CartContext";
+import { formatPrice, getActiveMarkdown, showNotification } from "../../../utils/helpers";
 import { handleBuyNow } from "../../../utils/whatsappService";
 
 const ProductDetailPage = () => {
@@ -51,6 +53,14 @@ const ProductDetailPage = () => {
 
   const changeMainImage = (index: number) => {
     setCurrentImageIndex(index);
+  };
+
+  const { addToCart } = useCart();
+
+  const handleAddToCartClick = () => {
+    if (!currentProduct || currentProduct.isSoldOut) return;
+    addToCart(currentProduct, selectedSize, selectedColor, quantity);
+    showNotification(`Added ${quantity}x ${currentProduct.name} to your bag! 🛍️`, "success");
   };
 
   const handleBuyNowClick = () => {
@@ -192,11 +202,19 @@ const ProductDetailPage = () => {
                 Out of Stock
               </button>
             ) : (
-              <button
-                onClick={handleBuyNowClick}
-                className="w-full bg-ink hover:bg-brand text-white font-semibold text-sm uppercase tracking-[0.2em] py-5 rounded-none transition cursor-pointer">
-                Buy Now
-              </button>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={handleAddToCartClick}
+                  className="w-full bg-ink hover:bg-brand text-white font-semibold text-sm uppercase tracking-[0.2em] py-4 rounded-none transition cursor-pointer flex items-center justify-center gap-2 shadow-md">
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Add to Bag</span>
+                </button>
+                <button
+                  onClick={handleBuyNowClick}
+                  className="w-full border border-ink text-ink hover:bg-stone font-semibold text-xs uppercase tracking-[0.2em] py-3.5 rounded-none transition cursor-pointer flex items-center justify-center gap-2">
+                  <span>Direct WhatsApp Buy</span>
+                </button>
+              </div>
             )}
 
             <div className="mt-8 p-6 bg-stone text-ink">
