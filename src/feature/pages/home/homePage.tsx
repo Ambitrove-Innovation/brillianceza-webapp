@@ -93,6 +93,7 @@ const Homepage = () => {
     <div className="min-h-screen flex flex-col">
       <HeroSection
         imageSrc="/images/pics/l2.webp"
+        extraImages={["/images/pics/B12.1.webp"]}
         title="Brilliance"
         subtitle="South African Streetwear Inspired by Hip-Hop Culture"
         buttonText="Shop Now"
