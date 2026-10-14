@@ -7,10 +7,15 @@ import {
 } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
+import SEO from "../../../components/ui/SEO";
 
 const SecurePaymentPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Secure Payment Methods & Banking"
+        description="Safe, fast, and convenient payment options for your Brilliance orders. PayShap instant payments and direct EFT support."
+      />
       <section className="bg-linear-to-r from-gray-900 to-ink text-white py-16">
         <div className="container mx-auto px-6 text-center">
           <Shield className="w-16 h-16 mx-auto mb-4" />

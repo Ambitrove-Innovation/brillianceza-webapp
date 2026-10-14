@@ -21,17 +21,19 @@ const Routespath = () => {
       <CartDrawer />
       <ScrollToTop />
       <ScrollToHashElement />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/delivery" element={<DeliveryPage />} />
-        <Route path="/secure-payment" element={<SecurePaymentPage />} />
-        <Route path="*" element={<PageErrorRedirect />} />
-      </Routes>
+      <main id="main-content" tabIndex={-1} className="outline-none">
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/delivery" element={<DeliveryPage />} />
+          <Route path="/secure-payment" element={<SecurePaymentPage />} />
+          <Route path="*" element={<PageErrorRedirect />} />
+        </Routes>
+      </main>
     </Router>
   );
 };

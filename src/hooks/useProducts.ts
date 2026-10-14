@@ -56,6 +56,8 @@ export interface UseProductsReturn {
   isSoldOut: (product: Product) => boolean;
   /** True if the product has an active markdown/sale today */
   hasActiveSale: (product: Product) => boolean;
+  /** Loading state for data fetching (ready for async API transition) */
+  isLoading: boolean;
 }
 
 /** Sort a list: available products first, sold-out pushed to the end */
@@ -128,5 +130,6 @@ export function useProducts(): UseProductsReturn {
     getFeatured: getFeaturedProducts,
     isSoldOut,
     hasActiveSale,
+    isLoading: false,
   };
 }

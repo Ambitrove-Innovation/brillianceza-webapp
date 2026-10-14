@@ -4,6 +4,7 @@ import { Instagram } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
+import SEO from "../../../components/ui/SEO";
 import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 
@@ -45,7 +46,11 @@ const Homepage = () => {
   ]);
 
   const ProductCard = ({ product }: { product: Product }) => (
-    <Link to={`/product/${product.id}`} className="block group">
+    <Link
+      to={`/product/${product.id}`}
+      className="block group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
+      aria-label={`View ${product.name} ${product.isSoldOut ? "(Sold Out)" : `- ${formatPrice(product.price)}`}`}
+    >
       <div
         key={product.id}
         className="group transition-colors duration-300 relative">
@@ -69,11 +74,11 @@ const Homepage = () => {
         <div className="pt-4 flex flex-col items-start gap-1">
           <p className="text-xs md:text-sm uppercase tracking-[0.12em] text-ink w-full truncate">{product.name}</p>
           {product.isSoldOut ? (
-            <button className="text-neutral-400 cursor-not-allowed p-0 uppercase tracking-[0.12em] text-xs" disabled>
+            <span className="text-neutral-400 p-0 uppercase tracking-[0.12em] text-xs">
               Sold Out
-            </button>
+            </span>
           ) : (
-            <button className="text-ink text-sm md:text-base font-medium p-0 cursor-pointer hover:underline underline-offset-4 transition max-w-full text-left">
+            <span className="text-ink text-sm md:text-base font-medium p-0 hover:underline underline-offset-4 transition max-w-full text-left">
               {getActiveMarkdown(product.markdown) ? (
                 <span className="flex flex-wrap justify-center items-center gap-x-1 sm:gap-x-2">
                   <span className="line-through text-neutral-400 text-xs sm:text-sm">{formatPrice(product.price)}</span>
@@ -82,7 +87,7 @@ const Homepage = () => {
               ) : (
                 <span>{formatPrice(product.price)}</span>
               )}
-            </button>
+            </span>
           )}
         </div>
       </div>
@@ -91,6 +96,10 @@ const Homepage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="South African Streetwear & Hip-Hop Culture"
+        description="Brilliance ZA - Exclusive South African streetwear inspired by hip-hop culture. Shop our curated Euphoria collection, tees, and bottoms."
+      />
       <HeroSection
         imageSrc="/images/pics/l2.webp"
         extraImages={["/images/pics/B12.1.webp"]}
