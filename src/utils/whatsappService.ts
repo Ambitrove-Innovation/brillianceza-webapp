@@ -6,7 +6,7 @@ import {
 import { getActiveMarkdown } from "./helpers";
 import type { CartItem } from "../context/CartContext";
 
-const WHATSAPP_NUMBER = "+27686311388";
+export const WHATSAPP_NUMBER = "+27686311388";
 
 interface BuyNowParams {
   product: Product;
