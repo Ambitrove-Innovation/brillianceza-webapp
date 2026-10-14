@@ -23,6 +23,7 @@ const ContactPage = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleChange = (
@@ -46,9 +47,7 @@ const ContactPage = () => {
     const templateID = import.meta.env.VITE_TEMPLATE_ID!;
     const publicKey = import.meta.env.VITE_PUBLIC_KEY!;
 
-    console.log(serviceID);
-    console.log(templateID);
-    console.log(publicKey);
+    setSubmitError(false);
 
     try {
       if (!isValidEmail(formData.email)) {
@@ -83,7 +82,9 @@ const ContactPage = () => {
         });
       }, 3000);
     } catch (err) {
-      console.log("Error: " + JSON.stringify(err));
+      console.error("EmailJS send failed:", err);
+      setSubmitError(true);
+      showNotification("Failed to send message. Please try WhatsApp or email us directly.", "error");
       setLoading(false);
     }
   };
@@ -224,6 +225,8 @@ const ContactPage = () => {
                         ? "bg-yellow-400"
                         : submitted
                         ? "bg-green-600"
+                        : submitError
+                        ? "bg-red-600 hover:bg-red-700"
                         : "bg-black hover:bg-gray-900"
                     }`}>
                   {loading ? (
@@ -234,6 +237,8 @@ const ContactPage = () => {
                     <>
                       <CheckCircle className="w-5 h-5" /> Sent!
                     </>
+                  ) : submitError ? (
+                    <>Failed — Try Again</>
                   ) : (
                     <>
                       <Send className="w-5 h-5" /> Send Email

@@ -4,10 +4,12 @@ import { Instagram } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
-import { getFeaturedProducts } from "../../data/product";
+import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 
 const Homepage = () => {
+  const { getFeatured } = useProducts();
+
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
@@ -20,7 +22,7 @@ const Homepage = () => {
     };
   }, []);
 
-  const brillianceCollection = getFeaturedProducts([
+  const brillianceCollection = getFeatured([
     "reflector-tshirt",
     "gum-elastic-wte-tshirt",
     "7-ways-brilliance",
@@ -28,14 +30,14 @@ const Homepage = () => {
     "gum-elastic-wte-tshirt",
   ]);
 
-  const euphoriaCollection = getFeaturedProducts([
+  const euphoriaCollection = getFeatured([
     "og-wte-tshirt-pink",
     "wte-5p",
     "wte-hoodie",
     "uk-motion-wear-navy",
   ]);
 
-  const bottomsCollection = getFeaturedProducts([
+  const bottomsCollection = getFeatured([
     "reflector-cargo-pants",
     "purple-strip-short",
     "white-cargo-pants",
@@ -47,7 +49,7 @@ const Homepage = () => {
       <div
         key={product.id}
         className="group transition-colors duration-300 relative">
-        <div className="w-full aspect-[4/5] overflow-hidden relative bg-stone">
+        <div className="w-full aspect-4/5 overflow-hidden relative bg-stone">
           <OptimizedImage
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
@@ -91,6 +93,7 @@ const Homepage = () => {
     <div className="min-h-screen flex flex-col">
       <HeroSection
         imageSrc="/images/pics/l2.webp"
+        extraImages={["/images/pics/B12.1.webp"]}
         title="Brilliance"
         subtitle="South African Streetwear Inspired by Hip-Hop Culture"
         buttonText="Shop Now"
@@ -156,7 +159,7 @@ const Homepage = () => {
 
       <section className="container mx-auto px-4 md:px-6 py-16">
         <div className="grid grid-cols-12 gap-4 md:gap-8 items-start max-w-6xl mx-auto">
-          <div className="col-span-7 aspect-[4/5] overflow-hidden bg-stone">
+          <div className="col-span-7 aspect-4/5 overflow-hidden bg-stone">
             <OptimizedImage
               src="/images/pics/s4.webp"
               alt="Streetwear Style 1"
@@ -165,7 +168,7 @@ const Homepage = () => {
               height={500}
             />
           </div>
-          <div className="col-span-5 aspect-[4/5] overflow-hidden bg-stone mt-10 md:mt-24">
+          <div className="col-span-5 aspect-4/5 overflow-hidden bg-stone mt-10 md:mt-24">
             <OptimizedImage
               src="/images/pics/s3.webp"
               alt="Streetwear Style 2"

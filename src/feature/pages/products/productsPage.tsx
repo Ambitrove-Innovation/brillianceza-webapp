@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { ShoppingBag } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
-import { getProductById, getRandomProducts } from "../../data/product";
-import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
+import { useProducts } from "../../../hooks/useProducts";
+import { useCart } from "../../../context/CartContext";
+import { formatPrice, getActiveMarkdown, showNotification } from "../../../utils/helpers";
 import { handleBuyNow } from "../../../utils/whatsappService";
 
 const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { getById, getRecommendations } = useProducts();
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
@@ -22,7 +25,7 @@ const ProductDetailPage = () => {
       return;
     }
 
-    const product = getProductById(id);
+    const product = getById(id);
     if (!product) {
       navigate("/");
       return;
@@ -33,11 +36,12 @@ const ProductDetailPage = () => {
     setSelectedColor(product.colors[0] || "");
     setCurrentImageIndex(0);
 
-    const recommended = getRandomProducts(3, id);
+    const recommended = getRecommendations(3, id);
     setRecommendations(recommended);
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [id, navigate]);
+  }, [id, navigate, getById, getRecommendations]);
+
 
   if (!currentProduct) {
     return (
@@ -49,6 +53,14 @@ const ProductDetailPage = () => {
 
   const changeMainImage = (index: number) => {
     setCurrentImageIndex(index);
+  };
+
+  const { addToCart } = useCart();
+
+  const handleAddToCartClick = () => {
+    if (!currentProduct || currentProduct.isSoldOut) return;
+    addToCart(currentProduct, selectedSize, selectedColor, quantity);
+    showNotification(`Added ${quantity}x ${currentProduct.name} to your bag! 🛍️`, "success");
   };
 
   const handleBuyNowClick = () => {
@@ -190,11 +202,19 @@ const ProductDetailPage = () => {
                 Out of Stock
               </button>
             ) : (
-              <button
-                onClick={handleBuyNowClick}
-                className="w-full bg-ink hover:bg-brand text-white font-semibold text-sm uppercase tracking-[0.2em] py-5 rounded-none transition cursor-pointer">
-                Buy Now
-              </button>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={handleAddToCartClick}
+                  className="w-full bg-ink hover:bg-brand text-white font-semibold text-sm uppercase tracking-[0.2em] py-4 rounded-none transition cursor-pointer flex items-center justify-center gap-2 shadow-md">
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Add to Bag</span>
+                </button>
+                <button
+                  onClick={handleBuyNowClick}
+                  className="w-full border border-ink text-ink hover:bg-stone font-semibold text-xs uppercase tracking-[0.2em] py-3.5 rounded-none transition cursor-pointer flex items-center justify-center gap-2">
+                  <span>Direct WhatsApp Buy</span>
+                </button>
+              </div>
             )}
 
             <div className="mt-8 p-6 bg-stone text-ink">
@@ -232,7 +252,7 @@ const ProductDetailPage = () => {
                   />
                   {product.isSoldOut && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10 pointer-events-none rounded">
-                      <span className="bg-black text-white px-4 py-1 text-sm font-bold tracking-widest uppercase rotate-[-12deg] shadow-lg border border-white">
+                      <span className="bg-black text-white px-4 py-1 text-sm font-bold tracking-widest uppercase -rotate-12 shadow-lg border border-white">
                         Sold Out
                       </span>
                     </div>

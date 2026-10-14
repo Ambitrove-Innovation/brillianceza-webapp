@@ -1,12 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowUp } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
-import { getProductsByCategory } from "../../data/product";
+import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, scrollToTop, getActiveMarkdown } from "../../../utils/helpers";
 
 const ShopPage = () => {
-  const tops = getProductsByCategory("tops");
-  const bottoms = getProductsByCategory("bottoms");
+  const { tops, bottoms } = useProducts();
 
   const ProductCard = ({ product }: { product: Product }) => {
     const navigate = useNavigate();
@@ -15,7 +14,7 @@ const ShopPage = () => {
       <Link to={`/product/${product.id}`} className="block group">
         <div className="transition-colors duration-300 relative">
           {/* Image */}
-          <div className="w-full aspect-[4/5] overflow-hidden relative bg-stone">
+          <div className="w-full aspect-4/5 overflow-hidden relative bg-stone">
             <img
               src={`/images/pics/${product.images[0]}`}
               alt={product.name}
