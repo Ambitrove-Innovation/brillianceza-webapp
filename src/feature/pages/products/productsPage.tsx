@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { ShoppingBag } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
+import { ProductDetailSkeleton } from "../../../components/ui/ProductSkeleton";
+import SEO from "../../../components/ui/SEO";
 import { useProducts } from "../../../hooks/useProducts";
 import { useCart } from "../../../context/CartContext";
 import { formatPrice, getActiveMarkdown, showNotification } from "../../../utils/helpers";
@@ -45,8 +47,9 @@ const ProductDetailPage = () => {
 
   if (!currentProduct) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+      <div className="min-h-screen flex flex-col justify-between">
+        <ProductDetailSkeleton />
+        <Footer />
       </div>
     );
   }
@@ -75,6 +78,12 @@ const ProductDetailPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title={currentProduct.name}
+        description={currentProduct.description.slice(0, 160)}
+        ogImage={`/images/pics/${currentProduct.images[0]}`}
+        ogType="product"
+      />
       <section className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
@@ -240,7 +249,9 @@ const ProductDetailPage = () => {
             <Link
               key={product.id}
               to={`/product/${product.id}`}
-              className="block group">
+              className="block group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
+              aria-label={`View ${product.name} ${product.isSoldOut ? "(Sold Out)" : `- ${formatPrice(product.price)}`}`}
+            >
               <div className="cardImageBorder relative">
                 <div className="overflow-hidden rounded mb-4 relative">
                   <OptimizedImage
@@ -260,11 +271,11 @@ const ProductDetailPage = () => {
                 </div>
                 <p className="font-bold text-center mb-2">{product.name}</p>
                 {product.isSoldOut ? (
-                  <button className="bg-gray-400 text-white font-bold py-2 px-4 rounded w-full mx-auto block max-w-fit cursor-not-allowed" disabled onClick={(e) => e.preventDefault()}>
+                  <span className="bg-gray-400 text-white font-bold py-2 px-4 rounded w-full mx-auto block max-w-fit text-center text-xs tracking-wider">
                     SOLD OUT
-                  </button>
+                  </span>
                 ) : (
-                  <button className="purchaseBtn">
+                  <span className="purchaseBtn block text-center">
                     {getActiveMarkdown(product.markdown) ? (
                       <span>
                         <span className="line-through text-neutral-400 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
@@ -273,7 +284,7 @@ const ProductDetailPage = () => {
                     ) : (
                       formatPrice(product.price)
                     )}
-                  </button>
+                  </span>
                 )}
               </div>
             </Link>

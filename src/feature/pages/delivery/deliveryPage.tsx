@@ -1,9 +1,14 @@
 import { Truck, Package, Clock, MapPin, CheckCircle } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
+import SEO from "../../../components/ui/SEO";
 
 const DeliveryPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Delivery & Shipping Nationwide"
+        description="Fast, reliable streetwear shipping across South Africa. Free nationwide delivery on all Brilliance orders over R500."
+      />
       {/* Hero Section */}
       <section className="bg-linear-to-r from-gray-900 to-gray-800 text-white py-16">
         <div className="container mx-auto px-6 text-center">

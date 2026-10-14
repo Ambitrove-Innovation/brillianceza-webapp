@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import Footer from "../../../components/layout/Footer";
+import SEO from "../../../components/ui/SEO";
 
 const SocialBar = () => (
   <div className="text-center my-8">
@@ -142,6 +143,10 @@ const GalleryPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Visual Lookbook & Euphoria Gallery"
+        description="Discover The Brilliance Gallery - curated streetwear shoots, styling visuals, and culture moments from South Africa."
+      />
       {/* Gallery Section */}
       <section className="container mx-auto px-6 py-20">
         <div className="text-center mb-16 py-12">
