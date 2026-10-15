@@ -7,7 +7,11 @@ import { ProductDetailSkeleton } from "../../../components/ui/ProductSkeleton";
 import SEO from "../../../components/ui/SEO";
 import { useProducts } from "../../../hooks/useProducts";
 import { useCart } from "../../../context/CartContext";
-import { formatPrice, getActiveMarkdown, showNotification } from "../../../utils/helpers";
+import {
+  formatPrice,
+  getActiveMarkdown,
+  showNotification,
+} from "../../../utils/helpers";
 import { handleBuyNow } from "../../../utils/whatsappService";
 
 const ProductDetailPage = () => {
@@ -45,7 +49,6 @@ const ProductDetailPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id, navigate, getById, getRecommendations]);
 
-
   if (!currentProduct) {
     return (
       <div className="min-h-screen flex flex-col justify-between">
@@ -62,7 +65,10 @@ const ProductDetailPage = () => {
   const handleAddToCartClick = () => {
     if (!currentProduct || currentProduct.isSoldOut) return;
     addToCart(currentProduct, selectedSize, selectedColor, quantity);
-    showNotification(`Added ${quantity}x ${currentProduct.name} to your bag! 🛍️`, "success");
+    showNotification(
+      `Added ${quantity}x ${currentProduct.name} to your bag! 🛍️`,
+      "success",
+    );
   };
 
   const handleBuyNowClick = () => {
@@ -121,21 +127,35 @@ const ProductDetailPage = () => {
           <div>
             <div className="flex flex-col gap-2 mb-6">
               <div className="flex items-center gap-4">
-                <h1 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight leading-none">{currentProduct.name}</h1>
+                <h1 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight leading-none">
+                  {currentProduct.name}
+                </h1>
                 {currentProduct.isSoldOut && (
                   <span className="bg-red-600 text-white px-3 py-1 text-sm font-bold tracking-widest uppercase rounded">
                     Sold Out
                   </span>
                 )}
               </div>
-              
+
               <div className="text-2xl font-medium text-ink flex flex-wrap items-center gap-x-3 gap-y-2">
                 {getActiveMarkdown(currentProduct.markdown) ? (
                   <>
-                    <span className="line-through text-neutral-400 opacity-80">{formatPrice(currentProduct.price)}</span>
-                    <span>{formatPrice(getActiveMarkdown(currentProduct.markdown)!.salePrice)}</span>
+                    <span className="line-through text-neutral-400 opacity-80">
+                      {formatPrice(currentProduct.price)}
+                    </span>
+                    <span>
+                      {formatPrice(
+                        getActiveMarkdown(currentProduct.markdown)!.salePrice,
+                      )}
+                    </span>
                     <span className="bg-black text-white text-xs px-2 py-1 rounded uppercase tracking-wide whitespace-nowrap">
-                      Valid Until {new Date(getActiveMarkdown(currentProduct.markdown)!.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
+                      Valid Until{" "}
+                      {new Date(
+                        getActiveMarkdown(currentProduct.markdown)!.endDate,
+                      ).toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                      })}
                     </span>
                   </>
                 ) : (
@@ -220,7 +240,7 @@ const ProductDetailPage = () => {
                 <button
                   onClick={handleBuyNowClick}
                   className="w-full border border-ink text-ink hover:bg-stone font-semibold text-xs uppercase tracking-[0.2em] py-3.5 rounded-none transition cursor-pointer flex items-center justify-center gap-2">
-                  <span>Direct WhatsApp Buy</span>
+                  <span>Direct Pay</span>
                 </button>
               </div>
             )}
@@ -249,8 +269,7 @@ const ProductDetailPage = () => {
               key={product.id}
               to={`/product/${product.id}`}
               className="block group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
-              aria-label={`View ${product.name} ${product.isSoldOut ? "(Sold Out)" : `- ${formatPrice(product.price)}`}`}
-            >
+              aria-label={`View ${product.name} ${product.isSoldOut ? "(Sold Out)" : `- ${formatPrice(product.price)}`}`}>
               <div className="cardImageBorder relative">
                 <div className="overflow-hidden rounded mb-4 relative">
                   <OptimizedImage
@@ -277,8 +296,12 @@ const ProductDetailPage = () => {
                   <span className="purchaseBtn block text-center">
                     {getActiveMarkdown(product.markdown) ? (
                       <span>
-                        <span className="line-through text-neutral-400 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
-                        {formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}
+                        <span className="line-through text-neutral-400 mr-2 opacity-80 text-sm">
+                          {formatPrice(product.price)}
+                        </span>
+                        {formatPrice(
+                          getActiveMarkdown(product.markdown)!.salePrice,
+                        )}
                       </span>
                     ) : (
                       formatPrice(product.price)
