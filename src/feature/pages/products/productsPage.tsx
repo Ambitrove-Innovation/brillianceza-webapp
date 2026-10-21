@@ -12,7 +12,6 @@ import {
   getActiveMarkdown,
   showNotification,
 } from "../../../utils/helpers";
-import { handleBuyNow } from "../../../utils/whatsappService";
 
 const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -69,16 +68,6 @@ const ProductDetailPage = () => {
       `Added ${quantity}x ${currentProduct.name} to your bag! 🛍️`,
       "success",
     );
-  };
-
-  const handleBuyNowClick = () => {
-    handleBuyNow({
-      product: currentProduct,
-      size: selectedSize,
-      color: selectedColor,
-      quantity,
-      mainImageSrc: `/images/pics/${currentProduct.images[currentImageIndex]}`,
-    });
   };
 
   return (
@@ -230,19 +219,12 @@ const ProductDetailPage = () => {
                 Out of Stock
               </button>
             ) : (
-              <div className="flex flex-col gap-3">
-                <button
-                  onClick={handleAddToCartClick}
-                  className="w-full bg-ink hover:bg-brand text-white font-semibold text-sm uppercase tracking-[0.2em] py-4 rounded-none transition cursor-pointer flex items-center justify-center gap-2 shadow-md">
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>Add to Bag</span>
-                </button>
-                <button
-                  onClick={handleBuyNowClick}
-                  className="w-full border border-ink text-ink hover:bg-stone font-semibold text-xs uppercase tracking-[0.2em] py-3.5 rounded-none transition cursor-pointer flex items-center justify-center gap-2">
-                  <span>Direct Pay</span>
-                </button>
-              </div>
+              <button
+                onClick={handleAddToCartClick}
+                className="w-full bg-ink hover:bg-neutral-800 active:scale-[0.99] text-white font-semibold text-sm uppercase tracking-[0.2em] py-4.5 rounded-none transition cursor-pointer flex items-center justify-center gap-2.5 shadow-md group">
+                <ShoppingBag className="w-4 h-4 transition-transform group-hover:scale-110" />
+                <span>Add to Bag</span>
+              </button>
             )}
 
             <div className="mt-8 p-6 bg-stone text-ink">
