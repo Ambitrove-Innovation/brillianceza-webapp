@@ -15,7 +15,7 @@ const Homepage = () => {
     const link = document.createElement("link");
     link.rel = "preload";
     link.as = "image";
-    link.href = "/images/pics/l2.webp";
+    link.href = "/images/pics/hero-banner.jpg";
     document.head.appendChild(link);
 
     return () => {
@@ -100,8 +100,12 @@ const Homepage = () => {
         description="Brilliance ZA - Exclusive South African streetwear inspired by hip-hop culture. Shop our curated Euphoria collection, tees, and bottoms."
       />
       <HeroSection
-        imageSrc="/images/pics/l2.webp"
+        imageSrc="/images/pics/hero-banner.jpg"
         extraImages={["/images/pics/B12.1.webp"]}
+        imagePositions={{
+          "/images/pics/hero-banner.jpg": "center 48%",
+          "/images/pics/B12.1.webp": "center center",
+        }}
         title="Brilliance"
         subtitle="South African Streetwear Inspired by Hip-Hop Culture"
         buttonText="Shop Now"

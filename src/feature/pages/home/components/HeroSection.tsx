@@ -6,6 +6,8 @@ interface HeroSectionProps {
   imageSrc: string;
   /** Add more images here and the hero fades between all of them, in a loop. */
   extraImages?: string[];
+  /** Optional custom object-position per image (e.g. { "/images/pics/hero-banner.jpg": "center 28%" }) */
+  imagePositions?: Record<string, string>;
   title: string;
   subtitle: string;
   buttonText?: string;
@@ -20,6 +22,7 @@ const DRIFT_MS = 7000; // slow, subtle zoom on the visible image
 const HeroSection = ({
   imageSrc,
   extraImages = [],
+  imagePositions = {},
   title,
   subtitle,
   buttonText = "Shop Now",
@@ -37,7 +40,7 @@ const HeroSection = ({
   const [reduceMotion] = useState(
     () =>
       typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
 
   // lets the very first image start its slow zoom instead of appearing zoomed
@@ -58,7 +61,7 @@ const HeroSection = ({
     if (count < 2 || paused || tabHidden || reduceMotion) return;
     const id = window.setTimeout(
       () => setActive((i) => (i + 1) % count),
-      interval
+      interval,
     );
     return () => window.clearTimeout(id);
   }, [active, count, paused, tabHidden, reduceMotion, interval]);
@@ -72,7 +75,7 @@ const HeroSection = ({
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}>
-      <div className="relative h-[520px] md:h-[640px] lg:h-[720px]">
+      <div className="relative h-130 md:h-160 lg:h-180">
         {slides.map((src, i) => {
           const isActive = i === current;
           return (
@@ -87,6 +90,7 @@ const HeroSection = ({
               width={1920}
               height={600}
               style={{
+                objectPosition: imagePositions[src] || "center center",
                 transition: `opacity ${FADE_MS}ms ease-in-out, transform ${DRIFT_MS}ms ease-out`,
                 transform:
                   isActive && started && count > 1 && !reduceMotion
@@ -107,7 +111,8 @@ const HeroSection = ({
       {count > 1 && (
         <div className="absolute right-4 top-4 z-10 flex items-center gap-4 text-white md:right-6 md:top-6">
           <span className="font-mono text-[11px] tracking-[0.2em]">
-            {String(current + 1).padStart(2, "0")}/{String(count).padStart(2, "0")}
+            {String(current + 1).padStart(2, "0")}/
+            {String(count).padStart(2, "0")}
           </span>
           <div className="flex gap-1.5">
             {slides.map((src, i) => (
@@ -120,7 +125,9 @@ const HeroSection = ({
                 className="group py-2 cursor-pointer">
                 <span
                   className={`block h-px w-8 transition-colors duration-500 ${
-                    i === current ? "bg-white" : "bg-white/40 group-hover:bg-white/80"
+                    i === current
+                      ? "bg-white"
+                      : "bg-white/40 group-hover:bg-white/80"
                   }`}
                 />
               </button>
