@@ -26,3 +26,8 @@ dist-ssr
 #Environmental Variables
 .env
 brilliance-design-refresh.patch
+
+# Internal Developer & Agent Documentation
+docs/
+.agents/
+
