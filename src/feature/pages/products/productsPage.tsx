@@ -6,7 +6,7 @@ import OptimizedImage from "../../../components/ui/OptimizedImage";
 import { ProductDetailSkeleton } from "../../../components/ui/ProductSkeleton";
 import SEO from "../../../components/ui/SEO";
 import { useProducts } from "../../../hooks/useProducts";
-import { useCart } from "../../../context/CartContext";
+import { useCart } from "../../../hooks/useCart";
 import {
   formatPrice,
   getActiveMarkdown,

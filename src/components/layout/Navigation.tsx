@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ShoppingBag } from "lucide-react";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

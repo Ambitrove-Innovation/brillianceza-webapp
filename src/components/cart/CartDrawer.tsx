@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { X, Plus, Minus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 import { formatPrice, getActiveMarkdown } from "../../utils/helpers";
 import { handleCartWhatsAppCheckout } from "../../utils/whatsappService";
-
-const FREE_DELIVERY_THRESHOLD = 500;
+import { FREE_DELIVERY_THRESHOLD } from "../../utils/constants";
 
 export const CartDrawer = () => {
   const {
@@ -17,6 +16,7 @@ export const CartDrawer = () => {
     clearCart,
     cartTotal,
     cartCount,
+    hasSoldOutItems,
   } = useCart();
 
   // Close on Escape key press
@@ -154,23 +154,35 @@ export const CartDrawer = () => {
                   <Link
                     to={`/product/${item.product.id}`}
                     onClick={closeCart}
-                    className="w-20 h-24 bg-stone rounded overflow-hidden shrink-0 block">
+                    className="w-20 h-24 bg-stone rounded overflow-hidden shrink-0 block relative">
                     <img
                       src={`/images/pics/${item.product.images[0]}`}
                       alt={item.product.name}
-                      className="w-full h-full object-cover"
+                      className={`w-full h-full object-cover ${item.product.isSoldOut ? "grayscale opacity-50" : ""}`}
                     />
+                    {item.product.isSoldOut && (
+                      <span className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-[9px] font-bold uppercase tracking-wider">
+                        Sold Out
+                      </span>
+                    )}
                   </Link>
 
                   {/* Details */}
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start gap-2">
-                      <Link
-                        to={`/product/${item.product.id}`}
-                        onClick={closeCart}
-                        className="text-xs uppercase tracking-wider font-bold text-ink truncate hover:underline block">
-                        {item.product.name}
-                      </Link>
+                      <div className="truncate">
+                        <Link
+                          to={`/product/${item.product.id}`}
+                          onClick={closeCart}
+                          className="text-xs uppercase tracking-wider font-bold text-ink truncate hover:underline block">
+                          {item.product.name}
+                        </Link>
+                        {item.product.isSoldOut && (
+                          <span className="inline-block mt-0.5 text-[10px] font-bold uppercase tracking-wider text-red-600 bg-red-50 border border-red-200 px-1.5 py-0.5 rounded">
+                            Sold Out
+                          </span>
+                        )}
+                      </div>
                       <button
                         onClick={() => removeFromCart(item.id)}
                         aria-label={`Remove ${item.product.name}`}
@@ -256,10 +268,21 @@ export const CartDrawer = () => {
               </div>
             </div>
 
+            {hasSoldOutItems && (
+              <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded text-center font-medium">
+                Some items in your bag are sold out. Please remove them to proceed with checkout.
+              </div>
+            )}
+
             <button
               onClick={() => handleCartWhatsAppCheckout(cartItems, cartTotal)}
-              className="w-full bg-ink hover:bg-brand text-white font-semibold text-xs uppercase tracking-[0.2em] py-4 transition flex items-center justify-center gap-2 cursor-pointer shadow-lg hover:shadow-xl">
-              <span>Checkout</span>
+              disabled={hasSoldOutItems}
+              className={`w-full font-semibold text-xs uppercase tracking-[0.2em] py-4 transition flex items-center justify-center gap-2 shadow-lg ${
+                hasSoldOutItems
+                  ? "bg-neutral-300 text-neutral-500 cursor-not-allowed"
+                  : "bg-ink hover:bg-neutral-800 text-white cursor-pointer hover:shadow-xl"
+              }`}>
+              <span>{hasSoldOutItems ? "Remove Sold-Out Items" : "Checkout"}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 

@@ -107,34 +107,6 @@ const HeroSection = ({
 
       <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/10 to-black/20" />
 
-      {/* Counter + jump lines (only when there is more than one image) */}
-      {count > 1 && (
-        <div className="absolute right-4 top-4 z-10 flex items-center gap-4 text-white md:right-6 md:top-6">
-          <span className="font-mono text-[11px] tracking-[0.2em]">
-            {String(current + 1).padStart(2, "0")}/
-            {String(count).padStart(2, "0")}
-          </span>
-          <div className="flex gap-1.5">
-            {slides.map((src, i) => (
-              <button
-                key={src}
-                type="button"
-                aria-label={`Show image ${i + 1}`}
-                aria-current={i === current}
-                onClick={() => setActive(i)}
-                className="group py-2 cursor-pointer">
-                <span
-                  className={`block h-px w-8 transition-colors duration-500 ${
-                    i === current
-                      ? "bg-white"
-                      : "bg-white/40 group-hover:bg-white/80"
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       <div className="absolute inset-x-0 bottom-0">
         <div className="container mx-auto px-4 md:px-6 pb-10 md:pb-16 text-white">
