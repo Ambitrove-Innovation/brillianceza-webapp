@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import {
   Mail,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import Footer from "../../../components/layout/Footer";
+import SEO from "../../../components/ui/SEO";
 import { sendContactMessage } from "../../../utils/whatsappService";
 import { showNotification } from "../../../utils/helpers";
 
@@ -96,6 +96,10 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Contact Us & Customer Support"
+        description="Connect with Brilliance ZA - Inquiries about orders, sizing, streetwear collections, or styling collaborations."
+      />
       {/* Split Section (Black & White) */}
       <section className="flex flex-col md:flex-row min-h-screen">
         {/* Left: Info / Black Side */}
@@ -166,10 +170,12 @@ const ContactPage = () => {
               Send Us a Message
             </h2>
 
-            <form onSubmit={handleEmailSubmit} className="space-y-5">
+            <form onSubmit={handleEmailSubmit} className="space-y-5" aria-label="Contact Form">
               <input
                 type="text"
                 name="name"
+                id="contact-name"
+                aria-label="Your Name"
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
@@ -180,6 +186,8 @@ const ContactPage = () => {
               <input
                 type="email"
                 name="email"
+                id="contact-email"
+                aria-label="Your Email"
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
@@ -190,6 +198,8 @@ const ContactPage = () => {
               <input
                 type="tel"
                 name="phone"
+                id="contact-phone"
+                aria-label="Your Phone (optional)"
                 placeholder="Your Phone (optional)"
                 value={formData.phone}
                 onChange={handleChange}
@@ -199,6 +209,8 @@ const ContactPage = () => {
               <input
                 type="text"
                 name="subject"
+                id="contact-subject"
+                aria-label="Subject"
                 placeholder="Subject"
                 value={formData.subject}
                 onChange={handleChange}
@@ -207,6 +219,8 @@ const ContactPage = () => {
 
               <textarea
                 name="message"
+                id="contact-message"
+                aria-label="Your Message"
                 placeholder="Your Message"
                 value={formData.message}
                 onChange={handleChange}

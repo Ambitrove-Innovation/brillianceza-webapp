@@ -3,15 +3,21 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { ShoppingBag } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
+import { ProductDetailSkeleton } from "../../../components/ui/ProductSkeleton";
+import SEO from "../../../components/ui/SEO";
 import { useProducts } from "../../../hooks/useProducts";
-import { useCart } from "../../../context/CartContext";
-import { formatPrice, getActiveMarkdown, showNotification } from "../../../utils/helpers";
-import { handleBuyNow } from "../../../utils/whatsappService";
+import { useCart } from "../../../hooks/useCart";
+import {
+  formatPrice,
+  getActiveMarkdown,
+  showNotification,
+} from "../../../utils/helpers";
 
 const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { getById, getRecommendations } = useProducts();
+  const { addToCart } = useCart();
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
@@ -42,11 +48,11 @@ const ProductDetailPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id, navigate, getById, getRecommendations]);
 
-
   if (!currentProduct) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+      <div className="min-h-screen flex flex-col justify-between">
+        <ProductDetailSkeleton />
+        <Footer />
       </div>
     );
   }
@@ -55,26 +61,23 @@ const ProductDetailPage = () => {
     setCurrentImageIndex(index);
   };
 
-  const { addToCart } = useCart();
-
   const handleAddToCartClick = () => {
     if (!currentProduct || currentProduct.isSoldOut) return;
     addToCart(currentProduct, selectedSize, selectedColor, quantity);
-    showNotification(`Added ${quantity}x ${currentProduct.name} to your bag! 🛍️`, "success");
-  };
-
-  const handleBuyNowClick = () => {
-    handleBuyNow({
-      product: currentProduct,
-      size: selectedSize,
-      color: selectedColor,
-      quantity,
-      mainImageSrc: `/images/pics/${currentProduct.images[currentImageIndex]}`,
-    });
+    showNotification(
+      `Added ${quantity}x ${currentProduct.name} to your bag! 🛍️`,
+      "success",
+    );
   };
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title={currentProduct.name}
+        description={currentProduct.description.slice(0, 160)}
+        ogImage={`/images/pics/${currentProduct.images[0]}`}
+        ogType="product"
+      />
       <section className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
@@ -113,21 +116,35 @@ const ProductDetailPage = () => {
           <div>
             <div className="flex flex-col gap-2 mb-6">
               <div className="flex items-center gap-4">
-                <h1 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight leading-none">{currentProduct.name}</h1>
+                <h1 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight leading-none">
+                  {currentProduct.name}
+                </h1>
                 {currentProduct.isSoldOut && (
                   <span className="bg-red-600 text-white px-3 py-1 text-sm font-bold tracking-widest uppercase rounded">
                     Sold Out
                   </span>
                 )}
               </div>
-              
+
               <div className="text-2xl font-medium text-ink flex flex-wrap items-center gap-x-3 gap-y-2">
                 {getActiveMarkdown(currentProduct.markdown) ? (
                   <>
-                    <span className="line-through text-neutral-400 opacity-80">{formatPrice(currentProduct.price)}</span>
-                    <span>{formatPrice(getActiveMarkdown(currentProduct.markdown)!.salePrice)}</span>
+                    <span className="line-through text-neutral-400 opacity-80">
+                      {formatPrice(currentProduct.price)}
+                    </span>
+                    <span>
+                      {formatPrice(
+                        getActiveMarkdown(currentProduct.markdown)!.salePrice,
+                      )}
+                    </span>
                     <span className="bg-black text-white text-xs px-2 py-1 rounded uppercase tracking-wide whitespace-nowrap">
-                      Valid Until {new Date(getActiveMarkdown(currentProduct.markdown)!.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
+                      Valid Until{" "}
+                      {new Date(
+                        getActiveMarkdown(currentProduct.markdown)!.endDate,
+                      ).toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                      })}
                     </span>
                   </>
                 ) : (
@@ -202,19 +219,12 @@ const ProductDetailPage = () => {
                 Out of Stock
               </button>
             ) : (
-              <div className="flex flex-col gap-3">
-                <button
-                  onClick={handleAddToCartClick}
-                  className="w-full bg-ink hover:bg-brand text-white font-semibold text-sm uppercase tracking-[0.2em] py-4 rounded-none transition cursor-pointer flex items-center justify-center gap-2 shadow-md">
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>Add to Bag</span>
-                </button>
-                <button
-                  onClick={handleBuyNowClick}
-                  className="w-full border border-ink text-ink hover:bg-stone font-semibold text-xs uppercase tracking-[0.2em] py-3.5 rounded-none transition cursor-pointer flex items-center justify-center gap-2">
-                  <span>Direct WhatsApp Buy</span>
-                </button>
-              </div>
+              <button
+                onClick={handleAddToCartClick}
+                className="w-full bg-ink hover:bg-neutral-800 active:scale-[0.99] text-white font-semibold text-sm uppercase tracking-[0.2em] py-4.5 rounded-none transition cursor-pointer flex items-center justify-center gap-2.5 shadow-md group">
+                <ShoppingBag className="w-4 h-4 transition-transform group-hover:scale-110" />
+                <span>Add to Bag</span>
+              </button>
             )}
 
             <div className="mt-8 p-6 bg-stone text-ink">
@@ -240,7 +250,8 @@ const ProductDetailPage = () => {
             <Link
               key={product.id}
               to={`/product/${product.id}`}
-              className="block group">
+              className="block group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
+              aria-label={`View ${product.name} ${product.isSoldOut ? "(Sold Out)" : `- ${formatPrice(product.price)}`}`}>
               <div className="cardImageBorder relative">
                 <div className="overflow-hidden rounded mb-4 relative">
                   <OptimizedImage
@@ -260,20 +271,24 @@ const ProductDetailPage = () => {
                 </div>
                 <p className="font-bold text-center mb-2">{product.name}</p>
                 {product.isSoldOut ? (
-                  <button className="bg-gray-400 text-white font-bold py-2 px-4 rounded w-full mx-auto block max-w-fit cursor-not-allowed" disabled onClick={(e) => e.preventDefault()}>
+                  <span className="bg-gray-400 text-white font-bold py-2 px-4 rounded w-full mx-auto block max-w-fit text-center text-xs tracking-wider">
                     SOLD OUT
-                  </button>
+                  </span>
                 ) : (
-                  <button className="purchaseBtn">
+                  <span className="purchaseBtn block text-center">
                     {getActiveMarkdown(product.markdown) ? (
                       <span>
-                        <span className="line-through text-neutral-400 mr-2 opacity-80 text-sm">{formatPrice(product.price)}</span>
-                        {formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}
+                        <span className="line-through text-neutral-400 mr-2 opacity-80 text-sm">
+                          {formatPrice(product.price)}
+                        </span>
+                        {formatPrice(
+                          getActiveMarkdown(product.markdown)!.salePrice,
+                        )}
                       </span>
                     ) : (
                       formatPrice(product.price)
                     )}
-                  </button>
+                  </span>
                 )}
               </div>
             </Link>

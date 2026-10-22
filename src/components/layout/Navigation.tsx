@@ -1,9 +1,7 @@
-"use client";
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ShoppingBag } from "lucide-react";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,10 +23,27 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-full backdrop-blur-md bg-cream/85 z-40 border-b border-black/5">
+      {/* Skip to Content for Keyboard and Screen Reader Accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-ink focus:text-white focus:px-4 focus:py-2 focus:outline-none focus:ring-2 focus:ring-white text-xs uppercase tracking-widest font-semibold shadow-xl"
+      >
+        Skip to main content
+      </a>
+
+      <nav
+        className="fixed top-0 w-full backdrop-blur-md bg-cream/85 z-40 border-b border-black/5"
+        role="navigation"
+        aria-label="Main Navigation"
+      >
         <div className="container mx-auto px-6 py-3 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" onClick={closeMenu}>
+          <Link
+            to="/"
+            onClick={closeMenu}
+            aria-label="Brilliance ZA Homepage"
+            className="focus-visible:ring-2 focus-visible:ring-ink focus-visible:outline-none rounded"
+          >
             <img
               src="/images/pics/Brilliancelogo.webp"
               alt="Brilliance Logo"
@@ -44,7 +59,7 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative pb-1 transition-colors duration-300 ${
+                className={`relative pb-1 transition-colors duration-300 focus-visible:ring-1 focus-visible:ring-ink focus-visible:outline-none ${
                   isActive(link.path)
                     ? "text-black after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-ink"
                     : "hover:text-black text-gray-600"
@@ -57,7 +72,7 @@ const Navigation = () => {
             <button
               onClick={toggleCart}
               aria-label={`Shopping Bag (${cartCount} items)`}
-              className="relative p-1 text-ink hover:text-brand transition cursor-pointer"
+              className="relative p-1 text-ink hover:text-brand transition cursor-pointer focus-visible:ring-2 focus-visible:ring-ink focus-visible:outline-none rounded"
             >
               <ShoppingBag className="w-5 h-5" />
               {cartCount > 0 && (
@@ -73,7 +88,7 @@ const Navigation = () => {
             <button
               onClick={toggleCart}
               aria-label={`Shopping Bag (${cartCount} items)`}
-              className="relative p-2 text-ink hover:text-brand transition cursor-pointer"
+              className="relative p-2 text-ink hover:text-brand transition cursor-pointer focus-visible:ring-2 focus-visible:ring-ink focus-visible:outline-none rounded"
             >
               <ShoppingBag className="w-6 h-6" />
               {cartCount > 0 && (
@@ -85,8 +100,10 @@ const Navigation = () => {
 
             <button
               onClick={toggleMenu}
-              className="p-2 focus:outline-none text-gray-900"
-              aria-label="Toggle menu"
+              className="p-2 focus:outline-none text-gray-900 focus-visible:ring-2 focus-visible:ring-ink rounded"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-nav-menu"
             >
               {isMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -99,13 +116,18 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+          <div
+            id="mobile-nav-menu"
+            role="region"
+            aria-label="Mobile Navigation Menu"
+            className="md:hidden bg-white border-t border-gray-100 shadow-lg"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={closeMenu}
-                className={`block px-6 py-3 text-sm uppercase tracking-wide font-medium transition ${
+                className={`block px-6 py-3 text-sm uppercase tracking-wide font-medium transition focus-visible:ring-2 focus-visible:ring-ink focus-visible:outline-none ${
                   isActive(link.path)
                     ? "bg-ink text-white"
                     : "hover:bg-gray-50 text-gray-700"

@@ -3,10 +3,11 @@ import {
   calculatePromoPrice,
   getPromoWhatsAppMessage,
 } from "./promoService";
-import { getActiveMarkdown } from "./helpers";
+import { getActiveMarkdown, showNotification } from "./helpers";
+import { FREE_DELIVERY_THRESHOLD } from "./constants";
 import type { CartItem } from "../context/CartContext";
 
-const WHATSAPP_NUMBER = "+27686311388";
+export const WHATSAPP_NUMBER = "+27686311388";
 
 interface BuyNowParams {
   product: Product;
@@ -119,7 +120,18 @@ export const handleCartWhatsAppCheckout = (
 ): void => {
   if (cartItems.length === 0) return;
 
-  const isFreeDelivery = cartTotal >= 500;
+  // Block checkout if any item in the bag is currently sold out (WARN-09)
+  const soldOutItems = cartItems.filter((item) => item.product.isSoldOut);
+  if (soldOutItems.length > 0) {
+    const names = soldOutItems.map((i) => i.product.name).join(", ");
+    showNotification(
+      `Please remove sold-out items from your bag before checkout: ${names}`,
+      "error"
+    );
+    return;
+  }
+
+  const isFreeDelivery = cartTotal >= FREE_DELIVERY_THRESHOLD;
   
   let message = "*Brilliance Clothing — Bag Checkout Request* 🛍️✨\n\n";
   message += "*Items Ordered:*\n";
@@ -140,7 +152,7 @@ export const handleCartWhatsAppCheckout = (
   message += `\n*Order Subtotal:* R${cartTotal.toFixed(2)}\n`;
   message += `*Delivery Benefit:* ${
     isFreeDelivery
-      ? "FREE Standard Delivery unlocked! (Order over R500) 🚚🎉"
+      ? `FREE Standard Delivery unlocked! (Order over R${FREE_DELIVERY_THRESHOLD}) 🚚🎉`
       : "Standard courier delivery rate applies 📦"
   }\n\n`;
   message += "Please confirm stock availability and send payment / banking instructions to finalize my order. Thank you! 🙏";

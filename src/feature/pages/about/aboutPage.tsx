@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Footer from "../../../components/layout/Footer";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
+import SEO from "../../../components/ui/SEO";
 import { getFeaturedProducts } from "../../data/product";
 import { formatPrice } from "../../../utils/helpers";
 
@@ -13,6 +14,10 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Our Story & Culture"
+        description="Learn about Brilliance Clothing - Born from South African hip-hop and streetwear culture, delivering premium high-fashion urban wear with purpose."
+      />
       <section className="container mx-auto px-4 py-8">
         <OptimizedImage
           src="/images/pics/B90.webp"
@@ -79,7 +84,9 @@ const AboutPage = () => {
             <Link
               key={product.id}
               to={`/product/${product.id}`}
-              className="block">
+              className="block group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
+              aria-label={`View ${product.name} - ${formatPrice(product.price)}`}
+            >
               <div className="bg-white border rounded-sm p-4 hover:shadow-lg transition">
                 <OptimizedImage
                   src={`/images/pics/${product.images[0]}`}
@@ -89,9 +96,9 @@ const AboutPage = () => {
                   height={400}
                 />
                 <p className="font-bold text-center mb-2">{product.name}</p>
-                <button className="w-full bg-ink text-white py-2 rounded-full hover:bg-brand transition">
+                <span className="block text-center w-full bg-ink text-white py-2 rounded-full hover:bg-brand transition text-sm font-semibold">
                   {formatPrice(product.price)}
-                </button>
+                </span>
               </div>
             </Link>
           ))}
