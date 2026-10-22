@@ -4,15 +4,18 @@ import { Instagram } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
-import { getFeaturedProducts } from "../../data/product";
+import SEO from "../../../components/ui/SEO";
+import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 
 const Homepage = () => {
+  const { getFeatured } = useProducts();
+
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "preload";
     link.as = "image";
-    link.href = "/images/pics/l2.webp";
+    link.href = "/images/pics/hero-banner.jpg";
     document.head.appendChild(link);
 
     return () => {
@@ -20,22 +23,21 @@ const Homepage = () => {
     };
   }, []);
 
-  const brillianceCollection = getFeaturedProducts([
+  const brillianceCollection = getFeatured([
     "reflector-tshirt",
     "gum-elastic-wte-tshirt",
     "7-ways-brilliance",
     "more-fashion-sweater",
-    "gum-elastic-wte-tshirt",
   ]);
 
-  const euphoriaCollection = getFeaturedProducts([
+  const euphoriaCollection = getFeatured([
     "og-wte-tshirt-pink",
     "wte-5p",
     "wte-hoodie",
     "uk-motion-wear-navy",
   ]);
 
-  const bottomsCollection = getFeaturedProducts([
+  const bottomsCollection = getFeatured([
     "reflector-cargo-pants",
     "purple-strip-short",
     "white-cargo-pants",
@@ -43,11 +45,15 @@ const Homepage = () => {
   ]);
 
   const ProductCard = ({ product }: { product: Product }) => (
-    <Link to={`/product/${product.id}`} className="block group">
+    <Link
+      to={`/product/${product.id}`}
+      className="block group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink"
+      aria-label={`View ${product.name} ${product.isSoldOut ? "(Sold Out)" : `- ${formatPrice(product.price)}`}`}
+    >
       <div
         key={product.id}
         className="group transition-colors duration-300 relative">
-        <div className="w-full aspect-[4/5] overflow-hidden relative bg-stone">
+        <div className="w-full aspect-4/5 overflow-hidden relative bg-stone">
           <OptimizedImage
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
@@ -67,11 +73,11 @@ const Homepage = () => {
         <div className="pt-4 flex flex-col items-start gap-1">
           <p className="text-xs md:text-sm uppercase tracking-[0.12em] text-ink w-full truncate">{product.name}</p>
           {product.isSoldOut ? (
-            <button className="text-neutral-400 cursor-not-allowed p-0 uppercase tracking-[0.12em] text-xs" disabled>
+            <span className="text-neutral-400 p-0 uppercase tracking-[0.12em] text-xs">
               Sold Out
-            </button>
+            </span>
           ) : (
-            <button className="text-ink text-sm md:text-base font-medium p-0 cursor-pointer hover:underline underline-offset-4 transition max-w-full text-left">
+            <span className="text-ink text-sm md:text-base font-medium p-0 hover:underline underline-offset-4 transition max-w-full text-left">
               {getActiveMarkdown(product.markdown) ? (
                 <span className="flex flex-wrap justify-center items-center gap-x-1 sm:gap-x-2">
                   <span className="line-through text-neutral-400 text-xs sm:text-sm">{formatPrice(product.price)}</span>
@@ -80,7 +86,7 @@ const Homepage = () => {
               ) : (
                 <span>{formatPrice(product.price)}</span>
               )}
-            </button>
+            </span>
           )}
         </div>
       </div>
@@ -89,8 +95,17 @@ const Homepage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="South African Streetwear & Hip-Hop Culture"
+        description="Brilliance ZA - Exclusive South African streetwear inspired by hip-hop culture. Shop our curated Euphoria collection, tees, and bottoms."
+      />
       <HeroSection
-        imageSrc="/images/pics/l2.webp"
+        imageSrc="/images/pics/hero-banner.jpg"
+        extraImages={["/images/pics/B12.1.webp"]}
+        imagePositions={{
+          "/images/pics/hero-banner.jpg": "center 48%",
+          "/images/pics/B12.1.webp": "center center",
+        }}
         title="Brilliance"
         subtitle="South African Streetwear Inspired by Hip-Hop Culture"
         buttonText="Shop Now"
@@ -156,7 +171,7 @@ const Homepage = () => {
 
       <section className="container mx-auto px-4 md:px-6 py-16">
         <div className="grid grid-cols-12 gap-4 md:gap-8 items-start max-w-6xl mx-auto">
-          <div className="col-span-7 aspect-[4/5] overflow-hidden bg-stone">
+          <div className="col-span-7 aspect-4/5 overflow-hidden bg-stone">
             <OptimizedImage
               src="/images/pics/s4.webp"
               alt="Streetwear Style 1"
@@ -165,7 +180,7 @@ const Homepage = () => {
               height={500}
             />
           </div>
-          <div className="col-span-5 aspect-[4/5] overflow-hidden bg-stone mt-10 md:mt-24">
+          <div className="col-span-5 aspect-4/5 overflow-hidden bg-stone mt-10 md:mt-24">
             <OptimizedImage
               src="/images/pics/s3.webp"
               alt="Streetwear Style 2"

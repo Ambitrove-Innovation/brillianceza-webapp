@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import {
   Mail,
@@ -10,6 +9,7 @@ import {
 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import Footer from "../../../components/layout/Footer";
+import SEO from "../../../components/ui/SEO";
 import { sendContactMessage } from "../../../utils/whatsappService";
 import { showNotification } from "../../../utils/helpers";
 
@@ -23,6 +23,7 @@ const ContactPage = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleChange = (
@@ -46,9 +47,7 @@ const ContactPage = () => {
     const templateID = import.meta.env.VITE_TEMPLATE_ID!;
     const publicKey = import.meta.env.VITE_PUBLIC_KEY!;
 
-    console.log(serviceID);
-    console.log(templateID);
-    console.log(publicKey);
+    setSubmitError(false);
 
     try {
       if (!isValidEmail(formData.email)) {
@@ -83,7 +82,9 @@ const ContactPage = () => {
         });
       }, 3000);
     } catch (err) {
-      console.log("Error: " + JSON.stringify(err));
+      console.error("EmailJS send failed:", err);
+      setSubmitError(true);
+      showNotification("Failed to send message. Please try WhatsApp or email us directly.", "error");
       setLoading(false);
     }
   };
@@ -95,6 +96,10 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Contact Us & Customer Support"
+        description="Connect with Brilliance ZA - Inquiries about orders, sizing, streetwear collections, or styling collaborations."
+      />
       {/* Split Section (Black & White) */}
       <section className="flex flex-col md:flex-row min-h-screen">
         {/* Left: Info / Black Side */}
@@ -165,10 +170,12 @@ const ContactPage = () => {
               Send Us a Message
             </h2>
 
-            <form onSubmit={handleEmailSubmit} className="space-y-5">
+            <form onSubmit={handleEmailSubmit} className="space-y-5" aria-label="Contact Form">
               <input
                 type="text"
                 name="name"
+                id="contact-name"
+                aria-label="Your Name"
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
@@ -179,6 +186,8 @@ const ContactPage = () => {
               <input
                 type="email"
                 name="email"
+                id="contact-email"
+                aria-label="Your Email"
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
@@ -189,6 +198,8 @@ const ContactPage = () => {
               <input
                 type="tel"
                 name="phone"
+                id="contact-phone"
+                aria-label="Your Phone (optional)"
                 placeholder="Your Phone (optional)"
                 value={formData.phone}
                 onChange={handleChange}
@@ -198,6 +209,8 @@ const ContactPage = () => {
               <input
                 type="text"
                 name="subject"
+                id="contact-subject"
+                aria-label="Subject"
                 placeholder="Subject"
                 value={formData.subject}
                 onChange={handleChange}
@@ -206,6 +219,8 @@ const ContactPage = () => {
 
               <textarea
                 name="message"
+                id="contact-message"
+                aria-label="Your Message"
                 placeholder="Your Message"
                 value={formData.message}
                 onChange={handleChange}
@@ -224,6 +239,8 @@ const ContactPage = () => {
                         ? "bg-yellow-400"
                         : submitted
                         ? "bg-green-600"
+                        : submitError
+                        ? "bg-red-600 hover:bg-red-700"
                         : "bg-black hover:bg-gray-900"
                     }`}>
                   {loading ? (
@@ -234,6 +251,8 @@ const ContactPage = () => {
                     <>
                       <CheckCircle className="w-5 h-5" /> Sent!
                     </>
+                  ) : submitError ? (
+                    <>Failed — Try Again</>
                   ) : (
                     <>
                       <Send className="w-5 h-5" /> Send Email

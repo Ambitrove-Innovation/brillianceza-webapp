@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Archivo:wght@700;800;900&display=swap");
 @import "tailwindcss";
 
+/* ===== WARN-02 FIX: Safelist dynamic classes =====
+   showNotification() in helpers.ts injects these Tailwind colour classes via
+   document.createElement at runtime. Tailwind v4's scanner can't see them,
+   so we force-include them here to prevent purging in production builds. */
+@source inline("bg-green-500 bg-red-500 bg-blue-500 bg-yellow-500");
+
+
 @theme {
   /* Core palette: black / white, with warm greys instead of an accent colour */
   --color-brand: #2e2b28;

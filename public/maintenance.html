@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Back soon | Brilliance</title>
+    <!--
+      Standalone holding page for the Netlify 503 method (see MAINTENANCE.md).
+      Everything is inline on purpose: when the forced rule is on, Netlify serves
+      THIS file for every URL, including images and scripts, so it must not
+      depend on any other local file. To change the time or wording, edit here.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@900&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet" />
+    <style>
+      :root { --ink:#111; --cream:#f5f2ed; }
+      * { box-sizing:border-box; margin:0; }
+      body { min-height:100vh; display:flex; flex-direction:column; background:var(--cream); color:var(--ink);
+             font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
+      .display { font-family:"Archivo","Arial Black","Helvetica Neue",Arial,sans-serif; font-weight:900;
+                 text-transform:uppercase; letter-spacing:-0.02em; }
+      header, footer { padding:20px 24px; display:flex; justify-content:space-between; align-items:center; }
+      header .brand { font-size:20px; }
+      .tag, .eyebrow { font-size:11px; text-transform:uppercase; letter-spacing:.25em; color:#737373; }
+      main { flex:1; display:flex; flex-direction:column; justify-content:center; padding:40px 24px; }
+      .wrap { width:100%; max-width:1152px; margin:0 auto; }
+      .eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+      .dot { position:relative; width:8px; height:8px; border-radius:50%; background:var(--ink); }
+      .dot::after { content:""; position:absolute; inset:0; border-radius:50%; background:var(--ink);
+                    animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite; }
+      @keyframes ping { 0% { transform:scale(1); opacity:.4 } 80%,100% { transform:scale(2.6); opacity:0 } }
+      h1 { font-size:min(22vw,14rem); line-height:.85; }
+      p.lead { margin-top:32px; max-width:28rem; font-size:18px; line-height:1.6; color:#525252; }
+      p.back { margin-top:16px; font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.2em; }
+      .actions { margin-top:40px; display:flex; flex-wrap:wrap; align-items:center; gap:16px 32px; }
+      .btn { display:inline-block; padding:14px 32px; background:var(--ink); color:#fff; border:1px solid var(--ink);
+             font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.2em; text-decoration:none;
+             transition:background .3s, color .3s; }
+      .btn:hover { background:var(--cream); color:var(--ink); }
+      .links a { color:var(--ink); margin-right:24px; font-size:12px; font-weight:600; text-transform:uppercase;
+                 letter-spacing:.2em; text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px;
+                 transition:border-color .3s; }
+      .links a:hover { border-color:var(--ink); }
+      footer { font-size:12px; color:#737373; }
+      @media (prefers-reduced-motion: reduce) { .dot::after { animation:none } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="brand display">Brilliance</span>
+      <span class="tag">Scheduled update</span>
+    </header>
+    <main>
+      <div class="wrap">
+        <p class="eyebrow"><span class="dot"></span>Update in progress</p>
+        <h1 class="display">Back<br />soon.</h1>
+        <p class="lead">
+          We're giving the site a quick update. Your style will be right here when we're done.
+        </p>
+        <!-- Optional: remove the comment markers below and set your time
+        <p class="back">Expected back by 3:00 PM</p>
+        -->
+        <div class="actions">
+          <a class="btn" href="https://wa.me/27686311388" target="_blank" rel="noopener noreferrer">Order on WhatsApp →</a>
+          <div class="links">
+            <a href="https://www.instagram.com/brilliance_za" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@brilliance_za" target="_blank" rel="noopener noreferrer">TikTok</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>© Brilliance Clothing. All rights reserved.</footer>
+  </body>
+</html>
