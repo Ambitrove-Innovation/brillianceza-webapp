@@ -45,6 +45,6 @@ export const CAMPAIGN = {
   // ── Dates (ISO 8601, include timezone offset) ──────────────
   /** Banner switches from countdown → live at this moment */
   dropDate: new Date("2026-11-27T00:00:00+02:00"),
-  /** Banner disappears entirely after this moment */
-  endDate: new Date("2026-11-28T00:00:00+02:00"),
+  /** Banner disappears entirely after this moment (runs through Cyber Monday Nov 30 midnight) */
+  endDate: new Date("2026-12-01T00:00:00+02:00"),
 } as const;
