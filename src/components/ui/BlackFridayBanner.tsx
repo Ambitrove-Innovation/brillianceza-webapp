@@ -68,9 +68,11 @@ export default function BlackFridayBanner() {
       ) : (
         /* ── COUNTDOWN STATE ── */
         <div className="flex items-center justify-center gap-4 flex-wrap">
-          <span className="text-xs uppercase tracking-[0.2em] font-semibold text-white/60 hidden sm:inline">
-            {CAMPAIGN.label}
-          </span>
+          {CAMPAIGN.label && (
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-white/60 hidden sm:inline">
+              {CAMPAIGN.label}
+            </span>
+          )}
 
           <span className="text-xs sm:text-sm font-medium tracking-wide text-white/90">
             {CAMPAIGN.teaser}

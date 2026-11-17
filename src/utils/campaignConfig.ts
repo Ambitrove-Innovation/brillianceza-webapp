@@ -21,12 +21,12 @@ export const CAMPAIGN = {
   enabled: true,
 
   // ── Identity ───────────────────────────────────────────────
-  /** Small label shown before the teaser text e.g. "🖤 Black Friday" */
-  label: "💚 Black Friday",
+  /** Small label shown before the teaser text e.g. "🔥 DROP ALERT" */
+  label: "🔥 DROP ALERT",
 
   // ── Countdown phase ────────────────────────────────────────
   /** Text shown during the countdown */
-  teaser: "Something big drops Nov 27 we're cooking 🔥",
+  teaser: "Black Friday Deals 27 Nov We're Cooking 🔥",
   /** Show the teaser CTA button during countdown */
   showCta: true,
   /** Button label for the countdown CTA (e.g. "Follow on IG", "Notify Me") */
@@ -45,6 +45,6 @@ export const CAMPAIGN = {
   // ── Dates (ISO 8601, include timezone offset) ──────────────
   /** Banner switches from countdown → live at this moment */
   dropDate: new Date("2026-11-27T00:00:00+02:00"),
-  /** Banner disappears entirely after this moment */
-  endDate: new Date("2026-11-28T00:00:00+02:00"),
+  /** Banner disappears entirely after this moment (runs through Cyber Monday Nov 30 midnight) */
+  endDate: new Date("2026-12-01T00:00:00+02:00"),
 } as const;
