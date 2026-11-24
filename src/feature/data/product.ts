@@ -1,4 +1,146 @@
-export const products: Product[] = [
+// src/feature/data/product.ts
+// Product catalogue and Black Friday promotional schedule
+
+/**
+ * Black Friday Tiered Markdown Schedule
+ * ──────────────────────────────────────────────────────────────
+ * Tier 1 (Starts 25 Nov): 18% off R349 items (besides Reflector)
+ * Tier 2 (Starts 26 Nov): 30% off R279 items
+ * Tier 3 (Starts 27 Nov): Cap 40% off, Bottoms 20% off, Reflector Shirt 14% off
+ * All deals run through Monday 30 Nov 23:59:59 (Cyber Monday)
+ */
+const BLACK_FRIDAY_MARKDOWNS: Record<
+  string,
+  { salePrice: number; startDate: string; endDate: string }
+> = {
+  // ── Tier 1: 25 Nov — 18% off R349 items (besides Reflector Shirt) ──
+  "gum-elastic-wte-tshirt": {
+    salePrice: 286.18,
+    startDate: "2026-11-25",
+    endDate: "2026-11-30",
+  },
+  "more-fashion-sweater": {
+    salePrice: 286.18,
+    startDate: "2026-11-25",
+    endDate: "2026-11-30",
+  },
+  "more-fashion-sweater-blk": {
+    salePrice: 286.18,
+    startDate: "2026-11-25",
+    endDate: "2026-11-30",
+  },
+  "og-wte-tshirt-pink": {
+    salePrice: 286.18,
+    startDate: "2026-11-25",
+    endDate: "2026-11-30",
+  },
+  "og-wte-tshirt-white": {
+    salePrice: 286.18,
+    startDate: "2026-11-25",
+    endDate: "2026-11-30",
+  },
+
+  // ── Tier 2: 26 Nov — 30% off all R279 items ────────────────────────
+  "3bs-tshirt": {
+    salePrice: 195.3,
+    startDate: "2026-11-26",
+    endDate: "2026-11-30",
+  },
+  "7-ways-brilliance": {
+    salePrice: 195.3,
+    startDate: "2026-11-26",
+    endDate: "2026-11-30",
+  },
+  "7-ways-brilliance-blk": {
+    salePrice: 195.3,
+    startDate: "2026-11-26",
+    endDate: "2026-11-30",
+  },
+  "brilliance-essential-purple": {
+    salePrice: 195.3,
+    startDate: "2026-11-26",
+    endDate: "2026-11-30",
+  },
+  "brilliance-essential-white": {
+    salePrice: 195.3,
+    startDate: "2026-11-26",
+    endDate: "2026-11-30",
+  },
+  "brilliance-essential-black": {
+    salePrice: 195.3,
+    startDate: "2026-11-26",
+    endDate: "2026-11-30",
+  },
+  "rainbow-tshirt-white": {
+    salePrice: 195.3,
+    startDate: "2026-11-26",
+    endDate: "2026-11-30",
+  },
+  "rainbow-tshirt-black": {
+    salePrice: 195.3,
+    startDate: "2026-11-26",
+    endDate: "2026-11-30",
+  },
+
+  // ── Tier 3: 27 Nov — Cap 40% off, Bottoms 20% off, Reflector 14% off ──
+  "wte-5p": {
+    salePrice: 60.0,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "reflector-tshirt": {
+    salePrice: 300.14,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "black-strip-short": {
+    salePrice: 224.0,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "purple-strip-short": {
+    salePrice: 224.0,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "blue-strip-short": {
+    salePrice: 224.0,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "red-strip-short": {
+    salePrice: 224.0,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "reflector-cargo-pants": {
+    salePrice: 319.2,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "white-cargo-pants": {
+    salePrice: 279.2,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "sky-blue-cargo-pants": {
+    salePrice: 279.2,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "uk-motion-pants-blue": {
+    salePrice: 279.2,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+  "uk-motion-pants-black": {
+    salePrice: 279.2,
+    startDate: "2026-11-27",
+    endDate: "2026-11-30",
+  },
+};
+
+const rawProducts: Product[] = [
   {
     id: "gum-elastic-wte-tshirt",
     name: "Gum Elastic W.T.E. T-SHIRT",
@@ -331,6 +473,12 @@ export const products: Product[] = [
       "The Brilliance Lucky 24. Perfect for all weather conditions.",
   },
 ];
+
+// Export products with Black Friday markdowns merged in seamlessly
+export const products: Product[] = rawProducts.map((p) => ({
+  ...p,
+  markdown: BLACK_FRIDAY_MARKDOWNS[p.id] ?? p.markdown,
+}));
 
 // Helper functions
 export const getProductById = (id: string): Product | undefined => {
