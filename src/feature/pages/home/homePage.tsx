@@ -5,6 +5,8 @@ import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import SEO from "../../../components/ui/SEO";
+import MarqueeTicker from "../../../components/ui/MarqueeTicker";
+import BlackFridayShowcase from "../../../components/ui/BlackFridayShowcase";
 import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 
@@ -54,6 +56,13 @@ const Homepage = () => {
         key={product.id}
         className="group transition-colors duration-300 relative">
         <div className="w-full aspect-4/5 overflow-hidden relative bg-stone">
+          {getActiveMarkdown(product.markdown) && !product.isSoldOut && (
+            <div className="absolute top-2.5 left-2.5 z-10">
+              <span className="bg-red-600 text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 shadow-md rounded-xs">
+                SALE
+              </span>
+            </div>
+          )}
           <OptimizedImage
             src={`/images/pics/${product.images[0]}`}
             alt={product.name}
@@ -79,9 +88,10 @@ const Homepage = () => {
           ) : (
             <span className="text-ink text-sm md:text-base font-medium p-0 hover:underline underline-offset-4 transition max-w-full text-left">
               {getActiveMarkdown(product.markdown) ? (
-                <span className="flex flex-wrap justify-center items-center gap-x-1 sm:gap-x-2">
+                <span className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <span className="line-through text-neutral-400 text-xs sm:text-sm">{formatPrice(product.price)}</span>
-                  <span className="text-sm sm:text-base">{formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}</span>
+                  <span className="text-red-600 font-bold text-sm sm:text-base">{formatPrice(getActiveMarkdown(product.markdown)!.salePrice)}</span>
+                  <span className="bg-red-600 text-white text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-xs">SALE</span>
                 </span>
               ) : (
                 <span>{formatPrice(product.price)}</span>
@@ -111,6 +121,12 @@ const Homepage = () => {
         buttonText="Shop Now"
         buttonLink="/shop"
       />
+
+      {/* Infinite Black Friday Promotional Ticker Ribbon */}
+      <MarqueeTicker />
+
+      {/* High-Impact Black Friday Showcase Feature Block */}
+      <BlackFridayShowcase />
 
       <section className="bg-stone">
         <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
