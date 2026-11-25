@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowUp } from "lucide-react";
 import Footer from "../../../components/layout/Footer";
 import SEO from "../../../components/ui/SEO";
+import MarqueeTicker from "../../../components/ui/MarqueeTicker";
 import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, scrollToTop, getActiveMarkdown } from "../../../utils/helpers";
 
@@ -92,6 +93,9 @@ const ShopPage = () => {
           className="w-full max-w-7xl mx-auto object-cover"
         />
       </section>
+
+      {/* Infinite Black Friday Marquee Ribbon */}
+      <MarqueeTicker />
 
       {/* Tops Section */}
       <section className="container mx-auto px-4 md:px-6 py-14 md:py-20">

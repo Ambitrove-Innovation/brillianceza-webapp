@@ -5,6 +5,8 @@ import Footer from "../../../components/layout/Footer";
 import HeroSection from "./components/HeroSection";
 import OptimizedImage from "../../../components/ui/OptimizedImage";
 import SEO from "../../../components/ui/SEO";
+import MarqueeTicker from "../../../components/ui/MarqueeTicker";
+import BlackFridayShowcase from "../../../components/ui/BlackFridayShowcase";
 import { useProducts } from "../../../hooks/useProducts";
 import { formatPrice, getActiveMarkdown } from "../../../utils/helpers";
 
@@ -119,6 +121,12 @@ const Homepage = () => {
         buttonText="Shop Now"
         buttonLink="/shop"
       />
+
+      {/* Infinite Black Friday Promotional Ticker Ribbon */}
+      <MarqueeTicker />
+
+      {/* High-Impact Black Friday Showcase Feature Block */}
+      <BlackFridayShowcase />
 
       <section className="bg-stone">
         <div className="container mx-auto px-4 md:px-6 py-16 md:py-24 grid md:grid-cols-12 gap-8 items-end">
