@@ -3,8 +3,14 @@
 
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { CAMPAIGN } from "../../utils/campaignConfig";
 
 export default function BlackFridayShowcase() {
+  const isCampaignActive =
+    CAMPAIGN.enabled && Date.now() < CAMPAIGN.endDate.getTime();
+
+  // Automatically roll back and disappear once event ends
+  if (!isCampaignActive) return null;
   return (
     <section className="container mx-auto px-4 md:px-6 py-10 md:py-16">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6 items-stretch">
