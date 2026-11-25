@@ -10,10 +10,11 @@ export function getActiveMarkdown(markdown?: { salePrice: number; startDate: str
   if (!markdown) return null;
   
   const today = new Date();
-  const start = new Date(markdown.startDate);
-  const end = new Date(markdown.endDate);
+  const start = new Date(markdown.startDate.includes("T") ? markdown.startDate : `${markdown.startDate}T00:00:00`);
+  const end = new Date(markdown.endDate.includes("T") ? markdown.endDate : `${markdown.endDate}T23:59:59.999`);
   
-  // Set end date to end of day to be inclusive
+  // Set start to beginning of day and end to end of day in local time
+  start.setHours(0, 0, 0, 0);
   end.setHours(23, 59, 59, 999);
   
   if (today >= start && today <= end) {
