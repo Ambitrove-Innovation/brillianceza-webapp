@@ -129,15 +129,18 @@ const ProductDetailPage = () => {
               <div className="text-2xl font-medium text-ink flex flex-wrap items-center gap-x-3 gap-y-2">
                 {getActiveMarkdown(currentProduct.markdown) ? (
                   <>
-                    <span className="line-through text-neutral-400 opacity-80">
+                    <span className="line-through text-neutral-400 opacity-80 text-xl">
                       {formatPrice(currentProduct.price)}
                     </span>
-                    <span>
+                    <span className="text-red-600 font-bold text-3xl">
                       {formatPrice(
                         getActiveMarkdown(currentProduct.markdown)!.salePrice,
                       )}
                     </span>
-                    <span className="bg-black text-white text-xs px-2 py-1 rounded uppercase tracking-wide whitespace-nowrap">
+                    <span className="bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-xs uppercase tracking-wider whitespace-nowrap shadow-xs">
+                      SALE
+                    </span>
+                    <span className="bg-neutral-900 text-white text-xs px-2.5 py-1 rounded-xs uppercase tracking-wide whitespace-nowrap">
                       Valid Until{" "}
                       {new Date(
                         getActiveMarkdown(currentProduct.markdown)!.endDate,
@@ -277,13 +280,18 @@ const ProductDetailPage = () => {
                 ) : (
                   <span className="purchaseBtn block text-center">
                     {getActiveMarkdown(product.markdown) ? (
-                      <span>
-                        <span className="line-through text-neutral-400 mr-2 opacity-80 text-sm">
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="line-through text-neutral-400 opacity-80 text-sm">
                           {formatPrice(product.price)}
                         </span>
-                        {formatPrice(
-                          getActiveMarkdown(product.markdown)!.salePrice,
-                        )}
+                        <span className="text-red-600 font-bold">
+                          {formatPrice(
+                            getActiveMarkdown(product.markdown)!.salePrice,
+                          )}
+                        </span>
+                        <span className="bg-red-600 text-white text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-xs">
+                          SALE
+                        </span>
                       </span>
                     ) : (
                       formatPrice(product.price)

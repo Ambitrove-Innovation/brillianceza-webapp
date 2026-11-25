@@ -230,7 +230,7 @@ export const CartDrawer = () => {
                             R{(item.product.price * item.quantity).toFixed(2)}
                           </div>
                         )}
-                        <span className="text-sm font-bold text-ink">
+                        <span className={`text-sm font-bold ${activeMarkdown ? "text-red-600" : "text-ink"}`}>
                           {formatPrice(lineTotal)}
                         </span>
                       </div>
